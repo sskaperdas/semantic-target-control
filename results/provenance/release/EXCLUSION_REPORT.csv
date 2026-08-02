@@ -1,0 +1,4 @@
+"Source","Reason","Bytes"
+"scripts\run_all_dbpedia.ps1","Excluded PowerShell script with private absolute path: <REDACTED_LOCAL_PATH>","15269"
+"scripts\run_all_drugbank.ps1","Excluded PowerShell script with private absolute path: <REDACTED_LOCAL_PATH>","17880"
+"scripts\run_all_eurostat.ps1","Excluded PowerShell script with private absolute path: <REDACTED_LOCAL_PATH>","14668"

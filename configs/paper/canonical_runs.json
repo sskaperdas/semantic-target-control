@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "paper": "STC: Inference-Time Semantic Target Control for Knowledge Graph Completion Rankings",
+  "common_protocol": {
+    "seed": 42,
+    "split": "test",
+    "mode": "all",
+    "top_k": 10,
+    "quota": 5,
+    "check_policy": "available_any",
+    "use_domain": true,
+    "use_range": true,
+    "use_disjoint": false,
+    "unknown_penalty": 1.0,
+    "fallback": "frozen_base_topk"
+  },
+  "datasets": {
+    "EurostatKG": {
+      "main_scorer": "PairRE",
+      "processed_dir": "data/processed/eurostatkg",
+      "run_dir": "runs/eurostat_schema_portfolio_v1/best_model",
+      "top_m": 20000,
+      "query_batch_size": 32,
+      "query_scope": "full"
+    },
+    "DBpedia": {
+      "main_scorer": "ComplEx",
+      "processed_dir": "data/processed/dbpedia",
+      "run_dir": "runs/dbpedia_schema_portfolio_safe_v3/best_model",
+      "top_m": 5000,
+      "query_batch_size": 8,
+      "query_scope": "fixed_paper_subset",
+      "query_id_file": "data/eval/dbpedia_paper_subset_query_ids.txt"
+    },
+    "DrugBank": {
+      "main_scorer": "RotatE",
+      "processed_dir": "data/processed/drugbank",
+      "run_dir": "runs/drugbank_schema_portfolio_v1/best_model",
+      "top_m": 5000,
+      "query_batch_size": 64,
+      "query_scope": "full"
+    }
+  },
+  "notes": [
+    "Paths are portable repository-relative placeholders.",
+    "Raw datasets and frozen checkpoints are not redistributed.",
+    "Semantic admissibility and factual correctness are evaluated separately."
+  ]
+}

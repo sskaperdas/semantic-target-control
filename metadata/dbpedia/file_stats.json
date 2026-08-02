@@ -1,0 +1,53 @@
+[
+  {
+    "path": "data\\raw\\DBpedia\\dbpedia_2016-10.owl",
+    "kind": "ontology",
+    "parse_sec": 0.7229725,
+    "graph_len": 31050,
+    "triples_seen": 31050,
+    "triples_kept": 0,
+    "triples_dropped_non_uri": 0,
+    "triples_dropped_prefix": 0,
+    "duplicate_graph_triples": 0,
+    "rdf_type_triples": 0,
+    "subclass_triples": 769,
+    "domain_triples": 2421,
+    "range_triples": 2588,
+    "disjoint_triples": 25,
+    "disjoint_union_axioms": 0
+  },
+  {
+    "path": "data\\raw\\DBpedia\\instance_types_en.ttl.bz2",
+    "kind": "instance_types",
+    "parse_sec": 98.3734265,
+    "graph_len": 5150432,
+    "triples_seen": 5150432,
+    "triples_kept": 5150432,
+    "triples_dropped_non_uri": 0,
+    "triples_dropped_prefix": 0,
+    "duplicate_graph_triples": 0,
+    "rdf_type_triples": 5150432,
+    "subclass_triples": 0,
+    "domain_triples": 0,
+    "range_triples": 0,
+    "disjoint_triples": 0,
+    "disjoint_union_axioms": 0
+  },
+  {
+    "path": "data\\raw\\DBpedia\\mappingbased_objects_en.ttl.bz2",
+    "kind": "mappingbased_objects",
+    "parse_sec": 373.8663902,
+    "graph_len": 18746173,
+    "triples_seen": 18746173,
+    "triples_kept": 18328677,
+    "triples_dropped_non_uri": 0,
+    "triples_dropped_prefix": 417496,
+    "duplicate_graph_triples": 0,
+    "rdf_type_triples": 0,
+    "subclass_triples": 0,
+    "domain_triples": 0,
+    "range_triples": 0,
+    "disjoint_triples": 0,
+    "disjoint_union_axioms": 0
+  }
+]

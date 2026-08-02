@@ -1,0 +1,33 @@
+{
+  "drugs_seen": 73687,
+  "drugs_kept": 73687,
+  "drugs_skipped_missing_id": 0,
+  "triples_total_before_dedup": 2930387,
+  "triples_unique": 2929754,
+  "relation_counts_total": {
+    "drug_interacts_with": 2855848,
+    "drug_has_target": 49381,
+    "drug_in_pathway": 3780,
+    "drug_has_enzyme": 12275,
+    "drug_has_carrier": 2023,
+    "drug_has_transporter": 7080
+  },
+  "relation_counts_unique": {
+    "drug_interacts_with": 2855848,
+    "drug_has_target": 48806,
+    "drug_in_pathway": 3780,
+    "drug_has_enzyme": 12220,
+    "drug_has_transporter": 7077,
+    "drug_has_carrier": 2023
+  },
+  "unique_drug_entities": 17431,
+  "unique_protein_entities": 10774,
+  "unique_pathway_entities": 877,
+  "interactions_found": 2855848,
+  "targets_found": 49381,
+  "enzymes_found": 12275,
+  "carriers_found": 2023,
+  "transporters_found": 7080,
+  "pathways_found": 3780,
+  "parse_xml_sec": 56.6794929
+}

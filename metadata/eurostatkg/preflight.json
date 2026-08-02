@@ -1,0 +1,91 @@
+{
+  "dataset": "eurostatkg",
+  "graph_dir": "data\\raw\\eurostatkg\\graph",
+  "ontology_dir": "data\\raw\\eurostatkg\\ontology",
+  "output_dir": "data\\processed\\eurostatkg",
+  "json_backend": "orjson",
+  "started_at_utc": "2026-03-18T14:46:48.354Z",
+  "finished_at_utc": "2026-03-18T14:46:55.568Z",
+  "include_literals": false,
+  "seed": 42,
+  "split_config": {
+    "train_ratio": 0.8,
+    "valid_ratio": 0.1,
+    "test_ratio": 0.1,
+    "min_relation_count_for_split": 10
+  },
+  "files": {
+    "num_graph_files": 1,
+    "num_ontology_files": 0,
+    "num_all_files": 1
+  },
+  "counts": {
+    "num_triples": 64631,
+    "num_train": 51709,
+    "num_valid": 6461,
+    "num_test": 6461,
+    "num_entities": 44948,
+    "num_relations": 20,
+    "typed_entities": 44704,
+    "typing_coverage": 0.994571504850049,
+    "relations_with_domain": 12,
+    "relations_with_range": 13,
+    "num_disjoint_pairs": 0,
+    "num_classes_with_subclass_edges": 1872,
+    "num_classes_in_subclass_closure": 1882
+  },
+  "schema_triples": {
+    "rdf_type": 67895,
+    "rdfs_subClassOf": 1924,
+    "rdfs_domain": 32,
+    "rdfs_range": 36,
+    "owl_disjointWith": 0
+  },
+  "skips_and_duplicates": {
+    "duplicate_kg_triples": 0,
+    "skipped_nonresource_subject": 0,
+    "skipped_nonresource_object": 172926
+  },
+  "runtime": {
+    "total_sec": 7.3469231,
+    "phase_trace": [
+      {
+        "phase": "parse_rdf_files",
+        "start_offset_sec": 0.0001933,
+        "end_offset_sec": 7.0530945,
+        "duration_sec": 7.0529012,
+        "files_total": 1
+      },
+      {
+        "phase": "build_type_closure_and_materialize",
+        "start_offset_sec": 7.0531022,
+        "end_offset_sec": 7.0900828,
+        "duration_sec": 0.0369806,
+        "classes_with_explicit_subclass_info": 1872,
+        "closure_class_count": 1882
+      },
+      {
+        "phase": "sort_and_split",
+        "start_offset_sec": 7.0900938,
+        "end_offset_sec": 7.1472369,
+        "duration_sec": 0.0571431,
+        "num_triples": 64631
+      },
+      {
+        "phase": "build_ids_and_constraints",
+        "start_offset_sec": 7.1472424,
+        "end_offset_sec": 7.1912941,
+        "duration_sec": 0.0440517,
+        "num_entities": 44948,
+        "num_relations": 20
+      },
+      {
+        "phase": "write_outputs",
+        "start_offset_sec": 7.2038922,
+        "end_offset_sec": 7.3469199,
+        "duration_sec": 0.1430277
+      }
+    ],
+    "outputs_written_sec": 0.1430277
+  }
+}

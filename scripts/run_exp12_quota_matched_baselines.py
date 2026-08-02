@@ -1,0 +1,2037 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import math
+import os
+import random
+import statistics
+import sys
+import time
+import traceback
+from collections import Counter, defaultdict
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Optional
+
+import numpy as np
+import torch
+from tqdm.auto import tqdm
+
+try:
+    import pykeen
+    from pykeen.models import model_resolver
+    from pykeen.triples import TriplesFactory
+except Exception as e:
+    raise SystemExit(
+        "This script requires PyKEEN. Install with: pip install pykeen"
+    ) from e
+
+
+# ============================================================
+# Helpers
+# ============================================================
+
+def now_iso_utc() -> str:
+    return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+
+def perf_now() -> float:
+    return time.perf_counter()
+
+
+def format_seconds(sec: float | None) -> str:
+    if sec is None or math.isinf(sec) or math.isnan(sec):
+        return "unknown"
+    sec = max(0, int(round(sec)))
+    h, rem = divmod(sec, 3600)
+    m, s = divmod(rem, 60)
+    if h > 0:
+        return f"{h:d}h {m:02d}m {s:02d}s"
+    if m > 0:
+        return f"{m:d}m {s:02d}s"
+    return f"{s:d}s"
+
+
+def percentile(values: list[float], q: float) -> Optional[float]:
+    if not values:
+        return None
+    arr = np.asarray(values, dtype=float)
+    return float(np.percentile(arr, q))
+
+
+def safe_mean(values: list[float]) -> Optional[float]:
+    if not values:
+        return None
+    return float(sum(values) / len(values))
+
+
+def _json_default(obj: Any) -> Any:
+    if isinstance(obj, Path):
+        return str(obj)
+    if isinstance(obj, torch.device):
+        return str(obj)
+    if isinstance(obj, np.integer):
+        return int(obj)
+    if isinstance(obj, np.floating):
+        return float(obj)
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    if isinstance(obj, set):
+        return sorted(obj)
+    return repr(obj)
+
+
+def load_json(path: Path) -> Any:
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_json_atomic(path: Path, data: Any, retries: int = 10, sleep_sec: float = 0.2) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    with tmp.open("w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2, default=_json_default)
+
+    last_err = None
+    for _ in range(retries):
+        try:
+            tmp.replace(path)
+            return
+        except PermissionError as e:
+            last_err = e
+            time.sleep(sleep_sec)
+    raise last_err
+
+
+def set_all_seeds(seed: int) -> None:
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+
+
+def maybe_clear_cuda_cache() -> None:
+    if torch.cuda.is_available():
+        try:
+            torch.cuda.empty_cache()
+        except Exception:
+            pass
+
+
+def get_env_metadata(device_str: str) -> dict[str, Any]:
+    info: dict[str, Any] = {
+        "python_version": sys.version,
+        "torch_version": getattr(torch, "__version__", "unknown"),
+        "pykeen_version": getattr(pykeen, "__version__", "unknown"),
+        "cuda_available": torch.cuda.is_available(),
+        "device_requested": device_str,
+        "platform": sys.platform,
+        "pid": os.getpid(),
+    }
+
+    if torch.cuda.is_available():
+        try:
+            requested = torch.device(device_str)
+            idx = requested.index
+            if idx is None:
+                idx = torch.cuda.current_device()
+            info["cuda_device_index"] = idx
+            info["cuda_device_name"] = torch.cuda.get_device_name(idx)
+            info["cuda_device_capability"] = list(torch.cuda.get_device_capability(idx))
+        except Exception as e:
+            info["cuda_metadata_error"] = f"{type(e).__name__}: {e}"
+
+    return info
+
+
+class Logger:
+    def __init__(self, log_path: Path):
+        self.log_path = log_path
+        self.log_path.parent.mkdir(parents=True, exist_ok=True)
+
+    def log(self, msg: str) -> None:
+        line = f"[{now_iso_utc()}] {msg}"
+        print(line, flush=True)
+        with self.log_path.open("a", encoding="utf-8") as f:
+            f.write(line + "\n")
+
+
+# ============================================================
+# Data loading
+# ============================================================
+
+@dataclass
+class DatasetBundle:
+    train_tf: TriplesFactory
+    valid_tf: TriplesFactory
+    test_tf: TriplesFactory
+    entity_to_id: dict[str, int]
+    relation_to_id: dict[str, int]
+    id_to_entity: dict[int, str]
+    id_to_relation: dict[int, str]
+
+
+def load_dataset(processed_dir: Path, create_inverse_triples: bool) -> DatasetBundle:
+    entity_to_id = load_json(processed_dir / "entity2id.json")
+    relation_to_id = load_json(processed_dir / "relation2id.json")
+
+    train_tf = TriplesFactory.from_path(
+        path=processed_dir / "train.tsv",
+        entity_to_id=entity_to_id,
+        relation_to_id=relation_to_id,
+        create_inverse_triples=create_inverse_triples,
+    )
+    valid_tf = TriplesFactory.from_path(
+        path=processed_dir / "valid.tsv",
+        entity_to_id=entity_to_id,
+        relation_to_id=relation_to_id,
+        create_inverse_triples=create_inverse_triples,
+    )
+    test_tf = TriplesFactory.from_path(
+        path=processed_dir / "test.tsv",
+        entity_to_id=entity_to_id,
+        relation_to_id=relation_to_id,
+        create_inverse_triples=create_inverse_triples,
+    )
+
+    return DatasetBundle(
+        train_tf=train_tf,
+        valid_tf=valid_tf,
+        test_tf=test_tf,
+        entity_to_id=entity_to_id,
+        relation_to_id=relation_to_id,
+        id_to_entity={v: k for k, v in entity_to_id.items()},
+        id_to_relation={v: k for k, v in relation_to_id.items()},
+    )
+
+
+# ============================================================
+# Ontology
+# ============================================================
+
+@dataclass
+class OntologyBundle:
+    entity_types: dict[int, set[str]]
+    relation_domains: dict[int, set[str]]
+    relation_ranges: dict[int, set[str]]
+    disjoint_pairs: set[tuple[str, str]]
+    has_entity_types: bool
+    has_relation_constraints: bool
+    has_disjoint_pairs: bool
+
+
+def _normalize_type_value(x: Any) -> str:
+    return str(x).strip()
+
+
+def _extract_type_set(v: Any) -> set[str]:
+    if v is None:
+        return set()
+    if isinstance(v, list):
+        return {_normalize_type_value(x) for x in v if x is not None}
+    if isinstance(v, dict):
+        for key in ("types", "classes", "values", "type_ids", "type_names"):
+            if key in v and isinstance(v[key], list):
+                return {_normalize_type_value(x) for x in v[key] if x is not None}
+        return set()
+    return {_normalize_type_value(v)}
+
+
+def load_entity_types(path: Path, entity_to_id: dict[str, int]) -> dict[int, set[str]]:
+    if not path.exists():
+        return {}
+
+    raw = load_json(path)
+    out: dict[int, set[str]] = {}
+
+    if isinstance(raw, dict):
+        for k, v in raw.items():
+            ent_id: Optional[int] = None
+            if k in entity_to_id:
+                ent_id = entity_to_id[k]
+            else:
+                try:
+                    maybe_id = int(k)
+                    if maybe_id in entity_to_id.values():
+                        ent_id = maybe_id
+                except Exception:
+                    pass
+            if ent_id is not None:
+                out[ent_id] = _extract_type_set(v)
+
+    elif isinstance(raw, list):
+        for item in raw:
+            if not isinstance(item, dict):
+                continue
+            ent = item.get("entity") or item.get("entity_id") or item.get("id") or item.get("name")
+            if ent is None:
+                continue
+            ent_id: Optional[int] = None
+            if isinstance(ent, str) and ent in entity_to_id:
+                ent_id = entity_to_id[ent]
+            else:
+                try:
+                    maybe_id = int(ent)
+                    if maybe_id in entity_to_id.values():
+                        ent_id = maybe_id
+                except Exception:
+                    pass
+            if ent_id is not None:
+                out[ent_id] = _extract_type_set(item)
+
+    return out
+
+
+def load_relation_constraints(path: Path, relation_to_id: dict[str, int]) -> tuple[dict[int, set[str]], dict[int, set[str]]]:
+    if not path.exists():
+        return {}, {}
+
+    raw = load_json(path)
+    domains: dict[int, set[str]] = {}
+    ranges: dict[int, set[str]] = {}
+
+    if isinstance(raw, dict):
+        for k, v in raw.items():
+            rel_id: Optional[int] = None
+            if k in relation_to_id:
+                rel_id = relation_to_id[k]
+            else:
+                try:
+                    maybe_id = int(k)
+                    if maybe_id in relation_to_id.values():
+                        rel_id = maybe_id
+                except Exception:
+                    pass
+            if rel_id is None or not isinstance(v, dict):
+                continue
+            domains[rel_id] = _extract_type_set(v.get("domain"))
+            ranges[rel_id] = _extract_type_set(v.get("range"))
+
+    elif isinstance(raw, list):
+        for item in raw:
+            if not isinstance(item, dict):
+                continue
+            rel = item.get("relation") or item.get("relation_id") or item.get("id") or item.get("name")
+            if rel is None:
+                continue
+            rel_id: Optional[int] = None
+            if isinstance(rel, str) and rel in relation_to_id:
+                rel_id = relation_to_id[rel]
+            else:
+                try:
+                    maybe_id = int(rel)
+                    if maybe_id in relation_to_id.values():
+                        rel_id = maybe_id
+                except Exception:
+                    pass
+            if rel_id is None:
+                continue
+            domains[rel_id] = _extract_type_set(item.get("domain"))
+            ranges[rel_id] = _extract_type_set(item.get("range"))
+
+    return domains, ranges
+
+
+def load_disjoint_pairs(path: Path) -> set[tuple[str, str]]:
+    if not path.exists():
+        return set()
+
+    raw = load_json(path)
+    out: set[tuple[str, str]] = set()
+
+    def add_pair(a: Any, b: Any) -> None:
+        aa = _normalize_type_value(a)
+        bb = _normalize_type_value(b)
+        if aa and bb:
+            out.add((aa, bb))
+            out.add((bb, aa))
+
+    if isinstance(raw, list):
+        for item in raw:
+            if isinstance(item, list) and len(item) == 2:
+                add_pair(item[0], item[1])
+            elif isinstance(item, dict):
+                a = item.get("left") or item.get("a") or item.get("source") or item.get("type1")
+                b = item.get("right") or item.get("b") or item.get("target") or item.get("type2")
+                if a is not None and b is not None:
+                    add_pair(a, b)
+
+    elif isinstance(raw, dict):
+        for k, v in raw.items():
+            if isinstance(v, list):
+                for x in v:
+                    add_pair(k, x)
+
+    return out
+
+
+def load_ontology_bundle(processed_dir: Path, entity_to_id: dict[str, int], relation_to_id: dict[str, int]) -> OntologyBundle:
+    entity_types_path = processed_dir / "entity_types.json"
+    relation_constraints_path = processed_dir / "relation_constraints.json"
+    disjoint_pairs_path = processed_dir / "disjoint_pairs.json"
+
+    entity_types = load_entity_types(entity_types_path, entity_to_id)
+    relation_domains, relation_ranges = load_relation_constraints(relation_constraints_path, relation_to_id)
+    disjoint_pairs = load_disjoint_pairs(disjoint_pairs_path)
+
+    return OntologyBundle(
+        entity_types=entity_types,
+        relation_domains=relation_domains,
+        relation_ranges=relation_ranges,
+        disjoint_pairs=disjoint_pairs,
+        has_entity_types=entity_types_path.exists(),
+        has_relation_constraints=relation_constraints_path.exists(),
+        has_disjoint_pairs=disjoint_pairs_path.exists(),
+    )
+
+
+# ============================================================
+# Model loading
+# ============================================================
+
+def resolve_checkpoint_path(run_dir: Path) -> Path:
+    if run_dir.is_file():
+        return run_dir
+    ckpt = run_dir / "base_model_checkpoint.pt"
+    if ckpt.exists():
+        return ckpt
+    raise FileNotFoundError(f"Could not find checkpoint at: {ckpt}")
+
+
+def load_checkpoint_payload(checkpoint_path: Path) -> dict[str, Any]:
+    return torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+
+
+def load_model_from_payload(
+    payload: dict[str, Any],
+    train_tf: TriplesFactory,
+    device: str,
+    logger: Logger,
+):
+    model_name = payload["model_name"]
+    model_kwargs = payload["model_kwargs"]
+    state_dict = payload["model_state_dict"]
+
+    logger.log(f"[MODEL] Rebuilding model_name={model_name} on device={device}")
+    model = model_resolver.make(
+        model_name,
+        triples_factory=train_tf,
+        **model_kwargs,
+    )
+    model.load_state_dict(state_dict)
+    model = model.to(torch.device(device))
+    model.eval()
+    return model
+
+
+# ============================================================
+# Query helpers
+# ============================================================
+
+@dataclass
+class QueryItem:
+    query_id: str
+    row_index: int
+    mode: str
+    head_id: int
+    rel_id: int
+    tail_id: int
+    relation_name: str
+    target_entity_id: int
+
+
+@dataclass
+class CandidateSemanticStatus:
+    checkable: bool
+    violated: bool
+    admissible: bool
+    unknown: bool
+    energy: float
+
+
+def load_allowed_query_ids(path: Optional[Path]) -> Optional[set[str]]:
+    if path is None:
+        return None
+
+    if not path.exists():
+        raise FileNotFoundError(f"Query id file does not exist: {path}")
+
+    allowed: set[str] = set()
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            qid = line.strip()
+            if qid:
+                allowed.add(qid)
+
+    if not allowed:
+        raise ValueError(f"Query id file is empty: {path}")
+
+    return allowed
+
+
+def build_queries(
+    mapped_triples: torch.Tensor,
+    id_to_relation: dict[int, str],
+    split_name: str,
+    mode: str,
+    max_queries: Optional[int],
+    allowed_query_ids: Optional[set[str]],
+) -> list[QueryItem]:
+    queries: list[QueryItem] = []
+
+    for row_index, row in enumerate(mapped_triples.tolist()):
+        h, r, t = int(row[0]), int(row[1]), int(row[2])
+        rel_name = id_to_relation.get(r, str(r))
+
+        if mode in ("tail", "all"):
+            qid = f"{split_name}_tail_{row_index:09d}"
+            if allowed_query_ids is None or qid in allowed_query_ids:
+                queries.append(
+                    QueryItem(
+                        query_id=qid,
+                        row_index=row_index,
+                        mode="tail",
+                        head_id=h,
+                        rel_id=r,
+                        tail_id=t,
+                        relation_name=rel_name,
+                        target_entity_id=t,
+                    )
+                )
+
+        if mode in ("head", "all"):
+            qid = f"{split_name}_head_{row_index:09d}"
+            if allowed_query_ids is None or qid in allowed_query_ids:
+                queries.append(
+                    QueryItem(
+                        query_id=qid,
+                        row_index=row_index,
+                        mode="head",
+                        head_id=h,
+                        rel_id=r,
+                        tail_id=t,
+                        relation_name=rel_name,
+                        target_entity_id=h,
+                    )
+                )
+
+        if max_queries is not None and len(queries) >= max_queries:
+            queries = queries[:max_queries]
+            break
+
+    return queries
+
+
+def score_batch(model: Any, queries: list[QueryItem], device: str) -> torch.Tensor:
+    if not queries:
+        raise ValueError("score_batch() received empty batch")
+
+    valid_modes = {"head", "tail"}
+    modes = {q.mode for q in queries}
+    unsupported = modes - valid_modes
+    if unsupported:
+        raise ValueError(f"Unsupported query modes in batch: {sorted(unsupported)}")
+
+    scores_out: Optional[torch.Tensor] = None
+
+    with torch.no_grad():
+        tail_positions = [i for i, q in enumerate(queries) if q.mode == "tail"]
+        if tail_positions:
+            tail_queries = [queries[i] for i in tail_positions]
+            hr_batch = torch.tensor(
+                [[q.head_id, q.rel_id] for q in tail_queries],
+                dtype=torch.long,
+                device=device,
+            )
+            tail_scores = model.score_t(hr_batch)
+
+            if tail_scores.ndim != 2:
+                raise RuntimeError(
+                    f"Expected 2D tail score tensor, got shape={tuple(tail_scores.shape)}"
+                )
+
+            if scores_out is None:
+                scores_out = torch.empty(
+                    (len(queries), tail_scores.shape[1]),
+                    dtype=tail_scores.dtype,
+                    device=tail_scores.device,
+                )
+
+            scores_out[
+                torch.tensor(tail_positions, dtype=torch.long, device=tail_scores.device)
+            ] = tail_scores
+
+        head_positions = [i for i, q in enumerate(queries) if q.mode == "head"]
+        if head_positions:
+            head_queries = [queries[i] for i in head_positions]
+            rt_batch = torch.tensor(
+                [[q.rel_id, q.tail_id] for q in head_queries],
+                dtype=torch.long,
+                device=device,
+            )
+            head_scores = model.score_h(rt_batch)
+
+            if head_scores.ndim != 2:
+                raise RuntimeError(
+                    f"Expected 2D head score tensor, got shape={tuple(head_scores.shape)}"
+                )
+
+            if scores_out is None:
+                scores_out = torch.empty(
+                    (len(queries), head_scores.shape[1]),
+                    dtype=head_scores.dtype,
+                    device=head_scores.device,
+                )
+
+            if scores_out.shape[1] != head_scores.shape[1]:
+                raise RuntimeError(
+                    f"Head/tail score dimension mismatch: "
+                    f"{scores_out.shape[1]} vs {head_scores.shape[1]}"
+                )
+
+            scores_out[
+                torch.tensor(head_positions, dtype=torch.long, device=head_scores.device)
+            ] = head_scores
+
+    if scores_out is None:
+        raise RuntimeError("No scores were produced for the query batch")
+
+    if scores_out.ndim != 2:
+        raise RuntimeError(f"Expected 2D score tensor, got shape={tuple(scores_out.shape)}")
+
+    return scores_out
+
+
+# ============================================================
+# Semantics
+# ============================================================
+
+def evaluate_candidate_semantics(
+    *,
+    head_id: int,
+    rel_id: int,
+    tail_id: int,
+    ontology: OntologyBundle,
+    check_policy: str,
+    use_domain: bool,
+    use_range: bool,
+    use_disjoint: bool,
+    unknown_penalty: float,
+    binary_like: bool,
+) -> CandidateSemanticStatus:
+    h_types = ontology.entity_types.get(head_id, set())
+    t_types = ontology.entity_types.get(tail_id, set())
+    r_dom = ontology.relation_domains.get(rel_id, set())
+    r_rng = ontology.relation_ranges.get(rel_id, set())
+
+    violated_reasons = 0
+    evaluable_flags: list[bool] = []
+
+    if use_domain:
+        dom_evaluable = bool(h_types) and bool(r_dom)
+        evaluable_flags.append(dom_evaluable)
+        if dom_evaluable and h_types.isdisjoint(r_dom):
+            violated_reasons += 1
+
+    if use_range:
+        rng_evaluable = bool(t_types) and bool(r_rng)
+        evaluable_flags.append(rng_evaluable)
+        if rng_evaluable and t_types.isdisjoint(r_rng):
+            violated_reasons += 1
+
+    if use_disjoint:
+        disj_evaluable = bool(h_types) and bool(t_types) and bool(ontology.disjoint_pairs)
+        evaluable_flags.append(disj_evaluable)
+        if disj_evaluable:
+            found_disjoint = False
+            for ht in h_types:
+                for tt in t_types:
+                    if (ht, tt) in ontology.disjoint_pairs:
+                        found_disjoint = True
+                        break
+                if found_disjoint:
+                    break
+            if found_disjoint:
+                violated_reasons += 1
+
+    if not evaluable_flags:
+        checkable = False
+    elif check_policy == "available_all":
+        checkable = all(evaluable_flags)
+    elif check_policy == "available_any":
+        checkable = any(evaluable_flags)
+    else:
+        raise ValueError(f"Unsupported check_policy: {check_policy}")
+
+    violated = checkable and (violated_reasons > 0)
+    admissible = checkable and not violated
+    unknown = not checkable
+
+    if admissible:
+        energy = 0.0
+    elif checkable:
+        energy = 1.0 if binary_like else float(max(1, violated_reasons))
+    else:
+        energy = float(unknown_penalty)
+
+    return CandidateSemanticStatus(
+        checkable=checkable,
+        violated=violated,
+        admissible=admissible,
+        unknown=unknown,
+        energy=energy,
+    )
+
+
+# ============================================================
+# Control / baselines
+# ============================================================
+
+def compute_lambda_star_quota(
+    *,
+    base_scores: list[float],
+    energies: list[float],
+    k: int,
+    q: int,
+) -> tuple[bool, Optional[float], Optional[float]]:
+    """
+    Minimal finite-window pressure for at least q zero-energy candidates
+    in the visible top-k list.
+
+    Up to k-q positive-energy candidates may remain above the q-th
+    admissible item. This is therefore minimal for the top-k quota
+    objective, not the stricter objective of pushing every positive-energy
+    candidate below the q-th admissible score.
+    """
+    if q < 1:
+        raise ValueError(f"q must be >= 1, got {q}")
+    if q > k:
+        raise ValueError(f"q must satisfy q <= k, got q={q}, k={k}")
+
+    zero_idxs = [i for i, e in enumerate(energies) if e == 0.0]
+    if len(zero_idxs) < q:
+        return False, None, None
+
+    zero_scores = sorted((base_scores[i] for i in zero_idxs), reverse=True)
+    tau_q = zero_scores[q - 1]
+
+    crossings: list[float] = []
+    for s, e in zip(base_scores, energies):
+        if e > 0.0:
+            crossing = (s - tau_q) / e
+            if crossing > 0.0:
+                crossings.append(float(crossing))
+
+    allowed_above = k - q
+    crossings.sort(reverse=True)
+
+    if len(crossings) <= allowed_above:
+        lam = 0.0
+    else:
+        lam = crossings[allowed_above]
+
+    return True, float(max(0.0, lam)), float(tau_q)
+
+
+def stable_rerank_with_lambda(
+    *,
+    cand_ids: list[int],
+    base_scores: list[float],
+    energies: list[float],
+    lam: float,
+) -> list[int]:
+    items = []
+    for idx, (cid, s, e) in enumerate(zip(cand_ids, base_scores, energies)):
+        calibrated = s - lam * e
+        items.append((cid, calibrated, e, s, idx))
+    items.sort(key=lambda x: (-x[1], x[2], -x[3], x[4]))
+    return [x[0] for x in items]
+
+
+def fill_to_k_from_original_order(
+    preferred_ids: list[int],
+    original_ids: list[int],
+    k: int,
+) -> list[int]:
+    if k <= 0:
+        raise ValueError(f"k must be positive, got {k}")
+
+    out: list[int] = []
+    used: set[int] = set()
+
+    for cid in preferred_ids:
+        if cid not in used:
+            out.append(cid)
+            used.add(cid)
+        if len(out) == k:
+            return out
+
+    for cid in original_ids:
+        if cid not in used:
+            out.append(cid)
+            used.add(cid)
+        if len(out) == k:
+            return out
+
+    raise RuntimeError(
+        f"Could not fill result to K={k}; only got {len(out)} items."
+    )
+
+
+def rerank_admissible_first_quota_fill_to_k(
+    *,
+    cand_ids: list[int],
+    admissible_by_id: dict[int, bool],
+    q: int,
+    k: int,
+) -> list[int]:
+    if q > k:
+        raise ValueError(f"q={q} cannot exceed k={k}")
+
+    preferred = [cid for cid in cand_ids if admissible_by_id.get(cid, False)]
+    preferred = preferred[:q]
+    return fill_to_k_from_original_order(preferred, cand_ids, k)
+
+
+def rerank_hard_validation_fill_to_k(
+    *,
+    cand_ids: list[int],
+    checkable_by_id: dict[int, bool],
+    violated_by_id: dict[int, bool],
+    k: int,
+) -> list[int]:
+    kept = [
+        cid for cid in cand_ids
+        if not (checkable_by_id.get(cid, False) and violated_by_id.get(cid, False))
+    ]
+    return fill_to_k_from_original_order(kept[:k], cand_ids, k)
+
+
+def rerank_quota_fill_minswap_to_k(
+    *,
+    cand_ids: list[int],
+    admissible_by_id: dict[int, bool],
+    q: int,
+    k: int,
+) -> list[int]:
+    """Quota-matched minimal replacement baseline.
+
+    Keeps the base top-k unchanged if it already satisfies the quota.
+    Otherwise, it replaces the lowest-ranked non-admissible items in the
+    base top-k with the highest-ranked admissible candidates from Top-M
+    outside the base top-k. This uses the minimum number of replacements
+    needed to satisfy q whenever the quota is feasible within Top-M.
+    """
+    if q > k:
+        raise ValueError(f"q={q} cannot exceed k={k}")
+    if len(cand_ids) < k:
+        raise ValueError(f"Need at least k={k} candidates, got {len(cand_ids)}")
+
+    base_topk = list(cand_ids[:k])
+    current_adm = sum(1 for cid in base_topk if admissible_by_id.get(cid, False))
+
+    if current_adm >= q:
+        return base_topk
+
+    needed = q - current_adm
+
+    outside_admissible = [
+        cid for cid in cand_ids[k:]
+        if admissible_by_id.get(cid, False)
+    ]
+
+    if len(outside_admissible) < needed:
+        # In principle this should not happen when the quota was certified
+        # feasible over Top-M, but returning the base list keeps fallback safe.
+        return base_topk
+
+    replace_positions = [
+        pos for pos in range(k - 1, -1, -1)
+        if not admissible_by_id.get(base_topk[pos], False)
+    ]
+
+    if len(replace_positions) < needed:
+        return base_topk
+
+    out = list(base_topk)
+    for pos, new_cid in zip(replace_positions[:needed], outside_admissible[:needed]):
+        out[pos] = new_cid
+
+    if len(out) != k or len(set(out)) != k:
+        raise RuntimeError("MinSwap produced an invalid top-k list.")
+
+    return out
+
+
+# ============================================================
+# Metrics
+# ============================================================
+
+def compute_pres_at_k(base_topk: list[int], reranked_topk: list[int], k: int) -> float:
+    if len(reranked_topk) != k:
+        raise ValueError(f"Expected returned top-k length {k}, got {len(reranked_topk)}")
+    return len(set(base_topk).intersection(set(reranked_topk))) / float(k)
+
+
+def compute_shift_at_k(base_rank_map: dict[int, int], reranked_topk: list[int], k: int) -> float:
+    if len(reranked_topk) != k:
+        raise ValueError(f"Expected returned top-k length {k}, got {len(reranked_topk)}")
+    vals = []
+    for out_rank, ent_id in enumerate(reranked_topk, start=1):
+        base_rank = base_rank_map.get(ent_id)
+        if base_rank is None:
+            raise KeyError(f"Entity {ent_id} not found in base_rank_map")
+        vals.append(abs(base_rank - out_rank))
+    return sum(vals) / float(k)
+
+
+def compute_topk_set_jaccard(a: list[int], b: list[int]) -> float:
+    sa, sb = set(a), set(b)
+    union = sa.union(sb)
+    if not union:
+        return 1.0
+    return len(sa.intersection(sb)) / float(len(union))
+
+
+def compute_topk_exact_match(a: list[int], b: list[int]) -> float:
+    return 1.0 if list(a) == list(b) else 0.0
+
+
+def compute_topk_set_match(a: list[int], b: list[int]) -> float:
+    return 1.0 if set(a) == set(b) else 0.0
+
+
+def count_admissible_in_topk(
+    *,
+    returned_topk: list[int],
+    admissible_by_id: dict[int, bool],
+) -> int:
+    return sum(1 for cid in returned_topk if admissible_by_id.get(cid, False))
+
+
+def evaluate_returned_topk(
+    *,
+    returned_topk: list[int],
+    checkable_by_id: dict[int, bool],
+    admissible_by_id: dict[int, bool],
+    violated_by_id: dict[int, bool],
+    unknown_by_id: dict[int, bool],
+    base_topk: list[int],
+    base_rank_map: dict[int, int],
+    k: int,
+) -> dict[str, float]:
+    if len(returned_topk) != k:
+        raise ValueError(f"Expected returned top-k length {k}, got {len(returned_topk)}")
+
+    checkable = 0
+    violating = 0
+    admissible = 0
+    unknown = 0
+
+    for cid in returned_topk:
+        if checkable_by_id.get(cid, False):
+            checkable += 1
+            if violated_by_id.get(cid, False):
+                violating += 1
+            elif admissible_by_id.get(cid, False):
+                admissible += 1
+        elif unknown_by_id.get(cid, False):
+            unknown += 1
+
+    viol_at_k = (violating / checkable) if checkable > 0 else 0.0
+    adm_at_k = admissible / float(k)
+    cov_at_k = checkable / float(k)
+    unknown_at_k = unknown / float(k)
+    pres_at_k = compute_pres_at_k(base_topk, returned_topk, k)
+    shift_at_k = compute_shift_at_k(base_rank_map, returned_topk, k)
+
+    return {
+        "viol_at_k": viol_at_k,
+        "adm_at_k": adm_at_k,
+        "cov_at_k": cov_at_k,
+        "unknown_at_k": unknown_at_k,
+        "pres_at_k": pres_at_k,
+        "shift_at_k": shift_at_k,
+    }
+
+
+# ============================================================
+# CSV / progress
+# ============================================================
+
+def write_query_csv_header(path: Path, quotas: list[int]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+
+        header = [
+            "query_index",
+            "query_id",
+            "row_index",
+            "mode",
+            "relation",
+            "head_id",
+            "rel_id",
+            "tail_id",
+            "effective_top_m",
+            "is_blind",
+            "blind_strict",
+        ]
+
+        for q in quotas:
+            prefix = f"q{q}"
+            header.extend([
+                f"{prefix}_feasible",
+                f"{prefix}_lambda_star",
+                f"{prefix}_tau_q",
+
+                f"{prefix}_optq_viol_at_k",
+                f"{prefix}_optq_adm_at_k",
+                f"{prefix}_optq_cov_at_k",
+                f"{prefix}_optq_unknown_at_k",
+                f"{prefix}_optq_pres_at_k",
+                f"{prefix}_optq_shift_at_k",
+                f"{prefix}_optq_adm_count_topk",
+
+                f"{prefix}_afq_viol_at_k",
+                f"{prefix}_afq_adm_at_k",
+                f"{prefix}_afq_cov_at_k",
+                f"{prefix}_afq_unknown_at_k",
+                f"{prefix}_afq_pres_at_k",
+                f"{prefix}_afq_shift_at_k",
+                f"{prefix}_afq_adm_count_topk",
+
+                f"{prefix}_hardval_viol_at_k",
+                f"{prefix}_hardval_adm_at_k",
+                f"{prefix}_hardval_cov_at_k",
+                f"{prefix}_hardval_unknown_at_k",
+                f"{prefix}_hardval_pres_at_k",
+                f"{prefix}_hardval_shift_at_k",
+                f"{prefix}_hardval_adm_count_topk",
+
+                f"{prefix}_minswap_viol_at_k",
+                f"{prefix}_minswap_adm_at_k",
+                f"{prefix}_minswap_cov_at_k",
+                f"{prefix}_minswap_unknown_at_k",
+                f"{prefix}_minswap_pres_at_k",
+                f"{prefix}_minswap_shift_at_k",
+                f"{prefix}_minswap_adm_count_topk",
+
+                f"{prefix}_optq_vs_afq_exact_match",
+                f"{prefix}_optq_vs_afq_set_match",
+                f"{prefix}_optq_vs_afq_jaccard",
+
+                f"{prefix}_optq_vs_hardval_exact_match",
+                f"{prefix}_optq_vs_hardval_set_match",
+                f"{prefix}_optq_vs_hardval_jaccard",
+
+                f"{prefix}_optq_vs_minswap_exact_match",
+                f"{prefix}_optq_vs_minswap_set_match",
+                f"{prefix}_optq_vs_minswap_jaccard",
+            ])
+        writer.writerow(header)
+
+
+def append_query_rows(path: Path, rows: list[list[Any]]) -> None:
+    with path.open("a", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerows(rows)
+
+
+def compute_progress_payload(
+    *,
+    started_at: float,
+    processed_queries: int,
+    total_queries: int,
+    effective_top_m: int,
+    aggs: dict[int, dict[str, Any]],
+) -> dict[str, Any]:
+    elapsed = perf_now() - started_at
+    rate = processed_queries / elapsed if elapsed > 0 else 0.0
+    remaining = max(0, total_queries - processed_queries)
+    eta_sec = (remaining / rate) if rate > 0 else None
+
+    running = {}
+    for q, agg in aggs.items():
+        n = agg["num_queries"]
+        fn = agg["num_feasible"]
+        running[f"q{q}_feasible_rate"] = (fn / n) if n > 0 else None
+        running[f"q{q}_optq_viol_at_k"] = (agg["optq_viol_sum"] / fn) if fn > 0 else None
+        running[f"q{q}_optq_adm_at_k"] = (agg["optq_adm_sum"] / fn) if fn > 0 else None
+        running[f"q{q}_optq_vs_afq_set_match"] = (agg["optq_vs_afq_set_match_sum"] / fn) if fn > 0 else None
+
+    return {
+        "status": "running",
+        "updated_at_utc": now_iso_utc(),
+        "processed_queries": processed_queries,
+        "total_queries": total_queries,
+        "progress_fraction": processed_queries / total_queries if total_queries else 0.0,
+        "elapsed_seconds": round(elapsed, 6),
+        "elapsed_human": format_seconds(elapsed),
+        "eta_seconds": None if eta_sec is None else round(eta_sec, 6),
+        "eta_human": format_seconds(eta_sec),
+        "queries_per_second": round(rate, 4),
+        "effective_top_m": effective_top_m,
+        "running_metrics": running,
+    }
+
+
+# ============================================================
+# Main experiment
+# ============================================================
+
+def run_exp12(args: argparse.Namespace) -> None:
+    output_dir = args.output_dir
+    output_dir.mkdir(parents=True, exist_ok=True)
+    logger = Logger(output_dir / "run.log")
+
+    save_json_atomic(output_dir / "config.json", vars(args))
+    set_all_seeds(args.seed)
+
+    started_total = perf_now()
+
+    logger.log("[STEP 1/7] Resolving checkpoint and loading payload")
+    checkpoint_path = resolve_checkpoint_path(args.run_dir)
+    checkpoint_payload = load_checkpoint_payload(checkpoint_path)
+    create_inverse_triples = bool(checkpoint_payload.get("create_inverse_triples", True))
+    logger.log(
+        f"[STEP 1/7] Done | checkpoint={checkpoint_path} "
+        f"create_inverse_triples={create_inverse_triples}"
+    )
+
+    logger.log("[STEP 2/7] Loading dataset")
+    bundle = load_dataset(args.processed_dir, create_inverse_triples=create_inverse_triples)
+    split_tf = {"train": bundle.train_tf, "valid": bundle.valid_tf, "test": bundle.test_tf}[args.split]
+    logger.log(
+        f"[STEP 2/7] Done | entities={len(bundle.entity_to_id)} "
+        f"relations={len(bundle.relation_to_id)} triples={split_tf.num_triples}"
+    )
+
+    logger.log("[STEP 3/7] Loading ontology")
+    ontology = load_ontology_bundle(args.processed_dir, bundle.entity_to_id, bundle.relation_to_id)
+    use_disjoint = bool(args.use_disjoint and ontology.has_disjoint_pairs)
+    logger.log(
+        f"[STEP 3/7] Done | has_entity_types={ontology.has_entity_types} "
+        f"has_relation_constraints={ontology.has_relation_constraints} "
+        f"has_disjoint_pairs={ontology.has_disjoint_pairs} "
+        f"use_disjoint={use_disjoint}"
+    )
+
+    logger.log("[STEP 4/7] Loading frozen model")
+    model = load_model_from_payload(
+        payload=checkpoint_payload,
+        train_tf=bundle.train_tf,
+        device=args.device,
+        logger=logger,
+    )
+    logger.log("[STEP 4/7] Done")
+
+    logger.log("[STEP 5/7] Building query list")
+    allowed_query_ids = load_allowed_query_ids(args.query_id_file)
+    queries = build_queries(
+        mapped_triples=split_tf.mapped_triples,
+        id_to_relation=bundle.id_to_relation,
+        split_name=args.split,
+        mode=args.mode,
+        max_queries=args.max_queries,
+        allowed_query_ids=allowed_query_ids,
+    )
+    total_queries_all = len(queries)
+    if total_queries_all == 0:
+        raise RuntimeError("No queries were built. Check split/mode/max_queries/query-id-file.")
+    logger.log(f"[STEP 5/7] Done | total_candidate_queries={total_queries_all}")
+
+    quotas = sorted(set(args.quotas))
+    if any(q <= 0 for q in quotas):
+        raise ValueError(f"All quotas must be positive, got {quotas}")
+    if any(q > args.top_k for q in quotas):
+        raise ValueError(f"All quotas must be <= top_k={args.top_k}, got {quotas}")
+
+    query_csv_path = output_dir / "query_level.csv"
+    summary_csv_path = output_dir / "quota_summary.csv"
+    relation_csv_path = output_dir / "relation_level.csv"
+    progress_json_path = output_dir / "progress.json"
+    summary_json_path = output_dir / "summary.json"
+
+    write_query_csv_header(query_csv_path, quotas)
+    env_metadata = get_env_metadata(args.device)
+
+    aggs: dict[int, dict[str, Any]] = {}
+    for q in quotas:
+        aggs[q] = {
+            "num_queries": 0,
+            "num_feasible": 0,
+
+            "optq_viol_sum": 0.0,
+            "optq_adm_sum": 0.0,
+            "optq_cov_sum": 0.0,
+            "optq_unknown_sum": 0.0,
+            "optq_pres_sum": 0.0,
+            "optq_shift_sum": 0.0,
+            "optq_adm_count_sum": 0.0,
+
+            "afq_viol_sum": 0.0,
+            "afq_adm_sum": 0.0,
+            "afq_cov_sum": 0.0,
+            "afq_unknown_sum": 0.0,
+            "afq_pres_sum": 0.0,
+            "afq_shift_sum": 0.0,
+            "afq_adm_count_sum": 0.0,
+
+            "hardval_viol_sum": 0.0,
+            "hardval_adm_sum": 0.0,
+            "hardval_cov_sum": 0.0,
+            "hardval_unknown_sum": 0.0,
+            "hardval_pres_sum": 0.0,
+            "hardval_shift_sum": 0.0,
+            "hardval_adm_count_sum": 0.0,
+
+            "optq_vs_afq_exact_match_sum": 0.0,
+            "optq_vs_afq_set_match_sum": 0.0,
+            "optq_vs_afq_jaccard_sum": 0.0,
+
+            "optq_vs_hardval_exact_match_sum": 0.0,
+            "optq_vs_hardval_set_match_sum": 0.0,
+            "optq_vs_hardval_jaccard_sum": 0.0,
+
+            "lambda_values": [],
+        }
+
+    rel_stats: dict[int, dict[str, Counter]] = {
+        q: defaultdict(Counter) for q in quotas
+    }
+
+    query_rows_buffer: list[list[Any]] = []
+    processed = 0
+    step_started = perf_now()
+    effective_top_m_global: Optional[int] = None
+
+    logger.log("[STEP 6/7] Running quota-vs-filtering partial-target benchmark")
+
+    batch_starts = list(range(0, total_queries_all, args.query_batch_size))
+    pbar = tqdm(
+        batch_starts,
+        desc="EXP-09 batches",
+        unit="batch",
+        dynamic_ncols=True,
+        leave=True,
+    )
+
+    for batch_start in pbar:
+        batch_end = min(batch_start + args.query_batch_size, total_queries_all)
+        batch_queries = queries[batch_start:batch_end]
+
+        scores = score_batch(model=model, queries=batch_queries, device=args.device)
+
+        num_candidates = int(scores.shape[1])
+        effective_top_m = min(args.top_m, num_candidates)
+        if effective_top_m < args.top_k:
+            raise RuntimeError(
+                f"effective_top_m={effective_top_m} is smaller than top_k={args.top_k}. "
+                f"Requested top_m={args.top_m}, num_candidates={num_candidates}."
+            )
+
+        if effective_top_m_global is None:
+            effective_top_m_global = effective_top_m
+            logger.log(
+                f"[STEP 6/7] Using effective_top_m={effective_top_m_global} "
+                f"(requested top_m={args.top_m}, num_candidates={num_candidates})"
+            )
+
+        topm_scores, topm_indices = torch.topk(
+            scores,
+            k=effective_top_m,
+            dim=1,
+            largest=True,
+            sorted=True,
+        )
+
+        for row_idx, qitem in enumerate(batch_queries):
+            global_query_index = batch_start + row_idx
+
+            cand_ids = topm_indices[row_idx].detach().cpu().tolist()
+            cand_scores = topm_scores[row_idx].detach().cpu().tolist()
+
+            statuses: list[CandidateSemanticStatus] = []
+            energies: list[float] = []
+
+            for cand_id in cand_ids:
+                if qitem.mode == "tail":
+                    head_id, rel_id, tail_id = qitem.head_id, qitem.rel_id, cand_id
+                else:
+                    head_id, rel_id, tail_id = cand_id, qitem.rel_id, qitem.tail_id
+
+                st = evaluate_candidate_semantics(
+                    head_id=head_id,
+                    rel_id=rel_id,
+                    tail_id=tail_id,
+                    ontology=ontology,
+                    check_policy=args.check_policy,
+                    use_domain=args.use_domain,
+                    use_range=args.use_range,
+                    use_disjoint=use_disjoint,
+                    unknown_penalty=args.unknown_penalty,
+                    binary_like=args.binary_like,
+                )
+                statuses.append(st)
+                energies.append(st.energy)
+
+            status_by_id = {cid: st for cid, st in zip(cand_ids, statuses)}
+            checkable_by_id = {cid: st.checkable for cid, st in status_by_id.items()}
+            admissible_by_id = {cid: st.admissible for cid, st in status_by_id.items()}
+            violated_by_id = {cid: st.violated for cid, st in status_by_id.items()}
+            unknown_by_id = {cid: st.unknown for cid, st in status_by_id.items()}
+
+            base_topk = cand_ids[:args.top_k]
+            base_rank_map = {cid: i + 1 for i, cid in enumerate(cand_ids)}
+
+            base_viol_present = any(violated_by_id.get(cid, False) for cid in base_topk)
+            admissible_in_topm = sum(1 for cid in cand_ids if admissible_by_id.get(cid, False))
+            admissible_outside_topk = sum(1 for cid in cand_ids[args.top_k:] if admissible_by_id.get(cid, False))
+
+            is_blind = base_viol_present and (admissible_in_topm >= 1)
+            blind_strict = base_viol_present and (admissible_outside_topk >= 1)
+
+            if args.query_scope == "blind" and not is_blind:
+                continue
+            if args.query_scope == "blind_strict" and not blind_strict:
+                continue
+
+            row = [
+                global_query_index,
+                qitem.query_id,
+                qitem.row_index,
+                qitem.mode,
+                qitem.relation_name,
+                qitem.head_id,
+                qitem.rel_id,
+                qitem.tail_id,
+                effective_top_m,
+                int(is_blind),
+                int(blind_strict),
+            ]
+
+            for q in quotas:
+                feasible, lambda_star, tau_q = compute_lambda_star_quota(
+                    base_scores=cand_scores,
+                    energies=energies,
+                    k=args.top_k,
+                    q=q,
+                )
+
+                aggs[q]["num_queries"] += 1
+                rel_counter = rel_stats[q][qitem.relation_name]
+                rel_counter["queries"] += 1
+
+                if feasible:
+                    optq_ranked = stable_rerank_with_lambda(
+                        cand_ids=cand_ids,
+                        base_scores=cand_scores,
+                        energies=energies,
+                        lam=lambda_star,
+                    )
+                    optq_topk = optq_ranked[:args.top_k]
+
+                    afq_topk = rerank_admissible_first_quota_fill_to_k(
+                        cand_ids=cand_ids,
+                        admissible_by_id=admissible_by_id,
+                        q=q,
+                        k=args.top_k,
+                    )
+
+                    hardval_topk = rerank_hard_validation_fill_to_k(
+                        cand_ids=cand_ids,
+                        checkable_by_id=checkable_by_id,
+                        violated_by_id=violated_by_id,
+                        k=args.top_k,
+                    )
+
+                    minswap_topk = rerank_quota_fill_minswap_to_k(
+                        cand_ids=cand_ids,
+                        admissible_by_id=admissible_by_id,
+                        q=q,
+                        k=args.top_k,
+                    )
+
+                    optq_metrics = evaluate_returned_topk(
+                        returned_topk=optq_topk,
+                        checkable_by_id=checkable_by_id,
+                        admissible_by_id=admissible_by_id,
+                        violated_by_id=violated_by_id,
+                        unknown_by_id=unknown_by_id,
+                        base_topk=base_topk,
+                        base_rank_map=base_rank_map,
+                        k=args.top_k,
+                    )
+                    afq_metrics = evaluate_returned_topk(
+                        returned_topk=afq_topk,
+                        checkable_by_id=checkable_by_id,
+                        admissible_by_id=admissible_by_id,
+                        violated_by_id=violated_by_id,
+                        unknown_by_id=unknown_by_id,
+                        base_topk=base_topk,
+                        base_rank_map=base_rank_map,
+                        k=args.top_k,
+                    )
+                    hardval_metrics = evaluate_returned_topk(
+                        returned_topk=hardval_topk,
+                        checkable_by_id=checkable_by_id,
+                        admissible_by_id=admissible_by_id,
+                        violated_by_id=violated_by_id,
+                        unknown_by_id=unknown_by_id,
+                        base_topk=base_topk,
+                        base_rank_map=base_rank_map,
+                        k=args.top_k,
+                    )
+                    minswap_metrics = evaluate_returned_topk(
+                        returned_topk=minswap_topk,
+                        checkable_by_id=checkable_by_id,
+                        admissible_by_id=admissible_by_id,
+                        violated_by_id=violated_by_id,
+                        unknown_by_id=unknown_by_id,
+                        base_topk=base_topk,
+                        base_rank_map=base_rank_map,
+                        k=args.top_k,
+                    )
+
+                    optq_adm_count = count_admissible_in_topk(
+                        returned_topk=optq_topk,
+                        admissible_by_id=admissible_by_id,
+                    )
+                    afq_adm_count = count_admissible_in_topk(
+                        returned_topk=afq_topk,
+                        admissible_by_id=admissible_by_id,
+                    )
+                    hardval_adm_count = count_admissible_in_topk(
+                        returned_topk=hardval_topk,
+                        admissible_by_id=admissible_by_id,
+                    )
+                    minswap_adm_count = count_admissible_in_topk(
+                        returned_topk=minswap_topk,
+                        admissible_by_id=admissible_by_id,
+                    )
+
+                    optq_vs_afq_exact = compute_topk_exact_match(optq_topk, afq_topk)
+                    optq_vs_afq_set = compute_topk_set_match(optq_topk, afq_topk)
+                    optq_vs_afq_jaccard = compute_topk_set_jaccard(optq_topk, afq_topk)
+
+                    optq_vs_hv_exact = compute_topk_exact_match(optq_topk, hardval_topk)
+                    optq_vs_hv_set = compute_topk_set_match(optq_topk, hardval_topk)
+                    optq_vs_hv_jaccard = compute_topk_set_jaccard(optq_topk, hardval_topk)
+
+                    optq_vs_minswap_exact = compute_topk_exact_match(optq_topk, minswap_topk)
+                    optq_vs_minswap_set = compute_topk_set_match(optq_topk, minswap_topk)
+                    optq_vs_minswap_jaccard = compute_topk_set_jaccard(optq_topk, minswap_topk)
+
+                    aggs[q]["num_feasible"] += 1
+
+                    aggs[q]["optq_viol_sum"] += optq_metrics["viol_at_k"]
+                    aggs[q]["optq_adm_sum"] += optq_metrics["adm_at_k"]
+                    aggs[q]["optq_cov_sum"] += optq_metrics["cov_at_k"]
+                    aggs[q]["optq_unknown_sum"] += optq_metrics["unknown_at_k"]
+                    aggs[q]["optq_pres_sum"] += optq_metrics["pres_at_k"]
+                    aggs[q]["optq_shift_sum"] += optq_metrics["shift_at_k"]
+                    aggs[q]["optq_adm_count_sum"] += optq_adm_count
+
+                    aggs[q]["afq_viol_sum"] += afq_metrics["viol_at_k"]
+                    aggs[q]["afq_adm_sum"] += afq_metrics["adm_at_k"]
+                    aggs[q]["afq_cov_sum"] += afq_metrics["cov_at_k"]
+                    aggs[q]["afq_unknown_sum"] += afq_metrics["unknown_at_k"]
+                    aggs[q]["afq_pres_sum"] += afq_metrics["pres_at_k"]
+                    aggs[q]["afq_shift_sum"] += afq_metrics["shift_at_k"]
+                    aggs[q]["afq_adm_count_sum"] += afq_adm_count
+
+                    aggs[q]["hardval_viol_sum"] += hardval_metrics["viol_at_k"]
+                    aggs[q]["hardval_adm_sum"] += hardval_metrics["adm_at_k"]
+                    aggs[q]["hardval_cov_sum"] += hardval_metrics["cov_at_k"]
+                    aggs[q]["hardval_unknown_sum"] += hardval_metrics["unknown_at_k"]
+                    aggs[q]["hardval_pres_sum"] += hardval_metrics["pres_at_k"]
+                    aggs[q]["hardval_shift_sum"] += hardval_metrics["shift_at_k"]
+                    aggs[q]["hardval_adm_count_sum"] += hardval_adm_count
+
+                    aggs[q]["optq_vs_afq_exact_match_sum"] += optq_vs_afq_exact
+                    aggs[q]["optq_vs_afq_set_match_sum"] += optq_vs_afq_set
+                    aggs[q]["optq_vs_afq_jaccard_sum"] += optq_vs_afq_jaccard
+
+                    aggs[q]["optq_vs_hardval_exact_match_sum"] += optq_vs_hv_exact
+                    aggs[q]["optq_vs_hardval_set_match_sum"] += optq_vs_hv_set
+                    aggs[q]["optq_vs_hardval_jaccard_sum"] += optq_vs_hv_jaccard
+
+                    aggs[q]["lambda_values"].append(lambda_star)
+
+                    rel_counter["num_feasible"] += 1
+
+                    rel_counter["optq_viol_sum"] += optq_metrics["viol_at_k"]
+                    rel_counter["optq_adm_sum"] += optq_metrics["adm_at_k"]
+                    rel_counter["optq_cov_sum"] += optq_metrics["cov_at_k"]
+                    rel_counter["optq_unknown_sum"] += optq_metrics["unknown_at_k"]
+                    rel_counter["optq_pres_sum"] += optq_metrics["pres_at_k"]
+                    rel_counter["optq_shift_sum"] += optq_metrics["shift_at_k"]
+                    rel_counter["optq_adm_count_sum"] += optq_adm_count
+
+                    rel_counter["afq_viol_sum"] += afq_metrics["viol_at_k"]
+                    rel_counter["afq_adm_sum"] += afq_metrics["adm_at_k"]
+                    rel_counter["afq_cov_sum"] += afq_metrics["cov_at_k"]
+                    rel_counter["afq_unknown_sum"] += afq_metrics["unknown_at_k"]
+                    rel_counter["afq_pres_sum"] += afq_metrics["pres_at_k"]
+                    rel_counter["afq_shift_sum"] += afq_metrics["shift_at_k"]
+                    rel_counter["afq_adm_count_sum"] += afq_adm_count
+
+                    rel_counter["hardval_viol_sum"] += hardval_metrics["viol_at_k"]
+                    rel_counter["hardval_adm_sum"] += hardval_metrics["adm_at_k"]
+                    rel_counter["hardval_cov_sum"] += hardval_metrics["cov_at_k"]
+                    rel_counter["hardval_unknown_sum"] += hardval_metrics["unknown_at_k"]
+                    rel_counter["hardval_pres_sum"] += hardval_metrics["pres_at_k"]
+                    rel_counter["hardval_shift_sum"] += hardval_metrics["shift_at_k"]
+                    rel_counter["hardval_adm_count_sum"] += hardval_adm_count
+
+                    rel_counter["optq_vs_afq_exact_match_sum"] += optq_vs_afq_exact
+                    rel_counter["optq_vs_afq_set_match_sum"] += optq_vs_afq_set
+                    rel_counter["optq_vs_afq_jaccard_sum"] += optq_vs_afq_jaccard
+
+                    rel_counter["optq_vs_hardval_exact_match_sum"] += optq_vs_hv_exact
+                    rel_counter["optq_vs_hardval_set_match_sum"] += optq_vs_hv_set
+                    rel_counter["optq_vs_hardval_jaccard_sum"] += optq_vs_hv_jaccard
+
+                    rel_counter["lambda_sum"] += lambda_star
+                else:
+                    lambda_star = None
+                    tau_q = None
+                    optq_metrics = None
+                    afq_metrics = None
+                    hardval_metrics = None
+                    minswap_metrics = None
+                    optq_adm_count = None
+                    afq_adm_count = None
+                    hardval_adm_count = None
+                    minswap_adm_count = None
+                    optq_vs_afq_exact = None
+                    optq_vs_afq_set = None
+                    optq_vs_afq_jaccard = None
+                    optq_vs_hv_exact = None
+                    optq_vs_hv_set = None
+                    optq_vs_hv_jaccard = None
+                    optq_vs_minswap_exact = None
+                    optq_vs_minswap_set = None
+                    optq_vs_minswap_jaccard = None
+
+                row.extend([
+                    int(feasible),
+                    lambda_star,
+                    tau_q,
+
+                    None if optq_metrics is None else optq_metrics["viol_at_k"],
+                    None if optq_metrics is None else optq_metrics["adm_at_k"],
+                    None if optq_metrics is None else optq_metrics["cov_at_k"],
+                    None if optq_metrics is None else optq_metrics["unknown_at_k"],
+                    None if optq_metrics is None else optq_metrics["pres_at_k"],
+                    None if optq_metrics is None else optq_metrics["shift_at_k"],
+                    optq_adm_count,
+
+                    None if afq_metrics is None else afq_metrics["viol_at_k"],
+                    None if afq_metrics is None else afq_metrics["adm_at_k"],
+                    None if afq_metrics is None else afq_metrics["cov_at_k"],
+                    None if afq_metrics is None else afq_metrics["unknown_at_k"],
+                    None if afq_metrics is None else afq_metrics["pres_at_k"],
+                    None if afq_metrics is None else afq_metrics["shift_at_k"],
+                    afq_adm_count,
+
+                    None if hardval_metrics is None else hardval_metrics["viol_at_k"],
+                    None if hardval_metrics is None else hardval_metrics["adm_at_k"],
+                    None if hardval_metrics is None else hardval_metrics["cov_at_k"],
+                    None if hardval_metrics is None else hardval_metrics["unknown_at_k"],
+                    None if hardval_metrics is None else hardval_metrics["pres_at_k"],
+                    None if hardval_metrics is None else hardval_metrics["shift_at_k"],
+                    hardval_adm_count,
+
+                    None if minswap_metrics is None else minswap_metrics["viol_at_k"],
+                    None if minswap_metrics is None else minswap_metrics["adm_at_k"],
+                    None if minswap_metrics is None else minswap_metrics["cov_at_k"],
+                    None if minswap_metrics is None else minswap_metrics["unknown_at_k"],
+                    None if minswap_metrics is None else minswap_metrics["pres_at_k"],
+                    None if minswap_metrics is None else minswap_metrics["shift_at_k"],
+                    minswap_adm_count,
+
+                    optq_vs_afq_exact,
+                    optq_vs_afq_set,
+                    optq_vs_afq_jaccard,
+
+                    optq_vs_hv_exact,
+                    optq_vs_hv_set,
+                    optq_vs_hv_jaccard,
+
+                    optq_vs_minswap_exact,
+                    optq_vs_minswap_set,
+                    optq_vs_minswap_jaccard,
+                ])
+
+            query_rows_buffer.append(row)
+            processed += 1
+
+        append_query_rows(query_csv_path, query_rows_buffer)
+        query_rows_buffer.clear()
+
+        progress_payload = compute_progress_payload(
+            started_at=step_started,
+            processed_queries=processed,
+            total_queries=max(1, total_queries_all),
+            effective_top_m=effective_top_m,
+            aggs=aggs,
+        )
+        save_json_atomic(progress_json_path, progress_payload)
+
+        postfix = {"kept": f"{processed}"}
+        for q in quotas[:3]:
+            fr = progress_payload["running_metrics"].get(f"q{q}_feasible_rate")
+            if fr is not None:
+                postfix[f"q{q}"] = f"{fr:.3f}"
+        pbar.set_postfix(postfix)
+
+        batch_number = (batch_start // args.query_batch_size) + 1
+        if (batch_number % args.log_every) == 0 or batch_end == total_queries_all:
+            parts = [
+                f"[STEP 6/7] kept={processed}",
+                f"elapsed={progress_payload['elapsed_human']}",
+                f"eta={progress_payload['eta_human']}",
+            ]
+            for q in quotas[:4]:
+                fr = progress_payload["running_metrics"].get(f"q{q}_feasible_rate")
+                if fr is not None:
+                    parts.append(f"q{q}_feas={fr:.4f}")
+            logger.log(" ".join(parts))
+
+        del scores, topm_scores, topm_indices
+        maybe_clear_cuda_cache()
+
+    logger.log("[STEP 6/7] Done")
+
+    logger.log("[STEP 7/7] Building final summaries")
+    total_elapsed = perf_now() - started_total
+    if effective_top_m_global is None:
+        raise RuntimeError("Internal error: effective_top_m_global was never set.")
+
+    with summary_csv_path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            "quota",
+            "num_queries",
+            "num_feasible",
+            "feasible_rate",
+
+            "optq_viol_at_k",
+            "optq_adm_at_k",
+            "optq_cov_at_k",
+            "optq_unknown_at_k",
+            "optq_pres_at_k",
+            "optq_shift_at_k",
+            "optq_adm_count_topk",
+
+            "afq_viol_at_k",
+            "afq_adm_at_k",
+            "afq_cov_at_k",
+            "afq_unknown_at_k",
+            "afq_pres_at_k",
+            "afq_shift_at_k",
+            "afq_adm_count_topk",
+
+            "hardval_viol_at_k",
+            "hardval_adm_at_k",
+            "hardval_cov_at_k",
+            "hardval_unknown_at_k",
+            "hardval_pres_at_k",
+            "hardval_shift_at_k",
+            "hardval_adm_count_topk",
+
+            "optq_vs_afq_exact_match_rate",
+            "optq_vs_afq_set_match_rate",
+            "optq_vs_afq_jaccard_mean",
+
+            "optq_vs_hardval_exact_match_rate",
+            "optq_vs_hardval_set_match_rate",
+            "optq_vs_hardval_jaccard_mean",
+
+            "mean_lambda",
+            "median_lambda",
+            "p95_lambda",
+        ])
+
+        for q in quotas:
+            agg = aggs[q]
+            n = agg["num_queries"]
+            fn = agg["num_feasible"]
+            writer.writerow([
+                q,
+                n,
+                fn,
+                (fn / n) if n > 0 else None,
+
+                (agg["optq_viol_sum"] / fn) if fn > 0 else None,
+                (agg["optq_adm_sum"] / fn) if fn > 0 else None,
+                (agg["optq_cov_sum"] / fn) if fn > 0 else None,
+                (agg["optq_unknown_sum"] / fn) if fn > 0 else None,
+                (agg["optq_pres_sum"] / fn) if fn > 0 else None,
+                (agg["optq_shift_sum"] / fn) if fn > 0 else None,
+                (agg["optq_adm_count_sum"] / fn) if fn > 0 else None,
+
+                (agg["afq_viol_sum"] / fn) if fn > 0 else None,
+                (agg["afq_adm_sum"] / fn) if fn > 0 else None,
+                (agg["afq_cov_sum"] / fn) if fn > 0 else None,
+                (agg["afq_unknown_sum"] / fn) if fn > 0 else None,
+                (agg["afq_pres_sum"] / fn) if fn > 0 else None,
+                (agg["afq_shift_sum"] / fn) if fn > 0 else None,
+                (agg["afq_adm_count_sum"] / fn) if fn > 0 else None,
+
+                (agg["hardval_viol_sum"] / fn) if fn > 0 else None,
+                (agg["hardval_adm_sum"] / fn) if fn > 0 else None,
+                (agg["hardval_cov_sum"] / fn) if fn > 0 else None,
+                (agg["hardval_unknown_sum"] / fn) if fn > 0 else None,
+                (agg["hardval_pres_sum"] / fn) if fn > 0 else None,
+                (agg["hardval_shift_sum"] / fn) if fn > 0 else None,
+                (agg["hardval_adm_count_sum"] / fn) if fn > 0 else None,
+
+                (agg["optq_vs_afq_exact_match_sum"] / fn) if fn > 0 else None,
+                (agg["optq_vs_afq_set_match_sum"] / fn) if fn > 0 else None,
+                (agg["optq_vs_afq_jaccard_sum"] / fn) if fn > 0 else None,
+
+                (agg["optq_vs_hardval_exact_match_sum"] / fn) if fn > 0 else None,
+                (agg["optq_vs_hardval_set_match_sum"] / fn) if fn > 0 else None,
+                (agg["optq_vs_hardval_jaccard_sum"] / fn) if fn > 0 else None,
+
+                safe_mean(agg["lambda_values"]),
+                statistics.median(agg["lambda_values"]) if agg["lambda_values"] else None,
+                percentile(agg["lambda_values"], 95),
+            ])
+
+    with relation_csv_path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            "quota",
+            "relation",
+            "queries",
+            "num_feasible",
+            "feasible_rate",
+
+            "optq_viol_at_k",
+            "optq_adm_at_k",
+            "optq_cov_at_k",
+            "optq_unknown_at_k",
+            "optq_pres_at_k",
+            "optq_shift_at_k",
+            "optq_adm_count_topk",
+
+            "afq_viol_at_k",
+            "afq_adm_at_k",
+            "afq_cov_at_k",
+            "afq_unknown_at_k",
+            "afq_pres_at_k",
+            "afq_shift_at_k",
+            "afq_adm_count_topk",
+
+            "hardval_viol_at_k",
+            "hardval_adm_at_k",
+            "hardval_cov_at_k",
+            "hardval_unknown_at_k",
+            "hardval_pres_at_k",
+            "hardval_shift_at_k",
+            "hardval_adm_count_topk",
+
+            "optq_vs_afq_set_match_rate",
+            "optq_vs_hardval_set_match_rate",
+            "mean_lambda",
+        ])
+
+        for q in quotas:
+            for rel, c in sorted(rel_stats[q].items()):
+                qn = c["queries"]
+                fn = c["num_feasible"]
+                writer.writerow([
+                    q,
+                    rel,
+                    qn,
+                    fn,
+                    (fn / qn) if qn > 0 else None,
+
+                    (c["optq_viol_sum"] / fn) if fn > 0 else None,
+                    (c["optq_adm_sum"] / fn) if fn > 0 else None,
+                    (c["optq_cov_sum"] / fn) if fn > 0 else None,
+                    (c["optq_unknown_sum"] / fn) if fn > 0 else None,
+                    (c["optq_pres_sum"] / fn) if fn > 0 else None,
+                    (c["optq_shift_sum"] / fn) if fn > 0 else None,
+                    (c["optq_adm_count_sum"] / fn) if fn > 0 else None,
+
+                    (c["afq_viol_sum"] / fn) if fn > 0 else None,
+                    (c["afq_adm_sum"] / fn) if fn > 0 else None,
+                    (c["afq_cov_sum"] / fn) if fn > 0 else None,
+                    (c["afq_unknown_sum"] / fn) if fn > 0 else None,
+                    (c["afq_pres_sum"] / fn) if fn > 0 else None,
+                    (c["afq_shift_sum"] / fn) if fn > 0 else None,
+                    (c["afq_adm_count_sum"] / fn) if fn > 0 else None,
+
+                    (c["hardval_viol_sum"] / fn) if fn > 0 else None,
+                    (c["hardval_adm_sum"] / fn) if fn > 0 else None,
+                    (c["hardval_cov_sum"] / fn) if fn > 0 else None,
+                    (c["hardval_unknown_sum"] / fn) if fn > 0 else None,
+                    (c["hardval_pres_sum"] / fn) if fn > 0 else None,
+                    (c["hardval_shift_sum"] / fn) if fn > 0 else None,
+                    (c["hardval_adm_count_sum"] / fn) if fn > 0 else None,
+
+                    (c["optq_vs_afq_set_match_sum"] / fn) if fn > 0 else None,
+                    (c["optq_vs_hardval_set_match_sum"] / fn) if fn > 0 else None,
+                    (c["lambda_sum"] / fn) if fn > 0 else None,
+                ])
+
+    summary = {
+        "status": "ok",
+        "experiment_id": "EXP-09",
+        "experiment_name": "quota_vs_filtering_partial",
+        "saved_at_utc": now_iso_utc(),
+        "elapsed_seconds": round(total_elapsed, 6),
+        "elapsed_human": format_seconds(total_elapsed),
+
+        "dataset_name": args.dataset_name or args.processed_dir.name,
+        "processed_dir": str(args.processed_dir),
+        "run_dir": str(args.run_dir),
+        "checkpoint_path": str(checkpoint_path),
+
+        "split": args.split,
+        "mode": args.mode,
+        "top_k": args.top_k,
+        "top_m_requested": args.top_m,
+        "top_m_effective": effective_top_m_global,
+        "query_batch_size": args.query_batch_size,
+        "device": args.device,
+        "seed": args.seed,
+        "max_queries": args.max_queries,
+
+        "semantic_policy": {
+            "check_policy": args.check_policy,
+            "use_domain": args.use_domain,
+            "use_range": args.use_range,
+            "use_disjoint_requested": args.use_disjoint,
+            "use_disjoint_used": use_disjoint,
+            "unknown_penalty": args.unknown_penalty,
+            "binary_like": args.binary_like,
+            "note": (
+                "EXP-09 compares quota-based OptQ against filtering-like partial baselines: "
+                "AdmissibleFirstQuota and HardValidationFill."
+            ),
+        },
+
+        "query_scope": {
+            "scope": args.query_scope,
+            "meaning": {
+                "full": "all eligible queries",
+                "blind": "base top-K has a violation and top-M contains at least one admissible candidate",
+                "blind_strict": "base top-K has a violation and top-M\\top-K contains at least one admissible candidate",
+            }[args.query_scope],
+        },
+
+        "query_subset": {
+            "query_id_file": str(args.query_id_file) if args.query_id_file is not None else None,
+            "subset_filter_active": args.query_id_file is not None,
+            "allowed_query_id_count": (len(allowed_query_ids) if allowed_query_ids is not None else None),
+            "initial_built_query_count": total_queries_all,
+            "kept_query_count": processed,
+        },
+
+        "quota_ladder": quotas,
+
+        "dataset_stats": {
+            "num_entities": len(bundle.entity_to_id),
+            "num_relations": len(bundle.relation_to_id),
+            "train_size": int(bundle.train_tf.num_triples),
+            "valid_size": int(bundle.valid_tf.num_triples),
+            "test_size": int(bundle.test_tf.num_triples),
+        },
+
+        "ontology_sidecars": {
+            "has_entity_types": ontology.has_entity_types,
+            "has_relation_constraints": ontology.has_relation_constraints,
+            "has_disjoint_pairs": ontology.has_disjoint_pairs,
+            "num_entities_with_types": len(ontology.entity_types),
+            "num_relations_with_domain_constraints": sum(1 for v in ontology.relation_domains.values() if v),
+            "num_relations_with_range_constraints": sum(1 for v in ontology.relation_ranges.values() if v),
+            "num_disjoint_pairs": len(ontology.disjoint_pairs),
+        },
+
+        "environment": env_metadata,
+        "quotas": {},
+        "artifacts": {
+            "summary_json": str(summary_json_path),
+            "progress_json": str(progress_json_path),
+            "query_level_csv": str(query_csv_path),
+            "quota_summary_csv": str(summary_csv_path),
+            "relation_level_csv": str(relation_csv_path),
+            "run_log": str(output_dir / "run.log"),
+        },
+    }
+
+    for q in quotas:
+        agg = aggs[q]
+        n = agg["num_queries"]
+        fn = agg["num_feasible"]
+        summary["quotas"][str(q)] = {
+            "num_queries": n,
+            "num_feasible": fn,
+            "feasible_rate": (fn / n) if n > 0 else None,
+
+            "optq": {
+                "viol_at_k": (agg["optq_viol_sum"] / fn) if fn > 0 else None,
+                "adm_at_k": (agg["optq_adm_sum"] / fn) if fn > 0 else None,
+                "cov_at_k": (agg["optq_cov_sum"] / fn) if fn > 0 else None,
+                "unknown_at_k": (agg["optq_unknown_sum"] / fn) if fn > 0 else None,
+                "pres_at_k": (agg["optq_pres_sum"] / fn) if fn > 0 else None,
+                "shift_at_k": (agg["optq_shift_sum"] / fn) if fn > 0 else None,
+                "adm_count_topk": (agg["optq_adm_count_sum"] / fn) if fn > 0 else None,
+            },
+
+            "admissible_first_quota": {
+                "viol_at_k": (agg["afq_viol_sum"] / fn) if fn > 0 else None,
+                "adm_at_k": (agg["afq_adm_sum"] / fn) if fn > 0 else None,
+                "cov_at_k": (agg["afq_cov_sum"] / fn) if fn > 0 else None,
+                "unknown_at_k": (agg["afq_unknown_sum"] / fn) if fn > 0 else None,
+                "pres_at_k": (agg["afq_pres_sum"] / fn) if fn > 0 else None,
+                "shift_at_k": (agg["afq_shift_sum"] / fn) if fn > 0 else None,
+                "adm_count_topk": (agg["afq_adm_count_sum"] / fn) if fn > 0 else None,
+            },
+
+            "hard_validation_fill": {
+                "viol_at_k": (agg["hardval_viol_sum"] / fn) if fn > 0 else None,
+                "adm_at_k": (agg["hardval_adm_sum"] / fn) if fn > 0 else None,
+                "cov_at_k": (agg["hardval_cov_sum"] / fn) if fn > 0 else None,
+                "unknown_at_k": (agg["hardval_unknown_sum"] / fn) if fn > 0 else None,
+                "pres_at_k": (agg["hardval_pres_sum"] / fn) if fn > 0 else None,
+                "shift_at_k": (agg["hardval_shift_sum"] / fn) if fn > 0 else None,
+                "adm_count_topk": (agg["hardval_adm_count_sum"] / fn) if fn > 0 else None,
+            },
+
+            "optq_vs_admissible_first_quota": {
+                "exact_match_rate": (agg["optq_vs_afq_exact_match_sum"] / fn) if fn > 0 else None,
+                "set_match_rate": (agg["optq_vs_afq_set_match_sum"] / fn) if fn > 0 else None,
+                "mean_jaccard": (agg["optq_vs_afq_jaccard_sum"] / fn) if fn > 0 else None,
+            },
+
+            "optq_vs_hard_validation_fill": {
+                "exact_match_rate": (agg["optq_vs_hardval_exact_match_sum"] / fn) if fn > 0 else None,
+                "set_match_rate": (agg["optq_vs_hardval_set_match_sum"] / fn) if fn > 0 else None,
+                "mean_jaccard": (agg["optq_vs_hardval_jaccard_sum"] / fn) if fn > 0 else None,
+            },
+
+            "lambda_stats": {
+                "mean_lambda": safe_mean(agg["lambda_values"]),
+                "median_lambda": statistics.median(agg["lambda_values"]) if agg["lambda_values"] else None,
+                "p90_lambda": percentile(agg["lambda_values"], 90),
+                "p95_lambda": percentile(agg["lambda_values"], 95),
+                "p99_lambda": percentile(agg["lambda_values"], 99),
+                "max_lambda": max(agg["lambda_values"]) if agg["lambda_values"] else None,
+            },
+        }
+
+    save_json_atomic(summary_json_path, summary)
+    save_json_atomic(progress_json_path, {**summary, "status": "completed"})
+
+    logger.log("[STEP 7/7] Done")
+    logger.log(f"[DONE] quotas={quotas} kept_queries={processed} elapsed={summary['elapsed_human']}")
+
+
+# ============================================================
+# CLI
+# ============================================================
+
+def parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser(
+        description=(
+            "EXP-12: Compare OptQ against quota-matched reranking baselines "
+            "(AdmissibleFirstQuota, HardValidationFill)."
+        )
+    )
+
+    p.add_argument("--processed-dir", type=Path, required=True)
+    p.add_argument("--run-dir", type=Path, required=True)
+    p.add_argument("--output-dir", type=Path, required=True)
+    p.add_argument("--dataset-name", type=str, default=None)
+
+    p.add_argument("--split", type=str, default="test", choices=["train", "valid", "test"])
+    p.add_argument("--mode", type=str, default="all", choices=["tail", "head", "all"])
+
+    p.add_argument("--top-k", type=int, default=10)
+    p.add_argument("--top-m", type=int, default=20000)
+
+    p.add_argument("--quotas", type=int, nargs="+", default=[1, 3, 5, 10])
+
+    p.add_argument("--query-batch-size", type=int, default=128)
+    p.add_argument("--device", type=str, default="cuda")
+    p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--max-queries", type=int, default=None)
+
+    p.add_argument("--check-policy", type=str, default="available_all", choices=["available_any", "available_all"])
+    p.add_argument("--use-domain", action="store_true")
+    p.add_argument("--use-range", action="store_true")
+    p.add_argument("--use-disjoint", action="store_true")
+    p.add_argument("--unknown-penalty", type=float, default=1.0)
+    p.add_argument("--binary-like", action="store_true")
+
+    p.add_argument(
+        "--query-scope",
+        type=str,
+        default="blind",
+        choices=["full", "blind", "blind_strict"],
+        help="Evaluate on all queries, blind queries, or blind-strict queries.",
+    )
+
+    p.add_argument("--log-every", type=int, default=5)
+
+    p.add_argument(
+        "--query-id-file",
+        type=Path,
+        default=None,
+        help="Optional file with one allowed query_id per line. If provided, only those queries are evaluated.",
+    )
+
+    return p.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+
+    if args.top_k <= 0:
+        raise SystemExit("--top-k must be positive")
+
+    if args.top_m < args.top_k:
+        raise SystemExit("--top-m must be >= --top-k")
+
+    if args.query_batch_size <= 0:
+        raise SystemExit("--query-batch-size must be positive")
+
+    if args.unknown_penalty < 0:
+        raise SystemExit("--unknown-penalty must be >= 0")
+
+    if not (args.use_domain or args.use_range or args.use_disjoint):
+        raise SystemExit("At least one of --use-domain / --use-range / --use-disjoint must be enabled")
+
+    output_dir = args.output_dir
+    output_dir.mkdir(parents=True, exist_ok=True)
+    logger = Logger(output_dir / "run.log")
+
+    try:
+        run_exp12(args)
+    except Exception as e:
+        err_payload = {
+            "status": "failed",
+            "saved_at_utc": now_iso_utc(),
+            "error": f"{type(e).__name__}: {e}",
+            "traceback": traceback.format_exc(),
+            "config": vars(args),
+        }
+        logger.log(f"[FAILED] {type(e).__name__}: {e}")
+        save_json_atomic(output_dir / "summary.json", err_payload)
+        save_json_atomic(output_dir / "progress.json", err_payload)
+        raise
+
+
+if __name__ == "__main__":
+    main()

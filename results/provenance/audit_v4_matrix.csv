@@ -1,0 +1,55 @@
+key,category,status,description,location,details
+title,manuscript,PASS,Final title and running title,<PROJECT_ROOT>\paper_iswc_camera_ready\main_merge_preview.tex,
+main_utility,manuscript,PASS,Canonical factual/semantic utility rows,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_main_utility.tex,
+dataset_diagnostics,manuscript,PASS,"Canonical settings, feasibility and target exposure",<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_dataset_diagnostics.tex,
+learned_compact,manuscript,PASS,Compact learned comparison and held-out counts,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_empirical_policy_comparison.tex,
+learned_full,manuscript,PASS,Full STC learned diagnostics including Shift@10,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_learned_policy_full.tex,
+fixed_lambda,manuscript,PASS,Full fixed-pressure populations and rows,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_fixed_lambda_comparison.tex,
+energy_ablation,manuscript,PASS,Domain/range and unknown-penalty ablations,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_energy_ablation.tex,
+bootstrap,manuscript,PASS,Factual and semantic bootstrap intervals,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_bootstrap_evidence.tex,
+runtime,manuscript,PASS,Runtime decomposition,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_runtime.tex,
+cross_semantic,manuscript,PASS,Additional scorer semantic diagnostics,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_cross_scorer.tex,
+cross_factual,manuscript,PASS,Additional scorer factual diagnostics,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_cross_scorer_factual.tex,
+quota_frontier,manuscript,PASS,Complete quota frontier,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_quota_frontier.tex,
+window_frontier,manuscript,PASS,Complete candidate-window frontier,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_window_sensitivity.tex,
+structure,manuscript,PASS,Structural summaries,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_structure_diagnostics.tex,
+relation,manuscript,PASS,"Relation support, concentration and utility",<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_relation_concentration.tex,
+head_tail,manuscript,PASS,Full and matched head-tail slices,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_head_tail_slices.tex,
+formula_b,theory,PASS,Uses b=k-q,main source,
+formula_crossing,theory,PASS,Uses the (b+1)-th crossing,main source,
+formula_scalar,theory,PASS,Minimality is restricted to the scalar family,main source,
+formula_not_permutation,theory,PASS,Arbitrary-permutation minimality is explicitly denied,main source,
+formula_zero,theory,PASS,Has the explicit zero-pressure branch,main source,
+old_formula_absent,theory,PASS,Superseded over-controlling partial-quota formula is absent,main source,
+fixed_window_no_requery,claims,PASS,Fixed materialized window and no re-query,main source,materialized_window=True; no_requery=True
+filtering_endpoint,claims,PASS,Hard validation is a valid strict endpoint,main source,
+operational_not_owl,claims,PASS,Operational admissibility is not OWL inconsistency,main source,
+unknown_not_violation,claims,PASS,Unknown means insufficient evidence,main source,
+separate_populations,claims,PASS,Learned and fixed tables use separate populations,main source,
+collapse,claims,PASS,Exact endpoint collapses to admissibility-first,main source,
+drugbank_ablation,claims,PASS,DrugBank unknown-penalty omission is explained,main source,
+coverage,supplementary,PASS,26-row exact coverage inventory,<PROJECT_ROOT>\paper_iswc_camera_ready\tables\zz_final_semantic_coverage_inventory.tex,<PROJECT_ROOT>\artifacts\iswc_camera_ready\semantic_coverage\semantic_coverage_candidates.csv
+utility_eurostat,provenance,PASS,EurostatKG/PairRE utility,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp14_all_scorers_corrected_optq_compact.csv
+utility_dbpedia,provenance,PASS,DBpedia/ComplEx utility,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp14_all_scorers_corrected_optq_compact.csv
+utility_drugbank,provenance,PASS,DrugBank/RotatE utility,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp14_all_scorers_corrected_optq_compact.csv
+learned_euro_near,provenance,PASS,Learned-policy row euro_near,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp22_paper_blindstrict_all_scorers.csv
+learned_euro_optq,provenance,PASS,Learned-policy row euro_optq,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp22_paper_blindstrict_all_scorers.csv
+learned_euro_safe,provenance,PASS,Learned-policy row euro_safe,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp22_paper_blindstrict_all_scorers.csv
+learned_dbp_near,provenance,PASS,Learned-policy row dbp_near,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp22_paper_blindstrict_all_scorers.csv
+learned_dbp_optq,provenance,PASS,Learned-policy row dbp_optq,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp22_paper_blindstrict_all_scorers.csv
+learned_dbp_safe,provenance,PASS,Learned-policy row dbp_safe,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp22_paper_blindstrict_all_scorers.csv
+learned_drug_near,provenance,PASS,Learned-policy row drug_near,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp22_paper_blindstrict_all_scorers.csv
+learned_drug_optq,provenance,PASS,Learned-policy row drug_optq,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp22_paper_blindstrict_all_scorers.csv
+learned_drug_safe,provenance,PASS,Learned-policy row drug_safe,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp22_paper_blindstrict_all_scorers.csv
+fixed_euro,provenance,PASS,Fixed-pressure row euro,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_tables_corrected\exp13_corrected_fixed_lambda_comparison.csv
+fixed_dbpedia,provenance,PASS,Fixed-pressure row dbpedia,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_tables_corrected\exp13_corrected_fixed_lambda_comparison.csv
+fixed_drugbank,provenance,PASS,Fixed-pressure row drugbank,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_tables_corrected\exp13_corrected_fixed_lambda_comparison.csv
+cross_euro,provenance,PASS,Full additional-scorer row,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp14_all_scorers_corrected_optq_compact.csv
+cross_drug_complex,provenance,PASS,Full additional-scorer row,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp14_all_scorers_corrected_optq_compact.csv
+cross_drug_pairre,provenance,PASS,Full additional-scorer row,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp14_all_scorers_corrected_optq_compact.csv
+quota_family,provenance,PASS,Quota-frontier artifact family,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_tables_corrected\exp12_corrected_quota_frontier.csv
+window_family,provenance,PASS,Candidate-window artifact family,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_evidence_v1\window_sensitivity_canonical.csv
+relation_family,provenance,PASS,Relation diagnostics artifact family,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp23_paper_relation_concentration_summary.csv
+head_tail_family,provenance,PASS,Head-tail diagnostics artifact family,STC-derived experimental CSVs,<PROJECT_ROOT>\artifacts\stc_final_freeze_corrected\exp24_paper_head_tail_slice_q5_summary.csv
+pdf_main_merge_preview,pdf,PASS,main_merge_preview.pdf exists and compile log reports a valid page count,<PROJECT_ROOT>\paper_iswc_camera_ready\main_merge_preview.pdf,bytes=434857; pages=19
+pdf_supplementary,pdf,PASS,supplementary.pdf exists and compile log reports a valid page count,<PROJECT_ROOT>\paper_iswc_camera_ready\supplementary.pdf,bytes=437181; pages=33

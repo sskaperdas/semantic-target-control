@@ -1,0 +1,23 @@
+name: Bug report
+description: Report a reproducible problem in code, documentation, or an experiment.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      placeholder: Include the command, dataset, configuration and complete error.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: OS, Python, PyTorch, CUDA, GPU

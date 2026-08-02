@@ -1,0 +1,3 @@
+# Lightweight repository checks and analysis helpers.
+# GPU-specific PyTorch/PyKEEN locks are documented under environment/.
+-e .[analysis,dev]

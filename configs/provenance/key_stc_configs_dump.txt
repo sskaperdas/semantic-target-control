@@ -1,0 +1,503 @@
+====================================================================================================
+
+outputs\stc_upgrade\exp12_quota_baselines\eurostat_m20000_full_q13510\config.json
+
+binary_like: True
+
+check_policy: available_any
+
+dataset_name: EurostatKG
+
+device: cuda
+
+log_every: 500
+
+max_queries: None
+
+mode: all
+
+output_dir: outputs\stc_upgrade\exp12_quota_baselines\eurostat_m20000_full_q13510
+
+processed_dir: data\processed\eurostatkg
+
+query_batch_size: 32
+
+query_id_file: None
+
+query_scope: full
+
+quotas: [1, 3, 5, 10]
+
+run_dir: eurostat_schema_portfolio_v1\best_model
+
+seed: 42
+
+split: test
+
+top_k: 10
+
+top_m: 20000
+
+unknown_penalty: 1.0
+
+use_disjoint: False
+
+use_domain: True
+
+use_range: True
+
+
+
+====================================================================================================
+
+outputs\stc_upgrade\exp12_quota_baselines\eurostat_m20000_blindstrict_q13510\config.json
+
+binary_like: True
+
+check_policy: available_any
+
+dataset_name: EurostatKG
+
+device: cuda
+
+log_every: 500
+
+max_queries: None
+
+mode: all
+
+output_dir: outputs\stc_upgrade\exp12_quota_baselines\eurostat_m20000_blindstrict_q13510
+
+processed_dir: data\processed\eurostatkg
+
+query_batch_size: 32
+
+query_id_file: None
+
+query_scope: blind_strict
+
+quotas: [1, 3, 5, 10]
+
+run_dir: eurostat_schema_portfolio_v1\best_model
+
+seed: 42
+
+split: test
+
+top_k: 10
+
+top_m: 20000
+
+unknown_penalty: 1.0
+
+use_disjoint: False
+
+use_domain: True
+
+use_range: True
+
+
+
+====================================================================================================
+
+outputs\stc_upgrade\exp12_quota_baselines\dbpedia_m5000_subset_q13510\config.json
+
+binary_like: True
+
+check_policy: available_any
+
+dataset_name: DBpedia
+
+device: cuda
+
+log_every: 500
+
+max_queries: None
+
+mode: all
+
+output_dir: outputs\stc_upgrade\exp12_quota_baselines\dbpedia_m5000_subset_q13510
+
+processed_dir: data\processed\dbpedia
+
+query_batch_size: 8
+
+query_id_file: outputs\stc_upgrade\audit\dbpedia_paper_subset_query_ids.txt
+
+query_scope: full
+
+quotas: [1, 3, 5, 10]
+
+run_dir: dbpedia_schema_portfolio_safe_v3\best_model
+
+seed: 42
+
+split: test
+
+top_k: 10
+
+top_m: 5000
+
+unknown_penalty: 1.0
+
+use_disjoint: False
+
+use_domain: True
+
+use_range: True
+
+
+
+====================================================================================================
+
+outputs\stc_upgrade\exp12_quota_baselines\drugbank_m5000_full_q13510\config.json
+
+binary_like: True
+
+check_policy: available_any
+
+dataset_name: DrugBank
+
+device: cuda
+
+log_every: 5000
+
+max_queries: None
+
+mode: all
+
+output_dir: outputs\stc_upgrade\exp12_quota_baselines\drugbank_m5000_full_q13510
+
+processed_dir: data\processed\drugbank
+
+query_batch_size: 64
+
+query_id_file: None
+
+query_scope: full
+
+quotas: [1, 3, 5, 10]
+
+run_dir: drugbank_schema_portfolio_v1\best_model
+
+seed: 42
+
+split: test
+
+top_k: 10
+
+top_m: 5000
+
+unknown_penalty: 1.0
+
+use_disjoint: False
+
+use_domain: True
+
+use_range: True
+
+
+
+====================================================================================================
+
+outputs\stc_upgrade\exp13_fixed_lambda\eurostat_m20000_q5\config.json
+
+binary_like: True
+
+check_policy: available_any
+
+dataset_name: EurostatKG
+
+device: cuda
+
+lambdas: [0.0, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0, 100.0]
+
+log_every: 500
+
+max_queries: None
+
+mode: all
+
+output_dir: outputs\stc_upgrade\exp13_fixed_lambda\eurostat_m20000_q5
+
+processed_dir: data\processed\eurostatkg
+
+query_batch_size: 32
+
+query_id_file: None
+
+quota: 5
+
+run_dir: eurostat_schema_portfolio_v1\best_model
+
+seed: 42
+
+split: test
+
+summary_scopes: ['full', 'blind_strict']
+
+top_k: 10
+
+top_m: 20000
+
+unknown_penalty: 1.0
+
+use_disjoint: False
+
+use_domain: True
+
+use_range: True
+
+
+
+====================================================================================================
+
+outputs\stc_upgrade\exp13_fixed_lambda\dbpedia_m5000_subset_q5\config.json
+
+binary_like: True
+
+check_policy: available_any
+
+dataset_name: DBpedia
+
+device: cuda
+
+lambdas: [0.0, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0, 100.0]
+
+log_every: 500
+
+max_queries: None
+
+mode: all
+
+output_dir: outputs\stc_upgrade\exp13_fixed_lambda\dbpedia_m5000_subset_q5
+
+processed_dir: data\processed\dbpedia
+
+query_batch_size: 8
+
+query_id_file: outputs\stc_upgrade\audit\dbpedia_paper_subset_query_ids.txt
+
+quota: 5
+
+run_dir: dbpedia_schema_portfolio_safe_v3\best_model
+
+seed: 42
+
+split: test
+
+summary_scopes: ['full', 'blind_strict']
+
+top_k: 10
+
+top_m: 5000
+
+unknown_penalty: 1.0
+
+use_disjoint: False
+
+use_domain: True
+
+use_range: True
+
+
+
+====================================================================================================
+
+outputs\stc_upgrade\exp14_factual_utility\eurostat_m20000_q5\config.json
+
+binary_like: True
+
+check_policy: available_any
+
+dataset_name: EurostatKG
+
+device: cuda
+
+log_every: 500
+
+max_queries: None
+
+mode: all
+
+output_dir: outputs\stc_upgrade\exp14_factual_utility\eurostat_m20000_q5
+
+processed_dir: data\processed\eurostatkg
+
+query_batch_size: 32
+
+query_id_file: None
+
+quota: 5
+
+run_dir: eurostat_schema_portfolio_v1\best_model
+
+seed: 42
+
+split: test
+
+summary_scopes: ['full', 'blind_strict']
+
+top_k: 10
+
+top_m: 20000
+
+unknown_penalty: 1.0
+
+use_disjoint: False
+
+use_domain: True
+
+use_range: True
+
+
+
+====================================================================================================
+
+outputs\stc_upgrade\exp14_factual_utility\dbpedia_m5000_subset_q5\config.json
+
+binary_like: True
+
+check_policy: available_any
+
+dataset_name: DBpedia
+
+device: cuda
+
+log_every: 500
+
+max_queries: None
+
+mode: all
+
+output_dir: outputs\stc_upgrade\exp14_factual_utility\dbpedia_m5000_subset_q5
+
+processed_dir: data\processed\dbpedia
+
+query_batch_size: 8
+
+query_id_file: outputs\stc_upgrade\audit\dbpedia_paper_subset_query_ids.txt
+
+quota: 5
+
+run_dir: dbpedia_schema_portfolio_safe_v3\best_model
+
+seed: 42
+
+split: test
+
+summary_scopes: ['full', 'blind_strict']
+
+top_k: 10
+
+top_m: 5000
+
+unknown_penalty: 1.0
+
+use_disjoint: False
+
+use_domain: True
+
+use_range: True
+
+
+
+====================================================================================================
+
+outputs\stc_upgrade\exp19_bootstrap_ci\eurostat_m20000_q5\config.json
+
+binary_like: True
+
+bootstrap_samples: 1000
+
+bootstrap_seed: 12345
+
+check_policy: available_any
+
+dataset_name: EurostatKG
+
+device: cuda
+
+log_every: 500
+
+max_queries: None
+
+mode: all
+
+output_dir: outputs\stc_upgrade\exp19_bootstrap_ci\eurostat_m20000_q5
+
+processed_dir: data\processed\eurostatkg
+
+query_batch_size: 32
+
+query_id_file: None
+
+quota: 5
+
+run_dir: eurostat_schema_portfolio_v1\best_model
+
+seed: 42
+
+split: test
+
+summary_scopes: ['full', 'blind_strict']
+
+top_k: 10
+
+top_m: 20000
+
+unknown_penalty: 1.0
+
+use_disjoint: False
+
+use_domain: True
+
+use_range: True
+
+
+
+====================================================================================================
+
+outputs\stc_upgrade\exp21_runtime_breakdown\eurostat_sample1000_m20000_q5\config.json
+
+binary_like: True
+
+check_policy: available_any
+
+dataset_name: Eurostat
+
+device: cuda
+
+log_every: 20
+
+max_queries: 1000
+
+mode: all
+
+output_dir: outputs\stc_upgrade\exp21_runtime_breakdown\eurostat_sample1000_m20000_q5
+
+processed_dir: data\processed\eurostatkg
+
+query_batch_size: 32
+
+query_id_file: None
+
+quota: 5
+
+run_dir: eurostat_schema_portfolio_v1\best_model
+
+seed: 42
+
+split: test
+
+top_k: 10
+
+top_m: 20000
+
+unknown_penalty: 1.0
+
+use_disjoint: False
+
+use_domain: True
+
+use_range: True

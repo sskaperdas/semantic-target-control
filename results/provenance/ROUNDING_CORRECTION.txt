@@ -1,0 +1,14 @@
+Rounding correction provenance
+==============================
+
+CSV source:
+artifacts\stc_final_tables_corrected\exp14_all_scorers_corrected_optq_compact.csv
+
+Raw value:
+0.4274106175514626
+
+Correct six-decimal rendering:
+0.427411
+
+Corrected manuscript source:
+paper_iswc_camera_ready\tables\zz_final_cross_scorer_factual.tex

@@ -1,0 +1,4 @@
+dataset,scorer,min_support,num_relations_all_feasible,num_relations_kept,kept_query_share,max_relation_support_share,top3_relation_support_share,macro_optq_adm,weighted_optq_adm,macro_optq_pres,weighted_optq_pres,share_relations_adm_ge_0p5,share_relations_viol_le_0p5
+EurostatKG,PairRE-main,500,13,8,0.911,0.194,0.495,0.569,0.551,0.669,0.66,1.0,1.0
+DBpedia,ComplEx-main,30,368,113,0.936,0.161,0.327,0.61,0.639,0.716,0.745,1.0,1.0
+DrugBank,RotatE-main,1,6,6,1.0,0.975,0.996,0.872,0.512,0.872,0.512,1.0,1.0

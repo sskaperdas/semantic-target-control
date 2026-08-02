@@ -1,0 +1,142 @@
+{
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasParagraph": {
+    "total": 4749,
+    "train": 3799,
+    "valid": 475,
+    "test": 475,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasTopic": {
+    "total": 4325,
+    "train": 3461,
+    "valid": 432,
+    "test": 432,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasReference": {
+    "total": 19735,
+    "train": 15787,
+    "valid": 1974,
+    "test": 1974,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasCategoryOfStatisticExplainedArticle": {
+    "total": 2458,
+    "train": 1966,
+    "valid": 246,
+    "test": 246,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasEurostatTheme": {
+    "total": 1493,
+    "train": 1195,
+    "valid": 149,
+    "test": 149,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasOECDTheme": {
+    "total": 8271,
+    "train": 6617,
+    "valid": 827,
+    "test": 827,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasCode": {
+    "total": 8645,
+    "train": 6917,
+    "valid": 864,
+    "test": 864,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasFrequentTerm": {
+    "total": 400,
+    "train": 320,
+    "valid": 40,
+    "test": 40,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/relatedTheme": {
+    "total": 109,
+    "train": 87,
+    "valid": 11,
+    "test": 11,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasSubTheme": {
+    "total": 38,
+    "train": 30,
+    "valid": 4,
+    "test": 4,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasCategoryOfGlossaryArticle": {
+    "total": 3428,
+    "train": 2742,
+    "valid": 343,
+    "test": 343,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/relatedTerm": {
+    "total": 4321,
+    "train": 3457,
+    "valid": 432,
+    "test": 432,
+    "forced_train_only": 0
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasURI": {
+    "total": 6550,
+    "train": 5240,
+    "valid": 655,
+    "test": 655,
+    "forced_train_only": 0
+  },
+  "http://www.w3.org/2002/07/owl#imports": {
+    "total": 1,
+    "train": 1,
+    "valid": 0,
+    "test": 0,
+    "forced_train_only": 1
+  },
+  "http://www.w3.org/2002/07/owl#equivalentClass": {
+    "total": 1,
+    "train": 1,
+    "valid": 0,
+    "test": 0,
+    "forced_train_only": 1
+  },
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+    "total": 39,
+    "train": 31,
+    "valid": 4,
+    "test": 4,
+    "forced_train_only": 0
+  },
+  "http://www.w3.org/2002/07/owl#equivalentProperty": {
+    "total": 8,
+    "train": 8,
+    "valid": 0,
+    "test": 0,
+    "forced_train_only": 1
+  },
+  "http://www.w3.org/2002/07/owl#unionOf": {
+    "total": 12,
+    "train": 10,
+    "valid": 1,
+    "test": 1,
+    "forced_train_only": 0
+  },
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": {
+    "total": 24,
+    "train": 20,
+    "valid": 2,
+    "test": 2,
+    "forced_train_only": 0
+  },
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": {
+    "total": 24,
+    "train": 20,
+    "valid": 2,
+    "test": 2,
+    "forced_train_only": 0
+  }
+}

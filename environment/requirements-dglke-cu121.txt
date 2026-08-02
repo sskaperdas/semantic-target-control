@@ -1,0 +1,30 @@
+--index-url https://pypi.org/simple
+--extra-index-url https://download.pytorch.org/whl/cu121
+--find-links https://data.dgl.ai/wheels/torch-2.3/cu121/repo.html
+
+# Core CUDA stack
+torch==2.3.1+cu121
+torchvision==0.18.1+cu121
+torchaudio==2.3.1+cu121
+torchdata==0.9.0
+
+# DGL / DGL-KE
+dgl==2.5.0+cu121
+dglke==0.1.2
+
+# “don’t let it surprise me later”
+numpy
+scipy
+tqdm
+psutil
+packaging
+
+# Your extras
+pydantic
+PyYAML
+pandas
+
+# Tooling
+pip
+setuptools==81.0.0
+wheel

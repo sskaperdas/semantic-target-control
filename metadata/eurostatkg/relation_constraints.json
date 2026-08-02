@@ -1,0 +1,132 @@
+{
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": {
+    "domain": [],
+    "range": []
+  },
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": {
+    "domain": [],
+    "range": []
+  },
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": {
+    "domain": [],
+    "range": []
+  },
+  "http://www.w3.org/2002/07/owl#equivalentClass": {
+    "domain": [],
+    "range": []
+  },
+  "http://www.w3.org/2002/07/owl#equivalentProperty": {
+    "domain": [],
+    "range": []
+  },
+  "http://www.w3.org/2002/07/owl#imports": {
+    "domain": [],
+    "range": []
+  },
+  "http://www.w3.org/2002/07/owl#unionOf": {
+    "domain": [],
+    "range": []
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasCategoryOfGlossaryArticle": {
+    "domain": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/GlossaryArticle"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/GlossaryArticleCategory"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasCategoryOfStatisticExplainedArticle": {
+    "domain": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/StatisticsExplainedArticle"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/StatisticsExplainedCategory"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasCode": {
+    "domain": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/StatisticalData"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/Code"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasEurostatTheme": {
+    "domain": [],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/EurostatTheme"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasFrequentTerm": {
+    "domain": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/Topic"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/FrequentTerm"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasOECDTheme": {
+    "domain": [
+      "n6519454499a343c98e60af0267242950b5"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/OECDTheme"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasParagraph": {
+    "domain": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/StatisticsExplainedArticle"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/Paragraph"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasReference": {
+    "domain": [
+      "n6519454499a343c98e60af0267242950b6"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/Reference"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasSubTheme": {
+    "domain": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/EurostatTheme"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/EurostatTheme"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasTopic": {
+    "domain": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/Content"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/Topic"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/hasURI": {
+    "domain": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/Reference"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/Content"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/relatedTerm": {
+    "domain": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/GlossaryTerm"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/GlossaryTerm"
+    ]
+  },
+  "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/relatedTheme": {
+    "domain": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/EurostatTheme"
+    ],
+    "range": [
+      "https://ec.europa.eu/eurostat/NLP4StatRef/ontology/OECDTheme"
+    ]
+  }
+}

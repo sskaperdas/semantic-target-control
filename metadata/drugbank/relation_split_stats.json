@@ -1,0 +1,44 @@
+{
+  "drug_has_target": {
+    "total": 48806,
+    "train": 39044,
+    "valid": 4881,
+    "test": 4881,
+    "forced_train_only": 0
+  },
+  "drug_in_pathway": {
+    "total": 3780,
+    "train": 3024,
+    "valid": 378,
+    "test": 378,
+    "forced_train_only": 0
+  },
+  "drug_interacts_with": {
+    "total": 2855848,
+    "train": 2284678,
+    "valid": 285585,
+    "test": 285585,
+    "forced_train_only": 0
+  },
+  "drug_has_enzyme": {
+    "total": 12220,
+    "train": 9776,
+    "valid": 1222,
+    "test": 1222,
+    "forced_train_only": 0
+  },
+  "drug_has_carrier": {
+    "total": 2023,
+    "train": 1619,
+    "valid": 202,
+    "test": 202,
+    "forced_train_only": 0
+  },
+  "drug_has_transporter": {
+    "total": 7077,
+    "train": 5661,
+    "valid": 708,
+    "test": 708,
+    "forced_train_only": 0
+  }
+}

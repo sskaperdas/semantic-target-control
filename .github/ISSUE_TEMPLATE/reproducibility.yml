@@ -1,0 +1,18 @@
+name: Reproducibility question
+description: Ask about reproducing a table, figure, or experiment.
+title: "[Reproduction]: "
+labels: ["reproducibility"]
+body:
+  - type: input
+    id: target
+    attributes:
+      label: Target result
+      placeholder: Paper table/figure or experiment ID
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and observed output
+    validations:
+      required: true

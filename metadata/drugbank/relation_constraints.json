@@ -1,0 +1,50 @@
+{
+  "drug_has_carrier": {
+    "domain": [
+      "Drug"
+    ],
+    "range": [
+      "Protein"
+    ]
+  },
+  "drug_has_enzyme": {
+    "domain": [
+      "Drug"
+    ],
+    "range": [
+      "Protein"
+    ]
+  },
+  "drug_has_target": {
+    "domain": [
+      "Drug"
+    ],
+    "range": [
+      "Protein"
+    ]
+  },
+  "drug_has_transporter": {
+    "domain": [
+      "Drug"
+    ],
+    "range": [
+      "Protein"
+    ]
+  },
+  "drug_in_pathway": {
+    "domain": [
+      "Drug"
+    ],
+    "range": [
+      "Pathway"
+    ]
+  },
+  "drug_interacts_with": {
+    "domain": [
+      "Drug"
+    ],
+    "range": [
+      "Drug"
+    ]
+  }
+}

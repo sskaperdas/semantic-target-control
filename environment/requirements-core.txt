@@ -1,0 +1,9 @@
+# CPU-side preprocessing, analysis and learned-baseline dependencies.
+numpy>=1.26
+pandas>=2.1
+matplotlib>=3.8
+scikit-learn>=1.4
+lightgbm>=4.3
+orjson>=3.10
+rdflib>=7.0
+tqdm>=4.66

@@ -1,0 +1,20 @@
+[
+  {
+    "path": "data\\raw\\eurostatkg\\graph\\Eurostat_KG.ttl",
+    "source_kind": "graph",
+    "rdf_format": "turtle",
+    "parse_sec": 6.1899041,
+    "triples_seen": 307444,
+    "kg_triples_added": 64631,
+    "duplicate_kg_triples": 0,
+    "type_triples": 67895,
+    "subclass_triples": 1924,
+    "domain_triples": 32,
+    "range_triples": 36,
+    "disjoint_triples": 0,
+    "skipped_nonresource_subject": 0,
+    "skipped_nonresource_object": 172926,
+    "skipped_schema_predicate": 0,
+    "skipped_self_disjoint": 0
+  }
+]

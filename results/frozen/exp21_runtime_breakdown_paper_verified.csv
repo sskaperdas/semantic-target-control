@@ -1,0 +1,4 @@
+dataset_name,num_queries,num_feasible,feasible_rate,top_m,top_k,quota,queries_per_second,total_ms_per_query,score_ms_per_query,semantic_ms_per_query,optq_ms_per_query,other_ms_per_query,score_topm_pct,semantic_eval_pct,optq_control_pct
+Eurostat,1000,754,0.754,20000,10,5,38.738,25.814,1.958,17.684,4.709,1.181,0.076,0.685,0.182
+DBpedia,1000,728,0.728,5000,10,5,7.03,142.238,34.474,6.24,1.02,92.609,0.242,0.044,0.007
+DrugBank,10000,9999,1.0,5000,10,5,146.918,6.807,1.202,3.526,1.335,0.529,0.177,0.518,0.196

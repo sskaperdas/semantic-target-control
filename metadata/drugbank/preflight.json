@@ -1,0 +1,111 @@
+{
+  "dataset": "drugbank",
+  "input": "data\\raw\\drugbank\\full_database.xml",
+  "json_backend": "orjson",
+  "started_at_utc": "2026-03-18T14:48:23.272Z",
+  "finished_at_utc": "2026-03-18T14:49:26.506Z",
+  "config": {
+    "seed": 42,
+    "train_ratio": 0.8,
+    "valid_ratio": 0.1,
+    "test_ratio": 0.1,
+    "min_relation_count_for_split": 10,
+    "max_drugs": null
+  },
+  "counts": {
+    "num_triples": 2929754,
+    "num_train": 2343802,
+    "num_valid": 292976,
+    "num_test": 292976,
+    "num_entities": 22466,
+    "num_relations": 6,
+    "typed_entities": 22466,
+    "typing_coverage": 1.0,
+    "num_disjoint_pairs": 3
+  },
+  "schema": {
+    "schema_source": "induced_from_xml_structure",
+    "relation_signatures": {
+      "drug_interacts_with": [
+        "Drug",
+        "Drug"
+      ],
+      "drug_has_target": [
+        "Drug",
+        "Protein"
+      ],
+      "drug_has_enzyme": [
+        "Drug",
+        "Protein"
+      ],
+      "drug_has_carrier": [
+        "Drug",
+        "Protein"
+      ],
+      "drug_has_transporter": [
+        "Drug",
+        "Protein"
+      ],
+      "drug_in_pathway": [
+        "Drug",
+        "Pathway"
+      ]
+    },
+    "disjoint_pairs": [
+      [
+        "Drug",
+        "Protein"
+      ],
+      [
+        "Drug",
+        "Pathway"
+      ],
+      [
+        "Protein",
+        "Pathway"
+      ]
+    ]
+  },
+  "relation_counts": {
+    "drug_interacts_with": 2855848,
+    "drug_has_target": 48806,
+    "drug_in_pathway": 3780,
+    "drug_has_enzyme": 12220,
+    "drug_has_transporter": 7077,
+    "drug_has_carrier": 2023
+  },
+  "runtime": {
+    "total_sec": 65.4879337,
+    "phase_trace": [
+      {
+        "phase": "parse_drugbank_xml",
+        "start_offset_sec": 0.000161,
+        "end_offset_sec": 57.5417337,
+        "duration_sec": 57.5415727,
+        "drugs_kept": 73687
+      },
+      {
+        "phase": "sort_and_split",
+        "start_offset_sec": 57.5422464,
+        "end_offset_sec": 62.8612569,
+        "duration_sec": 5.3190105,
+        "num_triples": 2929754
+      },
+      {
+        "phase": "build_ids_and_constraints",
+        "start_offset_sec": 62.8616746,
+        "end_offset_sec": 63.2369193,
+        "duration_sec": 0.3752447,
+        "num_entities": 22466,
+        "num_relations": 6
+      },
+      {
+        "phase": "write_outputs",
+        "start_offset_sec": 63.2421655,
+        "end_offset_sec": 65.4879306,
+        "duration_sec": 2.2457651
+      }
+    ],
+    "outputs_written_sec": 2.2457651
+  }
+}

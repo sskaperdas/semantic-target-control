@@ -1,0 +1,199 @@
+{
+  "dataset": "dbpedia",
+  "started_at_utc": "2026-03-18T14:47:41.204Z",
+  "finished_at_utc": "2026-03-18T14:57:18.062Z",
+  "json_backend": "orjson",
+  "config": {
+    "seed": 42,
+    "valid_frac": 0.1,
+    "test_frac": 0.1,
+    "entity_prefix_filter": [
+      "http://dbpedia.org/resource/"
+    ],
+    "min_triples_per_relation": 1,
+    "deduplicate_triples": true
+  },
+  "counts": {
+    "num_entities": 5496987,
+    "num_relations": 660,
+    "num_triples": 18328677,
+    "train_size": 14662925,
+    "valid_size": 1832876,
+    "test_size": 1832876,
+    "typed_entities": 4628358,
+    "typing_coverage": 0.8419808888032663,
+    "relations_with_domain": 514,
+    "relations_with_range": 485,
+    "relations_with_both": 386,
+    "num_disjoint_pairs": 25,
+    "avg_types_per_typed_entity": 3.8654481783820525
+  },
+  "schema": {
+    "subclass_edges": 769,
+    "classes_with_subclass_info": 760,
+    "classes_in_closure": 767,
+    "relations_with_domain_assertions": 2421,
+    "relations_with_range_assertions": 2588
+  },
+  "top_relations": [
+    {
+      "relation": "http://dbpedia.org/ontology/team",
+      "relation_local_name": "team",
+      "count": 2006992
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/birthPlace",
+      "relation_local_name": "birthPlace",
+      "count": 1007382
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/careerStation",
+      "relation_local_name": "careerStation",
+      "count": 977021
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/isPartOf",
+      "relation_local_name": "isPartOf",
+      "count": 912040
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/country",
+      "relation_local_name": "country",
+      "count": 769214
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/genre",
+      "relation_local_name": "genre",
+      "count": 575997
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/starring",
+      "relation_local_name": "starring",
+      "count": 422535
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/location",
+      "relation_local_name": "location",
+      "count": 408834
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/type",
+      "relation_local_name": "type",
+      "count": 403155
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/family",
+      "relation_local_name": "family",
+      "count": 397275
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/timeZone",
+      "relation_local_name": "timeZone",
+      "count": 377227
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/order",
+      "relation_local_name": "order",
+      "count": 355123
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/occupation",
+      "relation_local_name": "occupation",
+      "count": 335257
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/class",
+      "relation_local_name": "class",
+      "count": 323237
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/currentMember",
+      "relation_local_name": "currentMember",
+      "count": 318718
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/kingdom",
+      "relation_local_name": "kingdom",
+      "count": 296341
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/recordLabel",
+      "relation_local_name": "recordLabel",
+      "count": 281780
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/producer",
+      "relation_local_name": "producer",
+      "count": 260660
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/deathPlace",
+      "relation_local_name": "deathPlace",
+      "count": 256724
+    },
+    {
+      "relation": "http://dbpedia.org/ontology/phylum",
+      "relation_local_name": "phylum",
+      "count": 244881
+    }
+  ],
+  "source_files": {
+    "ontology": "data\\raw\\DBpedia\\dbpedia_2016-10.owl",
+    "instance_types": "data\\raw\\DBpedia\\instance_types_en.ttl.bz2",
+    "mappingbased_objects": "data\\raw\\DBpedia\\mappingbased_objects_en.ttl.bz2"
+  },
+  "runtime": {
+    "total_sec": 602.6293356,
+    "phase_trace": [
+      {
+        "phase": "parse_ontology",
+        "start_offset_sec": 0.0001105,
+        "end_offset_sec": 0.8101656,
+        "duration_sec": 0.8100551
+      },
+      {
+        "phase": "parse_instance_types",
+        "start_offset_sec": 0.810412,
+        "end_offset_sec": 120.7984567,
+        "duration_sec": 119.9880447
+      },
+      {
+        "phase": "parse_mappingbased_objects",
+        "start_offset_sec": 120.7988885,
+        "end_offset_sec": 546.1782635,
+        "duration_sec": 425.379375,
+        "deduplicate_triples": true
+      },
+      {
+        "phase": "build_subclass_closure_and_materialize_types",
+        "start_offset_sec": 546.1791377,
+        "end_offset_sec": 549.4427983,
+        "duration_sec": 3.2636606,
+        "subclass_nodes": 760,
+        "closure_nodes": 767
+      },
+      {
+        "phase": "build_ids_and_constraints",
+        "start_offset_sec": 549.4428098,
+        "end_offset_sec": 565.1155411,
+        "duration_sec": 15.6727313,
+        "num_entities": 5496987,
+        "num_relations": 660
+      },
+      {
+        "phase": "build_splits",
+        "start_offset_sec": 565.116361,
+        "end_offset_sec": 573.5092838,
+        "duration_sec": 8.3929228,
+        "num_triples": 18328677
+      },
+      {
+        "phase": "write_outputs",
+        "start_offset_sec": 577.570794,
+        "end_offset_sec": 602.629331,
+        "duration_sec": 25.058537
+      }
+    ],
+    "outputs_written_sec": 25.058537
+  }
+}

@@ -1,0 +1,75 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
+
+# Raw and restricted data
+data/raw/
+**/drugbank*.xml
+**/full_database.xml
+*.ttl.bz2
+*.nt.bz2
+*.owl.bz2
+
+# Large processed artifacts
+data/processed/**/all_triples.tsv
+data/processed/**/train.tsv
+data/processed/**/valid.tsv
+data/processed/**/test.tsv
+data/processed/**/entity2id.json
+data/processed/**/entity_types.json
+runs/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Full candidate windows and query-level outputs
+**/*topm*.jsonl
+**/*candidate_window*
+**/per_query*
+outputs/raw/
+logs/
+
+# Paper build files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# Archives
+*.rar
+*.7z
+*.tar
+*.tar.gz

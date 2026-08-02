@@ -1,0 +1,38 @@
+{
+  "processed_dir": "data/processed/dbpedia",
+  "output_dir": "runs/dbpedia_ddp/dbpedia_ddp_transe_opt=adagrad_d=200_e=50_bspergpu=1024_lr=0.05_negs=16_s=42",
+  "model": "transe",
+  "embedding_dim": 200,
+  "epochs": 50,
+  "batch_size_per_gpu": 1024,
+  "global_batch_size": 2048,
+  "batch_size_eval": 8,
+  "learning_rate": 0.05,
+  "num_negs": 16,
+  "gamma": 12.0,
+  "seed": 42,
+  "adv_temperature": 1.0,
+  "optimizer": "adagrad",
+  "adam_betas": [
+    0.9,
+    0.999
+  ],
+  "optimizer_eps": 1e-08,
+  "num_workers": 4,
+  "pin_memory": true,
+  "grad_clip_norm": null,
+  "validate_every": 5,
+  "max_eval_queries": 5000,
+  "dump_topm": true,
+  "dump_topm_size": 1000,
+  "dump_splits": [
+    "test"
+  ],
+  "dump_mode": "both",
+  "dump_max_queries": null,
+  "dump_batch_size": 8,
+  "alloc_expandable_segments": true,
+  "clear_cuda_cache": true,
+  "world_size": 2,
+  "env_PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True"
+}

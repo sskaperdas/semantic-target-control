@@ -1,0 +1,9 @@
+identifier,score,status,energy
+entity_A,0.950,admissible,0.0
+entity_B,0.940,violating,1.0
+entity_C,0.930,violating,1.0
+entity_D,0.920,unknown,0.5
+entity_E,0.910,violating,1.0
+entity_F,0.900,admissible,0.0
+entity_G,0.890,violating,1.0
+entity_H,0.880,admissible,0.0

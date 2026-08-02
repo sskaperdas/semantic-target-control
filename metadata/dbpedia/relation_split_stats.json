@@ -1,0 +1,3962 @@
+{
+  "http://dbpedia.org/ontology/raceHorse": {
+    "total": 3964,
+    "train": 3172,
+    "valid": 396,
+    "test": 396
+  },
+  "http://dbpedia.org/ontology/recordLabel": {
+    "total": 281780,
+    "train": 225424,
+    "valid": 28178,
+    "test": 28178
+  },
+  "http://dbpedia.org/ontology/order": {
+    "total": 355123,
+    "train": 284099,
+    "valid": 35512,
+    "test": 35512
+  },
+  "http://dbpedia.org/ontology/birthPlace": {
+    "total": 1007382,
+    "train": 805906,
+    "valid": 100738,
+    "test": 100738
+  },
+  "http://dbpedia.org/ontology/channel": {
+    "total": 15265,
+    "train": 12213,
+    "valid": 1526,
+    "test": 1526
+  },
+  "http://dbpedia.org/ontology/country": {
+    "total": 769214,
+    "train": 615372,
+    "valid": 76921,
+    "test": 76921
+  },
+  "http://dbpedia.org/ontology/team": {
+    "total": 2006992,
+    "train": 1605594,
+    "valid": 200699,
+    "test": 200699
+  },
+  "http://dbpedia.org/ontology/riverMouth": {
+    "total": 13723,
+    "train": 10979,
+    "valid": 1372,
+    "test": 1372
+  },
+  "http://dbpedia.org/ontology/genre": {
+    "total": 575997,
+    "train": 460797,
+    "valid": 57600,
+    "test": 57600
+  },
+  "http://dbpedia.org/ontology/ground": {
+    "total": 41719,
+    "train": 33375,
+    "valid": 4172,
+    "test": 4172
+  },
+  "http://dbpedia.org/ontology/locatedInArea": {
+    "total": 48899,
+    "train": 39119,
+    "valid": 4890,
+    "test": 4890
+  },
+  "http://dbpedia.org/ontology/hometown": {
+    "total": 93099,
+    "train": 74479,
+    "valid": 9310,
+    "test": 9310
+  },
+  "http://dbpedia.org/ontology/genus": {
+    "total": 224423,
+    "train": 179539,
+    "valid": 22442,
+    "test": 22442
+  },
+  "http://dbpedia.org/ontology/operatingSystem": {
+    "total": 13130,
+    "train": 10504,
+    "valid": 1313,
+    "test": 1313
+  },
+  "http://dbpedia.org/ontology/occupation": {
+    "total": 335257,
+    "train": 268205,
+    "valid": 33526,
+    "test": 33526
+  },
+  "http://dbpedia.org/ontology/musicalArtist": {
+    "total": 56270,
+    "train": 45016,
+    "valid": 5627,
+    "test": 5627
+  },
+  "http://dbpedia.org/ontology/kingdom": {
+    "total": 296341,
+    "train": 237073,
+    "valid": 29634,
+    "test": 29634
+  },
+  "http://dbpedia.org/ontology/lastAppearance": {
+    "total": 2018,
+    "train": 1614,
+    "valid": 202,
+    "test": 202
+  },
+  "http://dbpedia.org/ontology/producer": {
+    "total": 260660,
+    "train": 208528,
+    "valid": 26066,
+    "test": 26066
+  },
+  "http://dbpedia.org/ontology/locationCity": {
+    "total": 27216,
+    "train": 21772,
+    "valid": 2722,
+    "test": 2722
+  },
+  "http://dbpedia.org/ontology/phylum": {
+    "total": 244881,
+    "train": 195905,
+    "valid": 24488,
+    "test": 24488
+  },
+  "http://dbpedia.org/ontology/format": {
+    "total": 81482,
+    "train": 65186,
+    "valid": 8148,
+    "test": 8148
+  },
+  "http://dbpedia.org/ontology/network": {
+    "total": 36778,
+    "train": 29422,
+    "valid": 3678,
+    "test": 3678
+  },
+  "http://dbpedia.org/ontology/editing": {
+    "total": 31108,
+    "train": 24886,
+    "valid": 3111,
+    "test": 3111
+  },
+  "http://dbpedia.org/ontology/musicComposer": {
+    "total": 68788,
+    "train": 55030,
+    "valid": 6879,
+    "test": 6879
+  },
+  "http://dbpedia.org/ontology/division": {
+    "total": 68200,
+    "train": 54560,
+    "valid": 6820,
+    "test": 6820
+  },
+  "http://dbpedia.org/ontology/isPartOf": {
+    "total": 912040,
+    "train": 729632,
+    "valid": 91204,
+    "test": 91204
+  },
+  "http://dbpedia.org/ontology/type": {
+    "total": 403155,
+    "train": 322523,
+    "valid": 40316,
+    "test": 40316
+  },
+  "http://dbpedia.org/ontology/championInDoubleMale": {
+    "total": 2038,
+    "train": 1630,
+    "valid": 204,
+    "test": 204
+  },
+  "http://dbpedia.org/ontology/family": {
+    "total": 397275,
+    "train": 317819,
+    "valid": 39728,
+    "test": 39728
+  },
+  "http://www.w3.org/2000/01/rdf-schema#seeAlso": {
+    "total": 174248,
+    "train": 139398,
+    "valid": 17425,
+    "test": 17425
+  },
+  "http://dbpedia.org/ontology/subsequentWork": {
+    "total": 159725,
+    "train": 127781,
+    "valid": 15972,
+    "test": 15972
+  },
+  "http://dbpedia.org/ontology/arrondissement": {
+    "total": 9435,
+    "train": 7547,
+    "valid": 944,
+    "test": 944
+  },
+  "http://dbpedia.org/ontology/director": {
+    "total": 124516,
+    "train": 99612,
+    "valid": 12452,
+    "test": 12452
+  },
+  "http://dbpedia.org/ontology/careerStation": {
+    "total": 977021,
+    "train": 781617,
+    "valid": 97702,
+    "test": 97702
+  },
+  "http://dbpedia.org/ontology/timeZone": {
+    "total": 377227,
+    "train": 301781,
+    "valid": 37723,
+    "test": 37723
+  },
+  "http://dbpedia.org/ontology/termPeriod": {
+    "total": 148574,
+    "train": 118860,
+    "valid": 14857,
+    "test": 14857
+  },
+  "http://dbpedia.org/ontology/region": {
+    "total": 76709,
+    "train": 61367,
+    "valid": 7671,
+    "test": 7671
+  },
+  "http://dbpedia.org/ontology/party": {
+    "total": 88089,
+    "train": 70471,
+    "valid": 8809,
+    "test": 8809
+  },
+  "http://dbpedia.org/ontology/homeport": {
+    "total": 2480,
+    "train": 1984,
+    "valid": 248,
+    "test": 248
+  },
+  "http://dbpedia.org/ontology/deathPlace": {
+    "total": 256724,
+    "train": 205380,
+    "valid": 25672,
+    "test": 25672
+  },
+  "http://dbpedia.org/ontology/draftTeam": {
+    "total": 10294,
+    "train": 8236,
+    "valid": 1029,
+    "test": 1029
+  },
+  "http://dbpedia.org/ontology/class": {
+    "total": 323237,
+    "train": 258589,
+    "valid": 32324,
+    "test": 32324
+  },
+  "http://dbpedia.org/ontology/currentMember": {
+    "total": 318718,
+    "train": 254974,
+    "valid": 31872,
+    "test": 31872
+  },
+  "http://dbpedia.org/ontology/knownFor": {
+    "total": 46800,
+    "train": 37440,
+    "valid": 4680,
+    "test": 4680
+  },
+  "http://dbpedia.org/ontology/associatedMusicalArtist": {
+    "total": 131085,
+    "train": 104869,
+    "valid": 13108,
+    "test": 13108
+  },
+  "http://dbpedia.org/ontology/city": {
+    "total": 112479,
+    "train": 89983,
+    "valid": 11248,
+    "test": 11248
+  },
+  "http://dbpedia.org/ontology/successor": {
+    "total": 114112,
+    "train": 91290,
+    "valid": 11411,
+    "test": 11411
+  },
+  "http://dbpedia.org/ontology/location": {
+    "total": 408834,
+    "train": 327068,
+    "valid": 40883,
+    "test": 40883
+  },
+  "http://dbpedia.org/ontology/managerClub": {
+    "total": 60993,
+    "train": 48795,
+    "valid": 6099,
+    "test": 6099
+  },
+  "http://dbpedia.org/ontology/lastRace": {
+    "total": 766,
+    "train": 612,
+    "valid": 77,
+    "test": 77
+  },
+  "http://dbpedia.org/ontology/award": {
+    "total": 90655,
+    "train": 72523,
+    "valid": 9066,
+    "test": 9066
+  },
+  "http://dbpedia.org/ontology/predecessor": {
+    "total": 89359,
+    "train": 71487,
+    "valid": 8936,
+    "test": 8936
+  },
+  "http://dbpedia.org/ontology/artist": {
+    "total": 146715,
+    "train": 117371,
+    "valid": 14672,
+    "test": 14672
+  },
+  "http://dbpedia.org/ontology/manufacturer": {
+    "total": 35881,
+    "train": 28705,
+    "valid": 3588,
+    "test": 3588
+  },
+  "http://dbpedia.org/ontology/starring": {
+    "total": 422535,
+    "train": 338027,
+    "valid": 42254,
+    "test": 42254
+  },
+  "http://dbpedia.org/ontology/writer": {
+    "total": 200941,
+    "train": 160753,
+    "valid": 20094,
+    "test": 20094
+  },
+  "http://dbpedia.org/ontology/training": {
+    "total": 6570,
+    "train": 5256,
+    "valid": 657,
+    "test": 657
+  },
+  "http://dbpedia.org/ontology/commander": {
+    "total": 48939,
+    "train": 39151,
+    "valid": 4894,
+    "test": 4894
+  },
+  "http://dbpedia.org/ontology/composer": {
+    "total": 15105,
+    "train": 12085,
+    "valid": 1510,
+    "test": 1510
+  },
+  "http://dbpedia.org/ontology/leaderName": {
+    "total": 17528,
+    "train": 14022,
+    "valid": 1753,
+    "test": 1753
+  },
+  "http://dbpedia.org/ontology/creator": {
+    "total": 27149,
+    "train": 21719,
+    "valid": 2715,
+    "test": 2715
+  },
+  "http://dbpedia.org/ontology/field": {
+    "total": 42546,
+    "train": 34036,
+    "valid": 4255,
+    "test": 4255
+  },
+  "http://dbpedia.org/ontology/curator": {
+    "total": 65,
+    "train": 53,
+    "valid": 6,
+    "test": 6
+  },
+  "http://dbpedia.org/ontology/builder": {
+    "total": 39929,
+    "train": 31943,
+    "valid": 3993,
+    "test": 3993
+  },
+  "http://dbpedia.org/ontology/musicalBand": {
+    "total": 56270,
+    "train": 45016,
+    "valid": 5627,
+    "test": 5627
+  },
+  "http://dbpedia.org/ontology/residence": {
+    "total": 69281,
+    "train": 55425,
+    "valid": 6928,
+    "test": 6928
+  },
+  "http://dbpedia.org/ontology/lyrics": {
+    "total": 1982,
+    "train": 1586,
+    "valid": 198,
+    "test": 198
+  },
+  "http://dbpedia.org/ontology/child": {
+    "total": 15708,
+    "train": 12566,
+    "valid": 1571,
+    "test": 1571
+  },
+  "http://dbpedia.org/ontology/leader": {
+    "total": 8856,
+    "train": 7084,
+    "valid": 886,
+    "test": 886
+  },
+  "http://dbpedia.org/ontology/language": {
+    "total": 108030,
+    "train": 86424,
+    "valid": 10803,
+    "test": 10803
+  },
+  "http://dbpedia.org/ontology/position": {
+    "total": 240402,
+    "train": 192322,
+    "valid": 24040,
+    "test": 24040
+  },
+  "http://dbpedia.org/ontology/binomialAuthority": {
+    "total": 112246,
+    "train": 89796,
+    "valid": 11225,
+    "test": 11225
+  },
+  "http://dbpedia.org/ontology/restingPlace": {
+    "total": 24366,
+    "train": 19492,
+    "valid": 2437,
+    "test": 2437
+  },
+  "http://dbpedia.org/ontology/daylightSavingTimeZone": {
+    "total": 4677,
+    "train": 3741,
+    "valid": 468,
+    "test": 468
+  },
+  "http://dbpedia.org/ontology/formerTeam": {
+    "total": 106710,
+    "train": 85368,
+    "valid": 10671,
+    "test": 10671
+  },
+  "http://dbpedia.org/ontology/museum": {
+    "total": 3465,
+    "train": 2773,
+    "valid": 346,
+    "test": 346
+  },
+  "http://dbpedia.org/ontology/owner": {
+    "total": 60115,
+    "train": 48091,
+    "valid": 6012,
+    "test": 6012
+  },
+  "http://dbpedia.org/ontology/routeJunction": {
+    "total": 30513,
+    "train": 24411,
+    "valid": 3051,
+    "test": 3051
+  },
+  "http://dbpedia.org/ontology/honours": {
+    "total": 1549,
+    "train": 1239,
+    "valid": 155,
+    "test": 155
+  },
+  "http://dbpedia.org/ontology/county": {
+    "total": 9337,
+    "train": 7469,
+    "valid": 934,
+    "test": 934
+  },
+  "http://dbpedia.org/ontology/battle": {
+    "total": 117538,
+    "train": 94030,
+    "valid": 11754,
+    "test": 11754
+  },
+  "http://dbpedia.org/ontology/associatedBand": {
+    "total": 131094,
+    "train": 104876,
+    "valid": 13109,
+    "test": 13109
+  },
+  "http://dbpedia.org/ontology/intercommunality": {
+    "total": 7846,
+    "train": 6276,
+    "valid": 785,
+    "test": 785
+  },
+  "http://dbpedia.org/ontology/religion": {
+    "total": 50732,
+    "train": 40586,
+    "valid": 5073,
+    "test": 5073
+  },
+  "http://dbpedia.org/ontology/profession": {
+    "total": 15593,
+    "train": 12475,
+    "valid": 1559,
+    "test": 1559
+  },
+  "http://dbpedia.org/ontology/company": {
+    "total": 18753,
+    "train": 15003,
+    "valid": 1875,
+    "test": 1875
+  },
+  "http://dbpedia.org/ontology/season": {
+    "total": 10914,
+    "train": 8732,
+    "valid": 1091,
+    "test": 1091
+  },
+  "http://dbpedia.org/ontology/education": {
+    "total": 25646,
+    "train": 20516,
+    "valid": 2565,
+    "test": 2565
+  },
+  "http://dbpedia.org/ontology/previousWork": {
+    "total": 158197,
+    "train": 126557,
+    "valid": 15820,
+    "test": 15820
+  },
+  "http://www.w3.org/2002/07/owl#differentFrom": {
+    "total": 57607,
+    "train": 46085,
+    "valid": 5761,
+    "test": 5761
+  },
+  "http://dbpedia.org/ontology/sisterStation": {
+    "total": 37941,
+    "train": 30353,
+    "valid": 3794,
+    "test": 3794
+  },
+  "http://dbpedia.org/ontology/relative": {
+    "total": 15826,
+    "train": 12660,
+    "valid": 1583,
+    "test": 1583
+  },
+  "http://dbpedia.org/ontology/picture": {
+    "total": 3459,
+    "train": 2767,
+    "valid": 346,
+    "test": 346
+  },
+  "http://dbpedia.org/ontology/doctoralStudent": {
+    "total": 7534,
+    "train": 6028,
+    "valid": 753,
+    "test": 753
+  },
+  "http://dbpedia.org/ontology/ethnicity": {
+    "total": 8321,
+    "train": 6657,
+    "valid": 832,
+    "test": 832
+  },
+  "http://dbpedia.org/ontology/state": {
+    "total": 43595,
+    "train": 34875,
+    "valid": 4360,
+    "test": 4360
+  },
+  "http://dbpedia.org/ontology/literaryGenre": {
+    "total": 29145,
+    "train": 23317,
+    "valid": 2914,
+    "test": 2914
+  },
+  "http://dbpedia.org/ontology/part": {
+    "total": 16891,
+    "train": 13513,
+    "valid": 1689,
+    "test": 1689
+  },
+  "http://dbpedia.org/ontology/distributor": {
+    "total": 67970,
+    "train": 54376,
+    "valid": 6797,
+    "test": 6797
+  },
+  "http://dbpedia.org/ontology/origin": {
+    "total": 11211,
+    "train": 8969,
+    "valid": 1121,
+    "test": 1121
+  },
+  "http://dbpedia.org/ontology/place": {
+    "total": 25902,
+    "train": 20722,
+    "valid": 2590,
+    "test": 2590
+  },
+  "http://dbpedia.org/ontology/spokenIn": {
+    "total": 16366,
+    "train": 13092,
+    "valid": 1637,
+    "test": 1637
+  },
+  "http://dbpedia.org/ontology/cinematography": {
+    "total": 45870,
+    "train": 36696,
+    "valid": 4587,
+    "test": 4587
+  },
+  "http://dbpedia.org/ontology/nationality": {
+    "total": 130523,
+    "train": 104419,
+    "valid": 13052,
+    "test": 13052
+  },
+  "http://dbpedia.org/ontology/recordedIn": {
+    "total": 50786,
+    "train": 40628,
+    "valid": 5079,
+    "test": 5079
+  },
+  "http://dbpedia.org/ontology/routeStart": {
+    "total": 22580,
+    "train": 18064,
+    "valid": 2258,
+    "test": 2258
+  },
+  "http://dbpedia.org/ontology/influencedBy": {
+    "total": 23400,
+    "train": 18720,
+    "valid": 2340,
+    "test": 2340
+  },
+  "http://dbpedia.org/ontology/employer": {
+    "total": 7369,
+    "train": 5895,
+    "valid": 737,
+    "test": 737
+  },
+  "http://dbpedia.org/ontology/author": {
+    "total": 61536,
+    "train": 49228,
+    "valid": 6154,
+    "test": 6154
+  },
+  "http://dbpedia.org/ontology/school": {
+    "total": 5613,
+    "train": 4491,
+    "valid": 561,
+    "test": 561
+  },
+  "http://dbpedia.org/ontology/aircraftBomber": {
+    "total": 377,
+    "train": 301,
+    "valid": 38,
+    "test": 38
+  },
+  "http://dbpedia.org/ontology/lake": {
+    "total": 2406,
+    "train": 1924,
+    "valid": 241,
+    "test": 241
+  },
+  "http://dbpedia.org/ontology/engine": {
+    "total": 10463,
+    "train": 8371,
+    "valid": 1046,
+    "test": 1046
+  },
+  "http://dbpedia.org/ontology/executiveProducer": {
+    "total": 12367,
+    "train": 9893,
+    "valid": 1237,
+    "test": 1237
+  },
+  "http://dbpedia.org/ontology/nonFictionSubject": {
+    "total": 7785,
+    "train": 6229,
+    "valid": 778,
+    "test": 778
+  },
+  "http://dbpedia.org/ontology/president": {
+    "total": 15987,
+    "train": 12789,
+    "valid": 1599,
+    "test": 1599
+  },
+  "http://dbpedia.org/ontology/layout": {
+    "total": 6324,
+    "train": 5060,
+    "valid": 632,
+    "test": 632
+  },
+  "http://dbpedia.org/ontology/publisher": {
+    "total": 64795,
+    "train": 51835,
+    "valid": 6480,
+    "test": 6480
+  },
+  "http://dbpedia.org/ontology/architect": {
+    "total": 17987,
+    "train": 14389,
+    "valid": 1799,
+    "test": 1799
+  },
+  "http://dbpedia.org/ontology/department": {
+    "total": 24307,
+    "train": 19445,
+    "valid": 2431,
+    "test": 2431
+  },
+  "http://dbpedia.org/ontology/programmeFormat": {
+    "total": 21457,
+    "train": 17165,
+    "valid": 2146,
+    "test": 2146
+  },
+  "http://dbpedia.org/ontology/followingEvent": {
+    "total": 5278,
+    "train": 4222,
+    "valid": 528,
+    "test": 528
+  },
+  "http://dbpedia.org/ontology/developer": {
+    "total": 28196,
+    "train": 22556,
+    "valid": 2820,
+    "test": 2820
+  },
+  "http://dbpedia.org/ontology/affiliation": {
+    "total": 24561,
+    "train": 19649,
+    "valid": 2456,
+    "test": 2456
+  },
+  "http://dbpedia.org/ontology/regionServed": {
+    "total": 16504,
+    "train": 13204,
+    "valid": 1650,
+    "test": 1650
+  },
+  "http://dbpedia.org/ontology/countySeat": {
+    "total": 3016,
+    "train": 2412,
+    "valid": 302,
+    "test": 302
+  },
+  "http://dbpedia.org/ontology/subsidiary": {
+    "total": 5135,
+    "train": 4107,
+    "valid": 514,
+    "test": 514
+  },
+  "http://dbpedia.org/ontology/capital": {
+    "total": 5162,
+    "train": 4130,
+    "valid": 516,
+    "test": 516
+  },
+  "http://dbpedia.org/ontology/owningOrganisation": {
+    "total": 13184,
+    "train": 10548,
+    "valid": 1318,
+    "test": 1318
+  },
+  "http://dbpedia.org/ontology/district": {
+    "total": 47330,
+    "train": 37864,
+    "valid": 4733,
+    "test": 4733
+  },
+  "http://dbpedia.org/ontology/militaryBranch": {
+    "total": 41597,
+    "train": 33277,
+    "valid": 4160,
+    "test": 4160
+  },
+  "http://dbpedia.org/ontology/ceremonialCounty": {
+    "total": 5289,
+    "train": 4231,
+    "valid": 529,
+    "test": 529
+  },
+  "http://dbpedia.org/ontology/movement": {
+    "total": 7505,
+    "train": 6005,
+    "valid": 750,
+    "test": 750
+  },
+  "http://dbpedia.org/ontology/sport": {
+    "total": 5861,
+    "train": 4689,
+    "valid": 586,
+    "test": 586
+  },
+  "http://dbpedia.org/ontology/product": {
+    "total": 48195,
+    "train": 38555,
+    "valid": 4820,
+    "test": 4820
+  },
+  "http://dbpedia.org/ontology/province": {
+    "total": 11254,
+    "train": 9004,
+    "valid": 1125,
+    "test": 1125
+  },
+  "http://dbpedia.org/ontology/almaMater": {
+    "total": 131470,
+    "train": 105176,
+    "valid": 13147,
+    "test": 13147
+  },
+  "http://dbpedia.org/ontology/parent": {
+    "total": 29685,
+    "train": 23749,
+    "valid": 2968,
+    "test": 2968
+  },
+  "http://dbpedia.org/ontology/citizenship": {
+    "total": 6435,
+    "train": 5147,
+    "valid": 644,
+    "test": 644
+  },
+  "http://dbpedia.org/ontology/parentCompany": {
+    "total": 12136,
+    "train": 9708,
+    "valid": 1214,
+    "test": 1214
+  },
+  "http://dbpedia.org/ontology/owningCompany": {
+    "total": 13300,
+    "train": 10640,
+    "valid": 1330,
+    "test": 1330
+  },
+  "http://dbpedia.org/ontology/neighboringMunicipality": {
+    "total": 16680,
+    "train": 13344,
+    "valid": 1668,
+    "test": 1668
+  },
+  "http://dbpedia.org/ontology/leaderParty": {
+    "total": 6007,
+    "train": 4805,
+    "valid": 601,
+    "test": 601
+  },
+  "http://dbpedia.org/ontology/source": {
+    "total": 2959,
+    "train": 2367,
+    "valid": 296,
+    "test": 296
+  },
+  "http://dbpedia.org/ontology/veneratedIn": {
+    "total": 5013,
+    "train": 4011,
+    "valid": 501,
+    "test": 501
+  },
+  "http://dbpedia.org/ontology/race": {
+    "total": 31133,
+    "train": 24907,
+    "valid": 3113,
+    "test": 3113
+  },
+  "http://dbpedia.org/ontology/operator": {
+    "total": 19991,
+    "train": 15993,
+    "valid": 1999,
+    "test": 1999
+  },
+  "http://dbpedia.org/ontology/ingredient": {
+    "total": 12756,
+    "train": 10204,
+    "valid": 1276,
+    "test": 1276
+  },
+  "http://dbpedia.org/ontology/spouse": {
+    "total": 37724,
+    "train": 30180,
+    "valid": 3772,
+    "test": 3772
+  },
+  "http://dbpedia.org/ontology/keyPerson": {
+    "total": 31947,
+    "train": 25557,
+    "valid": 3195,
+    "test": 3195
+  },
+  "http://dbpedia.org/ontology/homeStadium": {
+    "total": 7403,
+    "train": 5923,
+    "valid": 740,
+    "test": 740
+  },
+  "http://dbpedia.org/ontology/usedInWar": {
+    "total": 4836,
+    "train": 3868,
+    "valid": 484,
+    "test": 484
+  },
+  "http://dbpedia.org/ontology/translator": {
+    "total": 1152,
+    "train": 922,
+    "valid": 115,
+    "test": 115
+  },
+  "http://dbpedia.org/ontology/mouthPlace": {
+    "total": 15487,
+    "train": 12389,
+    "valid": 1549,
+    "test": 1549
+  },
+  "http://dbpedia.org/ontology/championInSingleMale": {
+    "total": 1023,
+    "train": 819,
+    "valid": 102,
+    "test": 102
+  },
+  "http://dbpedia.org/ontology/campus": {
+    "total": 8568,
+    "train": 6854,
+    "valid": 857,
+    "test": 857
+  },
+  "http://dbpedia.org/ontology/instrument": {
+    "total": 53228,
+    "train": 42582,
+    "valid": 5323,
+    "test": 5323
+  },
+  "http://dbpedia.org/ontology/stateOfOrigin": {
+    "total": 38461,
+    "train": 30769,
+    "valid": 3846,
+    "test": 3846
+  },
+  "http://dbpedia.org/ontology/nearestCity": {
+    "total": 18581,
+    "train": 14865,
+    "valid": 1858,
+    "test": 1858
+  },
+  "http://dbpedia.org/ontology/governmentType": {
+    "total": 11757,
+    "train": 9405,
+    "valid": 1176,
+    "test": 1176
+  },
+  "http://dbpedia.org/ontology/aircraftRecon": {
+    "total": 395,
+    "train": 315,
+    "valid": 40,
+    "test": 40
+  },
+  "http://dbpedia.org/ontology/debutTeam": {
+    "total": 24693,
+    "train": 19755,
+    "valid": 2469,
+    "test": 2469
+  },
+  "http://dbpedia.org/ontology/tenant": {
+    "total": 11117,
+    "train": 8893,
+    "valid": 1112,
+    "test": 1112
+  },
+  "http://dbpedia.org/ontology/computingPlatform": {
+    "total": 53164,
+    "train": 42532,
+    "valid": 5316,
+    "test": 5316
+  },
+  "http://dbpedia.org/ontology/coach": {
+    "total": 24022,
+    "train": 19218,
+    "valid": 2402,
+    "test": 2402
+  },
+  "http://dbpedia.org/ontology/silverMedalist": {
+    "total": 6164,
+    "train": 4932,
+    "valid": 616,
+    "test": 616
+  },
+  "http://dbpedia.org/ontology/ideology": {
+    "total": 15038,
+    "train": 12030,
+    "valid": 1504,
+    "test": 1504
+  },
+  "http://dbpedia.org/ontology/leaderFunction": {
+    "total": 21598,
+    "train": 17278,
+    "valid": 2160,
+    "test": 2160
+  },
+  "http://dbpedia.org/ontology/formerBandMember": {
+    "total": 25890,
+    "train": 20712,
+    "valid": 2589,
+    "test": 2589
+  },
+  "http://dbpedia.org/ontology/openingTheme": {
+    "total": 4638,
+    "train": 3710,
+    "valid": 464,
+    "test": 464
+  },
+  "http://dbpedia.org/ontology/guest": {
+    "total": 34341,
+    "train": 27473,
+    "valid": 3434,
+    "test": 3434
+  },
+  "http://dbpedia.org/ontology/industry": {
+    "total": 52777,
+    "train": 42221,
+    "valid": 5278,
+    "test": 5278
+  },
+  "http://dbpedia.org/ontology/broadcastArea": {
+    "total": 23526,
+    "train": 18820,
+    "valid": 2353,
+    "test": 2353
+  },
+  "http://dbpedia.org/ontology/trainer": {
+    "total": 7567,
+    "train": 6053,
+    "valid": 757,
+    "test": 757
+  },
+  "http://dbpedia.org/ontology/license": {
+    "total": 9903,
+    "train": 7923,
+    "valid": 990,
+    "test": 990
+  },
+  "http://dbpedia.org/ontology/federalState": {
+    "total": 4619,
+    "train": 3695,
+    "valid": 462,
+    "test": 462
+  },
+  "http://dbpedia.org/ontology/manager": {
+    "total": 17244,
+    "train": 13796,
+    "valid": 1724,
+    "test": 1724
+  },
+  "http://dbpedia.org/ontology/mediaType": {
+    "total": 18386,
+    "train": 14708,
+    "valid": 1839,
+    "test": 1839
+  },
+  "http://dbpedia.org/ontology/personFunction": {
+    "total": 4473,
+    "train": 3579,
+    "valid": 447,
+    "test": 447
+  },
+  "http://dbpedia.org/ontology/bodyStyle": {
+    "total": 9746,
+    "train": 7796,
+    "valid": 975,
+    "test": 975
+  },
+  "http://dbpedia.org/ontology/broadcastNetwork": {
+    "total": 12145,
+    "train": 9717,
+    "valid": 1214,
+    "test": 1214
+  },
+  "http://dbpedia.org/ontology/person": {
+    "total": 4978,
+    "train": 3982,
+    "valid": 498,
+    "test": 498
+  },
+  "http://dbpedia.org/ontology/populationPlace": {
+    "total": 13878,
+    "train": 11102,
+    "valid": 1388,
+    "test": 1388
+  },
+  "http://dbpedia.org/ontology/sourceCountry": {
+    "total": 12767,
+    "train": 10213,
+    "valid": 1277,
+    "test": 1277
+  },
+  "http://dbpedia.org/ontology/firstDriverTeam": {
+    "total": 1325,
+    "train": 1061,
+    "valid": 132,
+    "test": 132
+  },
+  "http://dbpedia.org/ontology/notableIdea": {
+    "total": 1284,
+    "train": 1028,
+    "valid": 128,
+    "test": 128
+  },
+  "http://dbpedia.org/ontology/basedOn": {
+    "total": 4376,
+    "train": 3500,
+    "valid": 438,
+    "test": 438
+  },
+  "http://dbpedia.org/ontology/poleDriverTeam": {
+    "total": 1293,
+    "train": 1035,
+    "valid": 129,
+    "test": 129
+  },
+  "http://dbpedia.org/ontology/headquarter": {
+    "total": 45409,
+    "train": 36327,
+    "valid": 4541,
+    "test": 4541
+  },
+  "http://dbpedia.org/ontology/league": {
+    "total": 45391,
+    "train": 36313,
+    "valid": 4539,
+    "test": 4539
+  },
+  "http://dbpedia.org/ontology/usingCountry": {
+    "total": 457,
+    "train": 365,
+    "valid": 46,
+    "test": 46
+  },
+  "http://dbpedia.org/ontology/programmingLanguage": {
+    "total": 6355,
+    "train": 5083,
+    "valid": 636,
+    "test": 636
+  },
+  "http://dbpedia.org/ontology/academicDiscipline": {
+    "total": 8281,
+    "train": 6625,
+    "valid": 828,
+    "test": 828
+  },
+  "http://dbpedia.org/ontology/thirdDriver": {
+    "total": 1337,
+    "train": 1069,
+    "valid": 134,
+    "test": 134
+  },
+  "http://dbpedia.org/ontology/founder": {
+    "total": 1574,
+    "train": 1260,
+    "valid": 157,
+    "test": 157
+  },
+  "http://dbpedia.org/ontology/routeEnd": {
+    "total": 22006,
+    "train": 17604,
+    "valid": 2201,
+    "test": 2201
+  },
+  "http://dbpedia.org/ontology/related": {
+    "total": 17122,
+    "train": 13698,
+    "valid": 1712,
+    "test": 1712
+  },
+  "http://dbpedia.org/ontology/mouthMountain": {
+    "total": 15487,
+    "train": 12389,
+    "valid": 1549,
+    "test": 1549
+  },
+  "http://dbpedia.org/ontology/significantBuilding": {
+    "total": 2789,
+    "train": 2231,
+    "valid": 279,
+    "test": 279
+  },
+  "http://dbpedia.org/ontology/animator": {
+    "total": 4419,
+    "train": 3535,
+    "valid": 442,
+    "test": 442
+  },
+  "http://dbpedia.org/ontology/militaryRank": {
+    "total": 4361,
+    "train": 3489,
+    "valid": 436,
+    "test": 436
+  },
+  "http://dbpedia.org/ontology/formerBroadcastNetwork": {
+    "total": 4194,
+    "train": 3356,
+    "valid": 419,
+    "test": 419
+  },
+  "http://dbpedia.org/ontology/secondCommander": {
+    "total": 509,
+    "train": 407,
+    "valid": 51,
+    "test": 51
+  },
+  "http://dbpedia.org/ontology/firstLeader": {
+    "total": 3299,
+    "train": 2639,
+    "valid": 330,
+    "test": 330
+  },
+  "http://dbpedia.org/ontology/architecturalStyle": {
+    "total": 34579,
+    "train": 27663,
+    "valid": 3458,
+    "test": 3458
+  },
+  "http://dbpedia.org/ontology/languageFamily": {
+    "total": 22230,
+    "train": 17784,
+    "valid": 2223,
+    "test": 2223
+  },
+  "http://dbpedia.org/ontology/previousEvent": {
+    "total": 9124,
+    "train": 7300,
+    "valid": 912,
+    "test": 912
+  },
+  "http://dbpedia.org/ontology/isPartOfMilitaryConflict": {
+    "total": 13356,
+    "train": 10684,
+    "valid": 1336,
+    "test": 1336
+  },
+  "http://dbpedia.org/ontology/colour": {
+    "total": 7636,
+    "train": 6108,
+    "valid": 764,
+    "test": 764
+  },
+  "http://dbpedia.org/ontology/locationCountry": {
+    "total": 21851,
+    "train": 17481,
+    "valid": 2185,
+    "test": 2185
+  },
+  "http://dbpedia.org/ontology/assembly": {
+    "total": 14585,
+    "train": 11669,
+    "valid": 1458,
+    "test": 1458
+  },
+  "http://dbpedia.org/ontology/dean": {
+    "total": 496,
+    "train": 396,
+    "valid": 50,
+    "test": 50
+  },
+  "http://dbpedia.org/ontology/college": {
+    "total": 13758,
+    "train": 11006,
+    "valid": 1376,
+    "test": 1376
+  },
+  "http://dbpedia.org/ontology/railwayRollingStock": {
+    "total": 1804,
+    "train": 1444,
+    "valid": 180,
+    "test": 180
+  },
+  "http://dbpedia.org/ontology/series": {
+    "total": 27433,
+    "train": 21947,
+    "valid": 2743,
+    "test": 2743
+  },
+  "http://dbpedia.org/ontology/bandMember": {
+    "total": 28564,
+    "train": 22852,
+    "valid": 2856,
+    "test": 2856
+  },
+  "http://dbpedia.org/ontology/foundedBy": {
+    "total": 12832,
+    "train": 10266,
+    "valid": 1283,
+    "test": 1283
+  },
+  "http://dbpedia.org/ontology/variantOf": {
+    "total": 4180,
+    "train": 3344,
+    "valid": 418,
+    "test": 418
+  },
+  "http://dbpedia.org/ontology/hybrid": {
+    "total": 1925,
+    "train": 1541,
+    "valid": 192,
+    "test": 192
+  },
+  "http://dbpedia.org/ontology/sourcePlace": {
+    "total": 6147,
+    "train": 4917,
+    "valid": 615,
+    "test": 615
+  },
+  "http://dbpedia.org/ontology/influenced": {
+    "total": 10942,
+    "train": 8754,
+    "valid": 1094,
+    "test": 1094
+  },
+  "http://dbpedia.org/ontology/localAuthority": {
+    "total": 2394,
+    "train": 1916,
+    "valid": 239,
+    "test": 239
+  },
+  "http://dbpedia.org/ontology/leftTributary": {
+    "total": 3989,
+    "train": 3191,
+    "valid": 399,
+    "test": 399
+  },
+  "http://dbpedia.org/ontology/canton": {
+    "total": 8875,
+    "train": 7099,
+    "valid": 888,
+    "test": 888
+  },
+  "http://dbpedia.org/ontology/councilArea": {
+    "total": 2313,
+    "train": 1851,
+    "valid": 231,
+    "test": 231
+  },
+  "http://dbpedia.org/ontology/primeMinister": {
+    "total": 14012,
+    "train": 11210,
+    "valid": 1401,
+    "test": 1401
+  },
+  "http://dbpedia.org/ontology/pictureFormat": {
+    "total": 5628,
+    "train": 4502,
+    "valid": 563,
+    "test": 563
+  },
+  "http://dbpedia.org/ontology/isPartOfWineRegion": {
+    "total": 526,
+    "train": 420,
+    "valid": 53,
+    "test": 53
+  },
+  "http://dbpedia.org/ontology/champion": {
+    "total": 1505,
+    "train": 1205,
+    "valid": 150,
+    "test": 150
+  },
+  "http://dbpedia.org/ontology/meetingRoad": {
+    "total": 161,
+    "train": 129,
+    "valid": 16,
+    "test": 16
+  },
+  "http://dbpedia.org/ontology/notableWork": {
+    "total": 6771,
+    "train": 5417,
+    "valid": 677,
+    "test": 677
+  },
+  "http://dbpedia.org/ontology/rightTributary": {
+    "total": 3962,
+    "train": 3170,
+    "valid": 396,
+    "test": 396
+  },
+  "http://dbpedia.org/ontology/album": {
+    "total": 48243,
+    "train": 38595,
+    "valid": 4824,
+    "test": 4824
+  },
+  "http://dbpedia.org/ontology/soundRecording": {
+    "total": 10943,
+    "train": 8755,
+    "valid": 1094,
+    "test": 1094
+  },
+  "http://dbpedia.org/ontology/commandStructure": {
+    "total": 9411,
+    "train": 7529,
+    "valid": 941,
+    "test": 941
+  },
+  "http://dbpedia.org/ontology/crosses": {
+    "total": 3764,
+    "train": 3012,
+    "valid": 376,
+    "test": 376
+  },
+  "http://dbpedia.org/ontology/politicalPartyOfLeader": {
+    "total": 859,
+    "train": 687,
+    "valid": 86,
+    "test": 86
+  },
+  "http://dbpedia.org/ontology/splitFromParty": {
+    "total": 887,
+    "train": 709,
+    "valid": 89,
+    "test": 89
+  },
+  "http://dbpedia.org/ontology/rector": {
+    "total": 568,
+    "train": 454,
+    "valid": 57,
+    "test": 57
+  },
+  "http://dbpedia.org/ontology/mountainRange": {
+    "total": 14727,
+    "train": 11781,
+    "valid": 1473,
+    "test": 1473
+  },
+  "http://dbpedia.org/ontology/engineType": {
+    "total": 502,
+    "train": 402,
+    "valid": 50,
+    "test": 50
+  },
+  "http://dbpedia.org/ontology/hasVariant": {
+    "total": 652,
+    "train": 522,
+    "valid": 65,
+    "test": 65
+  },
+  "http://dbpedia.org/ontology/athletics": {
+    "total": 1630,
+    "train": 1304,
+    "valid": 163,
+    "test": 163
+  },
+  "http://dbpedia.org/ontology/servingRailwayLine": {
+    "total": 22047,
+    "train": 17637,
+    "valid": 2205,
+    "test": 2205
+  },
+  "http://dbpedia.org/ontology/portrayer": {
+    "total": 5811,
+    "train": 4649,
+    "valid": 581,
+    "test": 581
+  },
+  "http://dbpedia.org/ontology/militaryUnit": {
+    "total": 16880,
+    "train": 13504,
+    "valid": 1688,
+    "test": 1688
+  },
+  "http://dbpedia.org/ontology/growingGrape": {
+    "total": 3330,
+    "train": 2664,
+    "valid": 333,
+    "test": 333
+  },
+  "http://dbpedia.org/ontology/breeder": {
+    "total": 1854,
+    "train": 1484,
+    "valid": 185,
+    "test": 185
+  },
+  "http://dbpedia.org/ontology/aircraftTrainer": {
+    "total": 716,
+    "train": 572,
+    "valid": 72,
+    "test": 72
+  },
+  "http://dbpedia.org/ontology/showJudge": {
+    "total": 2495,
+    "train": 1995,
+    "valid": 250,
+    "test": 250
+  },
+  "http://dbpedia.org/ontology/mainInterest": {
+    "total": 4301,
+    "train": 3441,
+    "valid": 430,
+    "test": 430
+  },
+  "http://dbpedia.org/ontology/university": {
+    "total": 2795,
+    "train": 2235,
+    "valid": 280,
+    "test": 280
+  },
+  "http://dbpedia.org/ontology/outflow": {
+    "total": 3581,
+    "train": 2865,
+    "valid": 358,
+    "test": 358
+  },
+  "http://dbpedia.org/ontology/largestCity": {
+    "total": 3556,
+    "train": 2844,
+    "valid": 356,
+    "test": 356
+  },
+  "http://dbpedia.org/ontology/promotion": {
+    "total": 1266,
+    "train": 1012,
+    "valid": 127,
+    "test": 127
+  },
+  "http://dbpedia.org/ontology/bronzeMedalist": {
+    "total": 5988,
+    "train": 4790,
+    "valid": 599,
+    "test": 599
+  },
+  "http://dbpedia.org/ontology/institution": {
+    "total": 2254,
+    "train": 1804,
+    "valid": 225,
+    "test": 225
+  },
+  "http://dbpedia.org/ontology/principalArea": {
+    "total": 1953,
+    "train": 1563,
+    "valid": 195,
+    "test": 195
+  },
+  "http://dbpedia.org/ontology/secretaryGeneral": {
+    "total": 253,
+    "train": 203,
+    "valid": 25,
+    "test": 25
+  },
+  "http://dbpedia.org/ontology/foundationPlace": {
+    "total": 12985,
+    "train": 10389,
+    "valid": 1298,
+    "test": 1298
+  },
+  "http://dbpedia.org/ontology/nerve": {
+    "total": 534,
+    "train": 428,
+    "valid": 53,
+    "test": 53
+  },
+  "http://dbpedia.org/ontology/secondLeader": {
+    "total": 3056,
+    "train": 2444,
+    "valid": 306,
+    "test": 306
+  },
+  "http://dbpedia.org/ontology/era": {
+    "total": 1323,
+    "train": 1059,
+    "valid": 132,
+    "test": 132
+  },
+  "http://dbpedia.org/ontology/garrison": {
+    "total": 10385,
+    "train": 8309,
+    "valid": 1038,
+    "test": 1038
+  },
+  "http://dbpedia.org/ontology/sales": {
+    "total": 1983,
+    "train": 1587,
+    "valid": 198,
+    "test": 198
+  },
+  "http://dbpedia.org/ontology/formerCoach": {
+    "total": 2573,
+    "train": 2059,
+    "valid": 257,
+    "test": 257
+  },
+  "http://dbpedia.org/ontology/chancellor": {
+    "total": 1507,
+    "train": 1205,
+    "valid": 151,
+    "test": 151
+  },
+  "http://dbpedia.org/ontology/discoverer": {
+    "total": 3754,
+    "train": 3004,
+    "valid": 375,
+    "test": 375
+  },
+  "http://dbpedia.org/ontology/fastestDriver": {
+    "total": 1337,
+    "train": 1069,
+    "valid": 134,
+    "test": 134
+  },
+  "http://dbpedia.org/ontology/notableCommander": {
+    "total": 6745,
+    "train": 5397,
+    "valid": 674,
+    "test": 674
+  },
+  "http://dbpedia.org/ontology/hubAirport": {
+    "total": 3799,
+    "train": 3039,
+    "valid": 380,
+    "test": 380
+  },
+  "http://dbpedia.org/ontology/authority": {
+    "total": 352,
+    "train": 282,
+    "valid": 35,
+    "test": 35
+  },
+  "http://dbpedia.org/ontology/nextEvent": {
+    "total": 4237,
+    "train": 3389,
+    "valid": 424,
+    "test": 424
+  },
+  "http://dbpedia.org/ontology/coverArtist": {
+    "total": 3962,
+    "train": 3170,
+    "valid": 396,
+    "test": 396
+  },
+  "http://dbpedia.org/ontology/board": {
+    "total": 1925,
+    "train": 1541,
+    "valid": 192,
+    "test": 192
+  },
+  "http://dbpedia.org/ontology/relatedMeanOfTransportation": {
+    "total": 8904,
+    "train": 7124,
+    "valid": 890,
+    "test": 890
+  },
+  "http://dbpedia.org/ontology/grades": {
+    "total": 5397,
+    "train": 4317,
+    "valid": 540,
+    "test": 540
+  },
+  "http://dbpedia.org/ontology/deathCause": {
+    "total": 5422,
+    "train": 4338,
+    "valid": 542,
+    "test": 542
+  },
+  "http://dbpedia.org/ontology/stadium": {
+    "total": 2500,
+    "train": 2000,
+    "valid": 250,
+    "test": 250
+  },
+  "http://dbpedia.org/ontology/jurisdiction": {
+    "total": 6456,
+    "train": 5164,
+    "valid": 646,
+    "test": 646
+  },
+  "http://dbpedia.org/ontology/goldMedalist": {
+    "total": 6297,
+    "train": 5037,
+    "valid": 630,
+    "test": 630
+  },
+  "http://dbpedia.org/ontology/club": {
+    "total": 7159,
+    "train": 5727,
+    "valid": 716,
+    "test": 716
+  },
+  "http://dbpedia.org/ontology/designer": {
+    "total": 10572,
+    "train": 8458,
+    "valid": 1057,
+    "test": 1057
+  },
+  "http://dbpedia.org/ontology/domain": {
+    "total": 3752,
+    "train": 3002,
+    "valid": 375,
+    "test": 375
+  },
+  "http://dbpedia.org/ontology/firstDriver": {
+    "total": 10461,
+    "train": 8369,
+    "valid": 1046,
+    "test": 1046
+  },
+  "http://dbpedia.org/ontology/internationalAffiliation": {
+    "total": 1334,
+    "train": 1068,
+    "valid": 133,
+    "test": 133
+  },
+  "http://dbpedia.org/ontology/nationalTeam": {
+    "total": 4682,
+    "train": 3746,
+    "valid": 468,
+    "test": 468
+  },
+  "http://dbpedia.org/ontology/vicePresident": {
+    "total": 1001,
+    "train": 801,
+    "valid": 100,
+    "test": 100
+  },
+  "http://dbpedia.org/ontology/philosophicalSchool": {
+    "total": 2092,
+    "train": 1674,
+    "valid": 209,
+    "test": 209
+  },
+  "http://dbpedia.org/ontology/species": {
+    "total": 3310,
+    "train": 2648,
+    "valid": 331,
+    "test": 331
+  },
+  "http://dbpedia.org/ontology/governmentRegion": {
+    "total": 10,
+    "train": 8,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/service": {
+    "total": 7255,
+    "train": 5803,
+    "valid": 726,
+    "test": 726
+  },
+  "http://dbpedia.org/ontology/saint": {
+    "total": 2013,
+    "train": 1611,
+    "valid": 201,
+    "test": 201
+  },
+  "http://dbpedia.org/ontology/otherParty": {
+    "total": 3975,
+    "train": 3179,
+    "valid": 398,
+    "test": 398
+  },
+  "http://dbpedia.org/ontology/billed": {
+    "total": 2124,
+    "train": 1700,
+    "valid": 212,
+    "test": 212
+  },
+  "http://dbpedia.org/ontology/relation": {
+    "total": 9365,
+    "train": 7493,
+    "valid": 936,
+    "test": 936
+  },
+  "http://dbpedia.org/ontology/distributingLabel": {
+    "total": 1781,
+    "train": 1425,
+    "valid": 178,
+    "test": 178
+  },
+  "http://dbpedia.org/ontology/majorShrine": {
+    "total": 1643,
+    "train": 1315,
+    "valid": 164,
+    "test": 164
+  },
+  "http://dbpedia.org/ontology/governingBody": {
+    "total": 6149,
+    "train": 4919,
+    "valid": 615,
+    "test": 615
+  },
+  "http://dbpedia.org/ontology/thirdTeam": {
+    "total": 1322,
+    "train": 1058,
+    "valid": 132,
+    "test": 132
+  },
+  "http://dbpedia.org/ontology/formerChoreographer": {
+    "total": 1244,
+    "train": 996,
+    "valid": 124,
+    "test": 124
+  },
+  "http://dbpedia.org/ontology/editor": {
+    "total": 5531,
+    "train": 4425,
+    "valid": 553,
+    "test": 553
+  },
+  "http://dbpedia.org/ontology/discipline": {
+    "total": 1664,
+    "train": 1332,
+    "valid": 166,
+    "test": 166
+  },
+  "http://dbpedia.org/ontology/parentMountainPeak": {
+    "total": 2505,
+    "train": 2005,
+    "valid": 250,
+    "test": 250
+  },
+  "http://dbpedia.org/ontology/musicSubgenre": {
+    "total": 754,
+    "train": 604,
+    "valid": 75,
+    "test": 75
+  },
+  "http://dbpedia.org/ontology/voice": {
+    "total": 11180,
+    "train": 8944,
+    "valid": 1118,
+    "test": 1118
+  },
+  "http://dbpedia.org/ontology/fastestDriverTeam": {
+    "total": 1313,
+    "train": 1051,
+    "valid": 131,
+    "test": 131
+  },
+  "http://dbpedia.org/ontology/beatifiedBy": {
+    "total": 954,
+    "train": 764,
+    "valid": 95,
+    "test": 95
+  },
+  "http://dbpedia.org/ontology/governor": {
+    "total": 4473,
+    "train": 3579,
+    "valid": 447,
+    "test": 447
+  },
+  "http://dbpedia.org/ontology/municipality": {
+    "total": 3233,
+    "train": 2587,
+    "valid": 323,
+    "test": 323
+  },
+  "http://dbpedia.org/ontology/presenter": {
+    "total": 14564,
+    "train": 11652,
+    "valid": 1456,
+    "test": 1456
+  },
+  "http://dbpedia.org/ontology/ruralMunicipality": {
+    "total": 778,
+    "train": 622,
+    "valid": 78,
+    "test": 78
+  },
+  "http://dbpedia.org/ontology/gender": {
+    "total": 4834,
+    "train": 3868,
+    "valid": 483,
+    "test": 483
+  },
+  "http://dbpedia.org/ontology/targetAirport": {
+    "total": 2864,
+    "train": 2292,
+    "valid": 286,
+    "test": 286
+  },
+  "http://dbpedia.org/ontology/statisticLabel": {
+    "total": 47,
+    "train": 37,
+    "valid": 5,
+    "test": 5
+  },
+  "http://dbpedia.org/ontology/alumni": {
+    "total": 191,
+    "train": 153,
+    "valid": 19,
+    "test": 19
+  },
+  "http://dbpedia.org/ontology/sourceMountain": {
+    "total": 6147,
+    "train": 4917,
+    "valid": 615,
+    "test": 615
+  },
+  "http://dbpedia.org/ontology/associate": {
+    "total": 3528,
+    "train": 2822,
+    "valid": 353,
+    "test": 353
+  },
+  "http://dbpedia.org/ontology/aircraftAttack": {
+    "total": 775,
+    "train": 619,
+    "valid": 78,
+    "test": 78
+  },
+  "http://dbpedia.org/ontology/lieutenant": {
+    "total": 1859,
+    "train": 1487,
+    "valid": 186,
+    "test": 186
+  },
+  "http://dbpedia.org/ontology/parentOrganisation": {
+    "total": 3318,
+    "train": 2654,
+    "valid": 332,
+    "test": 332
+  },
+  "http://dbpedia.org/ontology/partner": {
+    "total": 1667,
+    "train": 1333,
+    "valid": 167,
+    "test": 167
+  },
+  "http://dbpedia.org/ontology/mission": {
+    "total": 1501,
+    "train": 1201,
+    "valid": 150,
+    "test": 150
+  },
+  "http://dbpedia.org/ontology/inflow": {
+    "total": 4040,
+    "train": 3232,
+    "valid": 404,
+    "test": 404
+  },
+  "http://dbpedia.org/ontology/gameEngine": {
+    "total": 2893,
+    "train": 2315,
+    "valid": 289,
+    "test": 289
+  },
+  "http://dbpedia.org/ontology/aircraftFighter": {
+    "total": 1358,
+    "train": 1086,
+    "valid": 136,
+    "test": 136
+  },
+  "http://dbpedia.org/ontology/poleDriver": {
+    "total": 1302,
+    "train": 1042,
+    "valid": 130,
+    "test": 130
+  },
+  "http://dbpedia.org/ontology/stylisticOrigin": {
+    "total": 3639,
+    "train": 2911,
+    "valid": 364,
+    "test": 364
+  },
+  "http://dbpedia.org/ontology/monarch": {
+    "total": 6433,
+    "train": 5147,
+    "valid": 643,
+    "test": 643
+  },
+  "http://dbpedia.org/ontology/metropolitanBorough": {
+    "total": 1463,
+    "train": 1171,
+    "valid": 146,
+    "test": 146
+  },
+  "http://dbpedia.org/ontology/constructionMaterial": {
+    "total": 606,
+    "train": 484,
+    "valid": 61,
+    "test": 61
+  },
+  "http://dbpedia.org/ontology/areaOfSearch": {
+    "total": 826,
+    "train": 660,
+    "valid": 83,
+    "test": 83
+  },
+  "http://dbpedia.org/ontology/appointer": {
+    "total": 1618,
+    "train": 1294,
+    "valid": 162,
+    "test": 162
+  },
+  "http://dbpedia.org/ontology/highschool": {
+    "total": 6491,
+    "train": 5193,
+    "valid": 649,
+    "test": 649
+  },
+  "http://dbpedia.org/ontology/territory": {
+    "total": 2799,
+    "train": 2239,
+    "valid": 280,
+    "test": 280
+  },
+  "http://dbpedia.org/ontology/illustrator": {
+    "total": 3093,
+    "train": 2475,
+    "valid": 309,
+    "test": 309
+  },
+  "http://dbpedia.org/ontology/archipelago": {
+    "total": 3173,
+    "train": 2539,
+    "valid": 317,
+    "test": 317
+  },
+  "http://dbpedia.org/ontology/rival": {
+    "total": 1735,
+    "train": 1387,
+    "valid": 174,
+    "test": 174
+  },
+  "http://dbpedia.org/ontology/sourceRegion": {
+    "total": 1252,
+    "train": 1002,
+    "valid": 125,
+    "test": 125
+  },
+  "http://dbpedia.org/ontology/significantProject": {
+    "total": 1375,
+    "train": 1099,
+    "valid": 138,
+    "test": 138
+  },
+  "http://dbpedia.org/ontology/placeOfBurial": {
+    "total": 1402,
+    "train": 1122,
+    "valid": 140,
+    "test": 140
+  },
+  "http://dbpedia.org/ontology/currentPartner": {
+    "total": 630,
+    "train": 504,
+    "valid": 63,
+    "test": 63
+  },
+  "http://dbpedia.org/ontology/formerPartner": {
+    "total": 1652,
+    "train": 1322,
+    "valid": 165,
+    "test": 165
+  },
+  "http://dbpedia.org/ontology/availableSmartCard": {
+    "total": 823,
+    "train": 659,
+    "valid": 82,
+    "test": 82
+  },
+  "http://dbpedia.org/ontology/river": {
+    "total": 2650,
+    "train": 2120,
+    "valid": 265,
+    "test": 265
+  },
+  "http://dbpedia.org/ontology/border": {
+    "total": 486,
+    "train": 388,
+    "valid": 49,
+    "test": 49
+  },
+  "http://purl.org/dc/elements/1.1/subject": {
+    "total": 2397,
+    "train": 1917,
+    "valid": 240,
+    "test": 240
+  },
+  "http://dbpedia.org/ontology/twinCountry": {
+    "total": 215,
+    "train": 171,
+    "valid": 22,
+    "test": 22
+  },
+  "http://dbpedia.org/ontology/schoolBoard": {
+    "total": 1839,
+    "train": 1471,
+    "valid": 184,
+    "test": 184
+  },
+  "http://dbpedia.org/ontology/originalLanguage": {
+    "total": 454,
+    "train": 364,
+    "valid": 45,
+    "test": 45
+  },
+  "http://dbpedia.org/ontology/choreographer": {
+    "total": 909,
+    "train": 727,
+    "valid": 91,
+    "test": 91
+  },
+  "http://dbpedia.org/ontology/powerType": {
+    "total": 4382,
+    "train": 3506,
+    "valid": 438,
+    "test": 438
+  },
+  "http://dbpedia.org/ontology/damsire": {
+    "total": 2509,
+    "train": 2007,
+    "valid": 251,
+    "test": 251
+  },
+  "http://dbpedia.org/ontology/secondDriver": {
+    "total": 1341,
+    "train": 1073,
+    "valid": 134,
+    "test": 134
+  },
+  "http://dbpedia.org/ontology/mergedIntoParty": {
+    "total": 800,
+    "train": 640,
+    "valid": 80,
+    "test": 80
+  },
+  "http://dbpedia.org/ontology/televisionSeries": {
+    "total": 2291,
+    "train": 1833,
+    "valid": 229,
+    "test": 229
+  },
+  "http://dbpedia.org/ontology/management": {
+    "total": 596,
+    "train": 476,
+    "valid": 60,
+    "test": 60
+  },
+  "http://dbpedia.org/ontology/island": {
+    "total": 560,
+    "train": 448,
+    "valid": 56,
+    "test": 56
+  },
+  "http://dbpedia.org/ontology/aircraftHelicopterUtility": {
+    "total": 68,
+    "train": 54,
+    "valid": 7,
+    "test": 7
+  },
+  "http://dbpedia.org/ontology/academicAdvisor": {
+    "total": 1345,
+    "train": 1077,
+    "valid": 134,
+    "test": 134
+  },
+  "http://dbpedia.org/ontology/openingFilm": {
+    "total": 183,
+    "train": 147,
+    "valid": 18,
+    "test": 18
+  },
+  "http://dbpedia.org/ontology/biome": {
+    "total": 259,
+    "train": 207,
+    "valid": 26,
+    "test": 26
+  },
+  "http://dbpedia.org/ontology/wineRegion": {
+    "total": 403,
+    "train": 323,
+    "valid": 40,
+    "test": 40
+  },
+  "http://dbpedia.org/ontology/automobilePlatform": {
+    "total": 1796,
+    "train": 1436,
+    "valid": 180,
+    "test": 180
+  },
+  "http://dbpedia.org/ontology/animal": {
+    "total": 279,
+    "train": 223,
+    "valid": 28,
+    "test": 28
+  },
+  "http://dbpedia.org/ontology/mythology": {
+    "total": 775,
+    "train": 619,
+    "valid": 78,
+    "test": 78
+  },
+  "http://dbpedia.org/ontology/notableStudent": {
+    "total": 1455,
+    "train": 1163,
+    "valid": 146,
+    "test": 146
+  },
+  "http://dbpedia.org/ontology/sourceConfluenceRegion": {
+    "total": 47,
+    "train": 37,
+    "valid": 5,
+    "test": 5
+  },
+  "http://dbpedia.org/ontology/nationalAffiliation": {
+    "total": 1388,
+    "train": 1110,
+    "valid": 139,
+    "test": 139
+  },
+  "http://dbpedia.org/ontology/magazine": {
+    "total": 3541,
+    "train": 2833,
+    "valid": 354,
+    "test": 354
+  },
+  "http://dbpedia.org/ontology/anthem": {
+    "total": 773,
+    "train": 619,
+    "valid": 77,
+    "test": 77
+  },
+  "http://xmlns.com/foaf/0.1/depiction": {
+    "total": 521,
+    "train": 417,
+    "valid": 52,
+    "test": 52
+  },
+  "http://dbpedia.org/ontology/launchSite": {
+    "total": 548,
+    "train": 438,
+    "valid": 55,
+    "test": 55
+  },
+  "http://dbpedia.org/ontology/coachedTeam": {
+    "total": 200,
+    "train": 160,
+    "valid": 20,
+    "test": 20
+  },
+  "http://dbpedia.org/ontology/ethnicGroup": {
+    "total": 2245,
+    "train": 1797,
+    "valid": 224,
+    "test": 224
+  },
+  "http://dbpedia.org/ontology/secondTeam": {
+    "total": 1322,
+    "train": 1058,
+    "valid": 132,
+    "test": 132
+  },
+  "http://dbpedia.org/ontology/beatifiedPlace": {
+    "total": 1239,
+    "train": 991,
+    "valid": 124,
+    "test": 124
+  },
+  "http://dbpedia.org/ontology/denomination": {
+    "total": 926,
+    "train": 740,
+    "valid": 93,
+    "test": 93
+  },
+  "http://dbpedia.org/ontology/gameArtist": {
+    "total": 803,
+    "train": 643,
+    "valid": 80,
+    "test": 80
+  },
+  "http://dbpedia.org/ontology/homeArena": {
+    "total": 1070,
+    "train": 856,
+    "valid": 107,
+    "test": 107
+  },
+  "http://dbpedia.org/ontology/largestSettlement": {
+    "total": 80,
+    "train": 64,
+    "valid": 8,
+    "test": 8
+  },
+  "http://dbpedia.org/ontology/politicalPartyInLegislature": {
+    "total": 4005,
+    "train": 3205,
+    "valid": 400,
+    "test": 400
+  },
+  "http://dbpedia.org/ontology/childOrganisation": {
+    "total": 1129,
+    "train": 903,
+    "valid": 113,
+    "test": 113
+  },
+  "http://dbpedia.org/ontology/grandsire": {
+    "total": 3280,
+    "train": 2624,
+    "valid": 328,
+    "test": 328
+  },
+  "http://dbpedia.org/ontology/designCompany": {
+    "total": 1526,
+    "train": 1220,
+    "valid": 153,
+    "test": 153
+  },
+  "http://dbpedia.org/ontology/borough": {
+    "total": 376,
+    "train": 300,
+    "valid": 38,
+    "test": 38
+  },
+  "http://dbpedia.org/ontology/musicBy": {
+    "total": 1494,
+    "train": 1196,
+    "valid": 149,
+    "test": 149
+  },
+  "http://dbpedia.org/ontology/europeanAffiliation": {
+    "total": 644,
+    "train": 516,
+    "valid": 64,
+    "test": 64
+  },
+  "http://dbpedia.org/ontology/mainOrgan": {
+    "total": 187,
+    "train": 149,
+    "valid": 19,
+    "test": 19
+  },
+  "http://dbpedia.org/ontology/lieutenancyArea": {
+    "total": 1613,
+    "train": 1291,
+    "valid": 161,
+    "test": 161
+  },
+  "http://dbpedia.org/ontology/mouthRegion": {
+    "total": 1046,
+    "train": 836,
+    "valid": 105,
+    "test": 105
+  },
+  "http://dbpedia.org/ontology/premierePlace": {
+    "total": 2002,
+    "train": 1602,
+    "valid": 200,
+    "test": 200
+  },
+  "http://dbpedia.org/ontology/mayor": {
+    "total": 936,
+    "train": 748,
+    "valid": 94,
+    "test": 94
+  },
+  "http://dbpedia.org/ontology/artery": {
+    "total": 472,
+    "train": 378,
+    "valid": 47,
+    "test": 47
+  },
+  "http://dbpedia.org/ontology/fuelSystem": {
+    "total": 240,
+    "train": 192,
+    "valid": 24,
+    "test": 24
+  },
+  "http://dbpedia.org/ontology/spokesperson": {
+    "total": 122,
+    "train": 98,
+    "valid": 12,
+    "test": 12
+  },
+  "http://dbpedia.org/ontology/march": {
+    "total": 375,
+    "train": 299,
+    "valid": 38,
+    "test": 38
+  },
+  "http://dbpedia.org/ontology/chairman": {
+    "total": 6982,
+    "train": 5586,
+    "valid": 698,
+    "test": 698
+  },
+  "http://dbpedia.org/ontology/administrativeDistrict": {
+    "total": 209,
+    "train": 167,
+    "valid": 21,
+    "test": 21
+  },
+  "http://dbpedia.org/ontology/countryWithFirstSpaceflight": {
+    "total": 10,
+    "train": 8,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/unitaryAuthority": {
+    "total": 346,
+    "train": 276,
+    "valid": 35,
+    "test": 35
+  },
+  "http://dbpedia.org/ontology/championInSingleFemale": {
+    "total": 211,
+    "train": 169,
+    "valid": 21,
+    "test": 21
+  },
+  "http://dbpedia.org/ontology/canonizedBy": {
+    "total": 653,
+    "train": 523,
+    "valid": 65,
+    "test": 65
+  },
+  "http://dbpedia.org/ontology/officialLanguage": {
+    "total": 561,
+    "train": 449,
+    "valid": 56,
+    "test": 56
+  },
+  "http://dbpedia.org/ontology/similar": {
+    "total": 970,
+    "train": 776,
+    "valid": 97,
+    "test": 97
+  },
+  "http://dbpedia.org/ontology/government": {
+    "total": 209,
+    "train": 167,
+    "valid": 21,
+    "test": 21
+  },
+  "http://dbpedia.org/ontology/currency": {
+    "total": 1792,
+    "train": 1434,
+    "valid": 179,
+    "test": 179
+  },
+  "http://dbpedia.org/ontology/hasJunctionWith": {
+    "total": 209,
+    "train": 167,
+    "valid": 21,
+    "test": 21
+  },
+  "http://dbpedia.org/ontology/narrator": {
+    "total": 5201,
+    "train": 4161,
+    "valid": 520,
+    "test": 520
+  },
+  "http://dbpedia.org/ontology/firstAscentPerson": {
+    "total": 891,
+    "train": 713,
+    "valid": 89,
+    "test": 89
+  },
+  "http://dbpedia.org/ontology/sire": {
+    "total": 3099,
+    "train": 2479,
+    "valid": 310,
+    "test": 310
+  },
+  "http://dbpedia.org/ontology/aircraftTransport": {
+    "total": 889,
+    "train": 711,
+    "valid": 89,
+    "test": 89
+  },
+  "http://dbpedia.org/ontology/patron": {
+    "total": 244,
+    "train": 196,
+    "valid": 24,
+    "test": 24
+  },
+  "http://dbpedia.org/ontology/distributingCompany": {
+    "total": 1781,
+    "train": 1425,
+    "valid": 178,
+    "test": 178
+  },
+  "http://dbpedia.org/ontology/chiefEditor": {
+    "total": 182,
+    "train": 146,
+    "valid": 18,
+    "test": 18
+  },
+  "http://dbpedia.org/ontology/chairperson": {
+    "total": 284,
+    "train": 228,
+    "valid": 28,
+    "test": 28
+  },
+  "http://dbpedia.org/ontology/derivative": {
+    "total": 879,
+    "train": 703,
+    "valid": 88,
+    "test": 88
+  },
+  "http://dbpedia.org/ontology/previousEditor": {
+    "total": 305,
+    "train": 245,
+    "valid": 30,
+    "test": 30
+  },
+  "http://dbpedia.org/ontology/plant": {
+    "total": 228,
+    "train": 182,
+    "valid": 23,
+    "test": 23
+  },
+  "http://dbpedia.org/ontology/equipment": {
+    "total": 269,
+    "train": 215,
+    "valid": 27,
+    "test": 27
+  },
+  "http://dbpedia.org/ontology/endPoint": {
+    "total": 217,
+    "train": 173,
+    "valid": 22,
+    "test": 22
+  },
+  "http://dbpedia.org/ontology/doctoralAdvisor": {
+    "total": 6473,
+    "train": 5179,
+    "valid": 647,
+    "test": 647
+  },
+  "http://dbpedia.org/ontology/flagBearer": {
+    "total": 681,
+    "train": 545,
+    "valid": 68,
+    "test": 68
+  },
+  "http://dbpedia.org/ontology/typeOfElectrification": {
+    "total": 1251,
+    "train": 1001,
+    "valid": 125,
+    "test": 125
+  },
+  "http://dbpedia.org/ontology/mouthCountry": {
+    "total": 684,
+    "train": 548,
+    "valid": 68,
+    "test": 68
+  },
+  "http://dbpedia.org/ontology/event": {
+    "total": 861,
+    "train": 689,
+    "valid": 86,
+    "test": 86
+  },
+  "http://dbpedia.org/ontology/viceChancellor": {
+    "total": 416,
+    "train": 332,
+    "valid": 42,
+    "test": 42
+  },
+  "http://dbpedia.org/ontology/primaryFuelType": {
+    "total": 3068,
+    "train": 2454,
+    "valid": 307,
+    "test": 307
+  },
+  "http://dbpedia.org/ontology/aircraftPatrol": {
+    "total": 552,
+    "train": 442,
+    "valid": 55,
+    "test": 55
+  },
+  "http://dbpedia.org/ontology/headChef": {
+    "total": 235,
+    "train": 187,
+    "valid": 24,
+    "test": 24
+  },
+  "http://dbpedia.org/ontology/binomial": {
+    "total": 440,
+    "train": 352,
+    "valid": 44,
+    "test": 44
+  },
+  "http://dbpedia.org/ontology/alliance": {
+    "total": 320,
+    "train": 256,
+    "valid": 32,
+    "test": 32
+  },
+  "http://dbpedia.org/ontology/category": {
+    "total": 781,
+    "train": 625,
+    "valid": 78,
+    "test": 78
+  },
+  "http://dbpedia.org/ontology/creativeDirector": {
+    "total": 371,
+    "train": 297,
+    "valid": 37,
+    "test": 37
+  },
+  "http://dbpedia.org/ontology/cpu": {
+    "total": 1679,
+    "train": 1343,
+    "valid": 168,
+    "test": 168
+  },
+  "http://dbpedia.org/ontology/startPoint": {
+    "total": 221,
+    "train": 177,
+    "valid": 22,
+    "test": 22
+  },
+  "http://dbpedia.org/ontology/organisation": {
+    "total": 393,
+    "train": 315,
+    "valid": 39,
+    "test": 39
+  },
+  "http://dbpedia.org/ontology/deputy": {
+    "total": 2550,
+    "train": 2040,
+    "valid": 255,
+    "test": 255
+  },
+  "http://dbpedia.org/ontology/branchFrom": {
+    "total": 572,
+    "train": 458,
+    "valid": 57,
+    "test": 57
+  },
+  "http://dbpedia.org/ontology/creatorOfDish": {
+    "total": 331,
+    "train": 265,
+    "valid": 33,
+    "test": 33
+  },
+  "http://dbpedia.org/ontology/endingTheme": {
+    "total": 1001,
+    "train": 801,
+    "valid": 100,
+    "test": 100
+  },
+  "http://dbpedia.org/ontology/maintainedBy": {
+    "total": 1652,
+    "train": 1322,
+    "valid": 165,
+    "test": 165
+  },
+  "http://dbpedia.org/ontology/prospectTeam": {
+    "total": 520,
+    "train": 416,
+    "valid": 52,
+    "test": 52
+  },
+  "http://dbpedia.org/ontology/boiler": {
+    "total": 42,
+    "train": 34,
+    "valid": 4,
+    "test": 4
+  },
+  "http://dbpedia.org/ontology/head": {
+    "total": 1016,
+    "train": 812,
+    "valid": 102,
+    "test": 102
+  },
+  "http://dbpedia.org/ontology/precursor": {
+    "total": 222,
+    "train": 178,
+    "valid": 22,
+    "test": 22
+  },
+  "http://dbpedia.org/ontology/firstDriverCountry": {
+    "total": 98,
+    "train": 78,
+    "valid": 10,
+    "test": 10
+  },
+  "http://dbpedia.org/ontology/twinTown": {
+    "total": 626,
+    "train": 500,
+    "valid": 63,
+    "test": 63
+  },
+  "http://dbpedia.org/ontology/frazioni": {
+    "total": 1386,
+    "train": 1108,
+    "valid": 139,
+    "test": 139
+  },
+  "http://dbpedia.org/ontology/house": {
+    "total": 467,
+    "train": 373,
+    "valid": 47,
+    "test": 47
+  },
+  "http://dbpedia.org/ontology/taoiseach": {
+    "total": 160,
+    "train": 128,
+    "valid": 16,
+    "test": 16
+  },
+  "http://dbpedia.org/ontology/lastWin": {
+    "total": 91,
+    "train": 73,
+    "valid": 9,
+    "test": 9
+  },
+  "http://dbpedia.org/ontology/whaDraftTeam": {
+    "total": 349,
+    "train": 279,
+    "valid": 35,
+    "test": 35
+  },
+  "http://dbpedia.org/ontology/photographer": {
+    "total": 457,
+    "train": 365,
+    "valid": 46,
+    "test": 46
+  },
+  "http://dbpedia.org/ontology/schoolPatron": {
+    "total": 291,
+    "train": 233,
+    "valid": 29,
+    "test": 29
+  },
+  "http://dbpedia.org/ontology/canonizedPlace": {
+    "total": 495,
+    "train": 395,
+    "valid": 50,
+    "test": 50
+  },
+  "http://dbpedia.org/ontology/branchTo": {
+    "total": 393,
+    "train": 315,
+    "valid": 39,
+    "test": 39
+  },
+  "http://xmlns.com/foaf/0.1/logo": {
+    "total": 88,
+    "train": 70,
+    "valid": 9,
+    "test": 9
+  },
+  "http://dbpedia.org/ontology/cultivatedVariety": {
+    "total": 19,
+    "train": 15,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/agency": {
+    "total": 717,
+    "train": 573,
+    "valid": 72,
+    "test": 72
+  },
+  "http://dbpedia.org/ontology/varietals": {
+    "total": 598,
+    "train": 478,
+    "valid": 60,
+    "test": 60
+  },
+  "http://dbpedia.org/ontology/lowestState": {
+    "total": 18,
+    "train": 14,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/railwayLineUsingTunnel": {
+    "total": 118,
+    "train": 94,
+    "valid": 12,
+    "test": 12
+  },
+  "http://dbpedia.org/ontology/bodyDiscovered": {
+    "total": 233,
+    "train": 187,
+    "valid": 23,
+    "test": 23
+  },
+  "http://dbpedia.org/ontology/royalAnthem": {
+    "total": 16,
+    "train": 12,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/superintendent": {
+    "total": 36,
+    "train": 28,
+    "valid": 4,
+    "test": 4
+  },
+  "http://dbpedia.org/ontology/rebuilder": {
+    "total": 110,
+    "train": 88,
+    "valid": 11,
+    "test": 11
+  },
+  "http://dbpedia.org/ontology/selection": {
+    "total": 583,
+    "train": 467,
+    "valid": 58,
+    "test": 58
+  },
+  "http://dbpedia.org/ontology/legalForm": {
+    "total": 357,
+    "train": 285,
+    "valid": 36,
+    "test": 36
+  },
+  "http://dbpedia.org/ontology/countryOrigin": {
+    "total": 226,
+    "train": 180,
+    "valid": 23,
+    "test": 23
+  },
+  "http://dbpedia.org/ontology/highestState": {
+    "total": 43,
+    "train": 35,
+    "valid": 4,
+    "test": 4
+  },
+  "http://dbpedia.org/ontology/compiler": {
+    "total": 295,
+    "train": 235,
+    "valid": 30,
+    "test": 30
+  },
+  "http://dbpedia.org/ontology/countryWithFirstAstronaut": {
+    "total": 33,
+    "train": 27,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/europeanParliamentGroup": {
+    "total": 424,
+    "train": 340,
+    "valid": 42,
+    "test": 42
+  },
+  "http://dbpedia.org/ontology/provost": {
+    "total": 71,
+    "train": 57,
+    "valid": 7,
+    "test": 7
+  },
+  "http://dbpedia.org/ontology/highestPlace": {
+    "total": 250,
+    "train": 200,
+    "valid": 25,
+    "test": 25
+  },
+  "http://dbpedia.org/ontology/geneLocation": {
+    "total": 4,
+    "train": 2,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/victim": {
+    "total": 154,
+    "train": 124,
+    "valid": 15,
+    "test": 15
+  },
+  "http://dbpedia.org/ontology/vein": {
+    "total": 294,
+    "train": 236,
+    "valid": 29,
+    "test": 29
+  },
+  "http://dbpedia.org/ontology/secondDriverCountry": {
+    "total": 97,
+    "train": 77,
+    "valid": 10,
+    "test": 10
+  },
+  "http://dbpedia.org/ontology/majorIsland": {
+    "total": 629,
+    "train": 503,
+    "valid": 63,
+    "test": 63
+  },
+  "http://dbpedia.org/ontology/administrativeCollectivity": {
+    "total": 251,
+    "train": 201,
+    "valid": 25,
+    "test": 25
+  },
+  "http://dbpedia.org/ontology/sisterNewspaper": {
+    "total": 910,
+    "train": 728,
+    "valid": 91,
+    "test": 91
+  },
+  "http://dbpedia.org/ontology/firstRace": {
+    "total": 785,
+    "train": 629,
+    "valid": 78,
+    "test": 78
+  },
+  "http://dbpedia.org/ontology/opponent": {
+    "total": 263,
+    "train": 211,
+    "valid": 26,
+    "test": 26
+  },
+  "http://dbpedia.org/ontology/vicePrimeMinister": {
+    "total": 29,
+    "train": 23,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/chef": {
+    "total": 58,
+    "train": 46,
+    "valid": 6,
+    "test": 6
+  },
+  "http://dbpedia.org/ontology/routeEndLocation": {
+    "total": 228,
+    "train": 182,
+    "valid": 23,
+    "test": 23
+  },
+  "http://dbpedia.org/ontology/aircraftHelicopterAttack": {
+    "total": 48,
+    "train": 38,
+    "valid": 5,
+    "test": 5
+  },
+  "http://dbpedia.org/ontology/subregion": {
+    "total": 438,
+    "train": 350,
+    "valid": 44,
+    "test": 44
+  },
+  "http://dbpedia.org/ontology/languageRegulator": {
+    "total": 216,
+    "train": 172,
+    "valid": 22,
+    "test": 22
+  },
+  "http://dbpedia.org/ontology/dam": {
+    "total": 469,
+    "train": 375,
+    "valid": 47,
+    "test": 47
+  },
+  "http://dbpedia.org/ontology/wineProduced": {
+    "total": 43,
+    "train": 35,
+    "valid": 4,
+    "test": 4
+  },
+  "http://dbpedia.org/ontology/brand": {
+    "total": 297,
+    "train": 237,
+    "valid": 30,
+    "test": 30
+  },
+  "http://dbpedia.org/ontology/destination": {
+    "total": 770,
+    "train": 616,
+    "valid": 77,
+    "test": 77
+  },
+  "http://dbpedia.org/ontology/voiceType": {
+    "total": 116,
+    "train": 92,
+    "valid": 12,
+    "test": 12
+  },
+  "http://dbpedia.org/ontology/associationOfLocalGovernment": {
+    "total": 568,
+    "train": 454,
+    "valid": 57,
+    "test": 57
+  },
+  "http://dbpedia.org/ontology/musicFusionGenre": {
+    "total": 648,
+    "train": 518,
+    "valid": 65,
+    "test": 65
+  },
+  "http://dbpedia.org/ontology/youthWing": {
+    "total": 439,
+    "train": 351,
+    "valid": 44,
+    "test": 44
+  },
+  "http://dbpedia.org/ontology/innervates": {
+    "total": 190,
+    "train": 152,
+    "valid": 19,
+    "test": 19
+  },
+  "http://dbpedia.org/ontology/notableWine": {
+    "total": 81,
+    "train": 65,
+    "valid": 8,
+    "test": 8
+  },
+  "http://dbpedia.org/ontology/thirdCommander": {
+    "total": 169,
+    "train": 135,
+    "valid": 17,
+    "test": 17
+  },
+  "http://dbpedia.org/ontology/governorGeneral": {
+    "total": 239,
+    "train": 191,
+    "valid": 24,
+    "test": 24
+  },
+  "http://dbpedia.org/ontology/prospectLeague": {
+    "total": 754,
+    "train": 604,
+    "valid": 75,
+    "test": 75
+  },
+  "http://dbpedia.org/ontology/teachingStaff": {
+    "total": 436,
+    "train": 348,
+    "valid": 44,
+    "test": 44
+  },
+  "http://dbpedia.org/ontology/beltwayCity": {
+    "total": 81,
+    "train": 65,
+    "valid": 8,
+    "test": 8
+  },
+  "http://dbpedia.org/ontology/thirdDriverCountry": {
+    "total": 99,
+    "train": 79,
+    "valid": 10,
+    "test": 10
+  },
+  "http://dbpedia.org/ontology/managementPlace": {
+    "total": 46,
+    "train": 36,
+    "valid": 5,
+    "test": 5
+  },
+  "http://dbpedia.org/ontology/recentWinner": {
+    "total": 69,
+    "train": 55,
+    "valid": 7,
+    "test": 7
+  },
+  "http://dbpedia.org/ontology/championInDoubleFemale": {
+    "total": 412,
+    "train": 330,
+    "valid": 41,
+    "test": 41
+  },
+  "http://dbpedia.org/ontology/aircraftHelicopterMultirole": {
+    "total": 33,
+    "train": 27,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/rocketFunction": {
+    "total": 252,
+    "train": 202,
+    "valid": 25,
+    "test": 25
+  },
+  "http://dbpedia.org/ontology/blockAlloy": {
+    "total": 164,
+    "train": 132,
+    "valid": 16,
+    "test": 16
+  },
+  "http://dbpedia.org/ontology/nrhpType": {
+    "total": 238,
+    "train": 190,
+    "valid": 24,
+    "test": 24
+  },
+  "http://dbpedia.org/ontology/map": {
+    "total": 152,
+    "train": 122,
+    "valid": 15,
+    "test": 15
+  },
+  "http://dbpedia.org/ontology/component": {
+    "total": 23,
+    "train": 19,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/maidenFlightRocket": {
+    "total": 200,
+    "train": 160,
+    "valid": 20,
+    "test": 20
+  },
+  "http://dbpedia.org/ontology/damage": {
+    "total": 24,
+    "train": 20,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/associatedAct": {
+    "total": 195,
+    "train": 155,
+    "valid": 20,
+    "test": 20
+  },
+  "http://dbpedia.org/ontology/aircraftInterceptor": {
+    "total": 51,
+    "train": 41,
+    "valid": 5,
+    "test": 5
+  },
+  "http://dbpedia.org/ontology/nobelLaureates": {
+    "total": 26,
+    "train": 20,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/lowestPlace": {
+    "total": 166,
+    "train": 132,
+    "valid": 17,
+    "test": 17
+  },
+  "http://dbpedia.org/ontology/sportGoverningBody": {
+    "total": 169,
+    "train": 135,
+    "valid": 17,
+    "test": 17
+  },
+  "http://dbpedia.org/ontology/associatedRocket": {
+    "total": 65,
+    "train": 53,
+    "valid": 6,
+    "test": 6
+  },
+  "http://dbpedia.org/ontology/sportCountry": {
+    "total": 187,
+    "train": 149,
+    "valid": 19,
+    "test": 19
+  },
+  "http://dbpedia.org/ontology/principal": {
+    "total": 163,
+    "train": 131,
+    "valid": 16,
+    "test": 16
+  },
+  "http://dbpedia.org/ontology/lymph": {
+    "total": 61,
+    "train": 49,
+    "valid": 6,
+    "test": 6
+  },
+  "http://dbpedia.org/ontology/headAlloy": {
+    "total": 133,
+    "train": 107,
+    "valid": 13,
+    "test": 13
+  },
+  "http://dbpedia.org/ontology/aircraftHelicopter": {
+    "total": 328,
+    "train": 262,
+    "valid": 33,
+    "test": 33
+  },
+  "http://dbpedia.org/ontology/oilSystem": {
+    "total": 93,
+    "train": 75,
+    "valid": 9,
+    "test": 9
+  },
+  "http://dbpedia.org/ontology/highwaySystem": {
+    "total": 51,
+    "train": 41,
+    "valid": 5,
+    "test": 5
+  },
+  "http://dbpedia.org/ontology/fastestDriverCountry": {
+    "total": 80,
+    "train": 64,
+    "valid": 8,
+    "test": 8
+  },
+  "http://dbpedia.org/ontology/closingFilm": {
+    "total": 132,
+    "train": 106,
+    "valid": 13,
+    "test": 13
+  },
+  "http://dbpedia.org/ontology/jointCommunity": {
+    "total": 136,
+    "train": 108,
+    "valid": 14,
+    "test": 14
+  },
+  "http://dbpedia.org/ontology/isPartOfAnatomicalStructure": {
+    "total": 95,
+    "train": 75,
+    "valid": 10,
+    "test": 10
+  },
+  "http://dbpedia.org/ontology/engineer": {
+    "total": 150,
+    "train": 120,
+    "valid": 15,
+    "test": 15
+  },
+  "http://dbpedia.org/ontology/significantDesign": {
+    "total": 94,
+    "train": 76,
+    "valid": 9,
+    "test": 9
+  },
+  "http://dbpedia.org/ontology/lounge": {
+    "total": 64,
+    "train": 52,
+    "valid": 6,
+    "test": 6
+  },
+  "http://dbpedia.org/ontology/chain": {
+    "total": 142,
+    "train": 114,
+    "valid": 14,
+    "test": 14
+  },
+  "http://dbpedia.org/ontology/headteacher": {
+    "total": 2,
+    "train": 2,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/lowestRegion": {
+    "total": 11,
+    "train": 9,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/firstWin": {
+    "total": 91,
+    "train": 73,
+    "valid": 9,
+    "test": 9
+  },
+  "http://dbpedia.org/ontology/winsAtChallenges": {
+    "total": 14,
+    "train": 12,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/rightChild": {
+    "total": 1,
+    "train": 1,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/highestMountain": {
+    "total": 79,
+    "train": 63,
+    "valid": 8,
+    "test": 8
+  },
+  "http://dbpedia.org/ontology/drainsFrom": {
+    "total": 83,
+    "train": 67,
+    "valid": 8,
+    "test": 8
+  },
+  "http://dbpedia.org/ontology/routeStartLocation": {
+    "total": 238,
+    "train": 190,
+    "valid": 24,
+    "test": 24
+  },
+  "http://dbpedia.org/ontology/coolingSystem": {
+    "total": 127,
+    "train": 101,
+    "valid": 13,
+    "test": 13
+  },
+  "http://dbpedia.org/ontology/firstWinner": {
+    "total": 59,
+    "train": 47,
+    "valid": 6,
+    "test": 6
+  },
+  "http://dbpedia.org/ontology/regionalLanguage": {
+    "total": 130,
+    "train": 104,
+    "valid": 13,
+    "test": 13
+  },
+  "http://dbpedia.org/ontology/retiredRocket": {
+    "total": 129,
+    "train": 103,
+    "valid": 13,
+    "test": 13
+  },
+  "http://dbpedia.org/ontology/structuralSystem": {
+    "total": 217,
+    "train": 173,
+    "valid": 22,
+    "test": 22
+  },
+  "http://dbpedia.org/ontology/aircraftElectronic": {
+    "total": 104,
+    "train": 84,
+    "valid": 10,
+    "test": 10
+  },
+  "http://dbpedia.org/ontology/runningMate": {
+    "total": 17,
+    "train": 13,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/mostWins": {
+    "total": 57,
+    "train": 45,
+    "valid": 6,
+    "test": 6
+  },
+  "http://dbpedia.org/ontology/supplies": {
+    "total": 260,
+    "train": 208,
+    "valid": 26,
+    "test": 26
+  },
+  "http://dbpedia.org/ontology/jockey": {
+    "total": 82,
+    "train": 66,
+    "valid": 8,
+    "test": 8
+  },
+  "http://dbpedia.org/ontology/pastMember": {
+    "total": 46,
+    "train": 36,
+    "valid": 5,
+    "test": 5
+  },
+  "http://dbpedia.org/ontology/incumbent": {
+    "total": 96,
+    "train": 76,
+    "valid": 10,
+    "test": 10
+  },
+  "http://dbpedia.org/ontology/sourceConfluenceMountain": {
+    "total": 205,
+    "train": 165,
+    "valid": 20,
+    "test": 20
+  },
+  "http://dbpedia.org/ontology/managementMountain": {
+    "total": 46,
+    "train": 36,
+    "valid": 5,
+    "test": 5
+  },
+  "http://dbpedia.org/ontology/vehicle": {
+    "total": 185,
+    "train": 149,
+    "valid": 18,
+    "test": 18
+  },
+  "http://dbpedia.org/ontology/namedAfter": {
+    "total": 40,
+    "train": 32,
+    "valid": 4,
+    "test": 4
+  },
+  "http://dbpedia.org/ontology/sourceConfluencePlace": {
+    "total": 205,
+    "train": 165,
+    "valid": 20,
+    "test": 20
+  },
+  "http://dbpedia.org/ontology/officerInCharge": {
+    "total": 19,
+    "train": 15,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/generalManager": {
+    "total": 32,
+    "train": 26,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/ceo": {
+    "total": 95,
+    "train": 75,
+    "valid": 10,
+    "test": 10
+  },
+  "http://dbpedia.org/ontology/winsAtMajors": {
+    "total": 30,
+    "train": 24,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/releaseLocation": {
+    "total": 17,
+    "train": 13,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/highestRegion": {
+    "total": 34,
+    "train": 28,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/vicePrincipalLabel": {
+    "total": 16,
+    "train": 12,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/clubsRecordGoalscorer": {
+    "total": 28,
+    "train": 22,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/fourthCommander": {
+    "total": 60,
+    "train": 48,
+    "valid": 6,
+    "test": 6
+  },
+  "http://dbpedia.org/ontology/secondPopularVote": {
+    "total": 31,
+    "train": 25,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/winsAtPGA": {
+    "total": 14,
+    "train": 12,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/winsAtJapan": {
+    "total": 15,
+    "train": 11,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/lowestMountain": {
+    "total": 133,
+    "train": 107,
+    "valid": 13,
+    "test": 13
+  },
+  "http://dbpedia.org/ontology/committeeInLegislature": {
+    "total": 20,
+    "train": 16,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/aircraftHelicopterCargo": {
+    "total": 17,
+    "train": 13,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/sourceConfluence": {
+    "total": 139,
+    "train": 111,
+    "valid": 14,
+    "test": 14
+  },
+  "http://dbpedia.org/ontology/comparable": {
+    "total": 73,
+    "train": 59,
+    "valid": 7,
+    "test": 7
+  },
+  "http://dbpedia.org/ontology/nominee": {
+    "total": 31,
+    "train": 25,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/winsAtAsia": {
+    "total": 11,
+    "train": 9,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/countryWithFirstSatellite": {
+    "total": 48,
+    "train": 38,
+    "valid": 5,
+    "test": 5
+  },
+  "http://dbpedia.org/ontology/poleDriverCountry": {
+    "total": 83,
+    "train": 67,
+    "valid": 8,
+    "test": 8
+  },
+  "http://dbpedia.org/ontology/drainsTo": {
+    "total": 260,
+    "train": 208,
+    "valid": 26,
+    "test": 26
+  },
+  "http://dbpedia.org/ontology/principalEngineer": {
+    "total": 92,
+    "train": 74,
+    "valid": 9,
+    "test": 9
+  },
+  "http://dbpedia.org/ontology/trustee": {
+    "total": 14,
+    "train": 12,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/parish": {
+    "total": 25,
+    "train": 21,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/championInMixedDouble": {
+    "total": 55,
+    "train": 43,
+    "valid": 6,
+    "test": 6
+  },
+  "http://dbpedia.org/ontology/addressInRoad": {
+    "total": 18,
+    "train": 14,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/connotation": {
+    "total": 34,
+    "train": 28,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/winsAtOtherTournaments": {
+    "total": 10,
+    "train": 8,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/previousInfrastructure": {
+    "total": 9,
+    "train": 7,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/sisterCollege": {
+    "total": 75,
+    "train": 59,
+    "valid": 8,
+    "test": 8
+  },
+  "http://dbpedia.org/ontology/aircraftHelicopterTransport": {
+    "total": 27,
+    "train": 21,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/orogeny": {
+    "total": 13,
+    "train": 11,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/assistantPrincipal": {
+    "total": 6,
+    "train": 4,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/lastFlight": {
+    "total": 6,
+    "train": 4,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/countryWithFirstSatelliteLaunched": {
+    "total": 11,
+    "train": 9,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/sheading": {
+    "total": 29,
+    "train": 23,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/winsAtLET": {
+    "total": 10,
+    "train": 8,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/associateEditor": {
+    "total": 19,
+    "train": 15,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/winsInEurope": {
+    "total": 10,
+    "train": 8,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/firstPopularVote": {
+    "total": 21,
+    "train": 17,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/religiousHeadLabel": {
+    "total": 49,
+    "train": 39,
+    "valid": 5,
+    "test": 5
+  },
+  "http://dbpedia.org/ontology/winsAtLPGA": {
+    "total": 7,
+    "train": 5,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/sourceConfluenceState": {
+    "total": 31,
+    "train": 25,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/projectParticipant": {
+    "total": 35,
+    "train": 27,
+    "valid": 4,
+    "test": 4
+  },
+  "http://dbpedia.org/ontology/governmentMountain": {
+    "total": 13,
+    "train": 11,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/religiousHead": {
+    "total": 22,
+    "train": 18,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/riverBranch": {
+    "total": 31,
+    "train": 25,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/subsequentInfrastructure": {
+    "total": 14,
+    "train": 12,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/webcast": {
+    "total": 18,
+    "train": 14,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/formerHighschool": {
+    "total": 14,
+    "train": 12,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/chaplain": {
+    "total": 21,
+    "train": 17,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/riverBranchOf": {
+    "total": 39,
+    "train": 31,
+    "valid": 4,
+    "test": 4
+  },
+  "http://dbpedia.org/ontology/currentProduction": {
+    "total": 46,
+    "train": 36,
+    "valid": 5,
+    "test": 5
+  },
+  "http://dbpedia.org/ontology/firstFlight": {
+    "total": 6,
+    "train": 4,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/winsAtChampionships": {
+    "total": 7,
+    "train": 5,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/pastor": {
+    "total": 62,
+    "train": 50,
+    "valid": 6,
+    "test": 6
+  },
+  "http://dbpedia.org/ontology/congressionalDistrict": {
+    "total": 20,
+    "train": 16,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/vicePrincipal": {
+    "total": 19,
+    "train": 15,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/building": {
+    "total": 13,
+    "train": 11,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/aircraftHelicopterObservation": {
+    "total": 13,
+    "train": 11,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/governmentPlace": {
+    "total": 13,
+    "train": 11,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/actScore": {
+    "total": 5,
+    "train": 3,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/film": {
+    "total": 28,
+    "train": 22,
+    "valid": 3,
+    "test": 3
+  },
+  "http://dbpedia.org/ontology/capitalRegion": {
+    "total": 3,
+    "train": 1,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/custodian": {
+    "total": 1,
+    "train": 1,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/waterwayThroughTunnel": {
+    "total": 23,
+    "train": 19,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/boilerPressure": {
+    "total": 7,
+    "train": 5,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/firstLaunchRocket": {
+    "total": 2,
+    "train": 2,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/managingEditor": {
+    "total": 22,
+    "train": 18,
+    "valid": 2,
+    "test": 2
+  },
+  "http://dbpedia.org/ontology/originalStartPoint": {
+    "total": 6,
+    "train": 4,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/heir": {
+    "total": 1,
+    "train": 1,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/originalEndPoint": {
+    "total": 3,
+    "train": 1,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/winsAtAus": {
+    "total": 6,
+    "train": 4,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/winsAtNWIDE": {
+    "total": 8,
+    "train": 6,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/summerAppearances": {
+    "total": 5,
+    "train": 3,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/organSystem": {
+    "total": 3,
+    "train": 1,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/chairLabel": {
+    "total": 5,
+    "train": 3,
+    "valid": 1,
+    "test": 1
+  },
+  "http://xmlns.com/foaf/0.1/page": {
+    "total": 1,
+    "train": 1,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/capitalCountry": {
+    "total": 2,
+    "train": 2,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/orthologousGene": {
+    "total": 2,
+    "train": 2,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/projectCoordinator": {
+    "total": 5,
+    "train": 3,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/satScore": {
+    "total": 2,
+    "train": 2,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/show": {
+    "total": 2,
+    "train": 2,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/capitalPlace": {
+    "total": 1,
+    "train": 1,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/administrator": {
+    "total": 3,
+    "train": 1,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/capitalMountain": {
+    "total": 1,
+    "train": 1,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/ratio": {
+    "total": 3,
+    "train": 1,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/winterAppearances": {
+    "total": 3,
+    "train": 1,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/winsAtProTournaments": {
+    "total": 4,
+    "train": 2,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/lastLaunchRocket": {
+    "total": 2,
+    "train": 2,
+    "valid": 0,
+    "test": 0
+  },
+  "http://dbpedia.org/ontology/numberOfClassrooms": {
+    "total": 2,
+    "train": 2,
+    "valid": 0,
+    "test": 0
+  },
+  "http://xmlns.com/foaf/0.1/thumbnail": {
+    "total": 3,
+    "train": 1,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/governmentCountry": {
+    "total": 4,
+    "train": 2,
+    "valid": 1,
+    "test": 1
+  },
+  "http://dbpedia.org/ontology/leftChild": {
+    "total": 2,
+    "train": 2,
+    "valid": 0,
+    "test": 0
+  }
+}

@@ -1,0 +1,54 @@
+name: research-artifact-checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install lightweight STC package
+        run: python -m pip install -e .
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Toy demonstration
+        run: python examples/toy_control.py
+
+      - name: CLI smoke test
+        run: stc-control examples/toy_candidates.csv --top-k 5 --quota 3 --json
+
+      - name: Compile all public Python sources
+        run: python -m compileall -q src scripts tools examples tests
+
+      - name: Python source audit
+        run: python tools/check_local_imports.py
+
+      - name: Source consistency audit
+        run: python tools/source_consistency_audit.py
+
+      - name: Release readiness
+        run: python tools/release_readiness.py
+
+      - name: Repository privacy, structure, and text-integrity audit
+        run: python tools/repository_audit.py
+
+      - name: Verify strict artifact manifest
+        run: python tools/verify_manifest.py

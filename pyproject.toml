@@ -1,0 +1,85 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "semantic-target-control"
+version = "1.0.0"
+description = "Inference-time semantic target control for rankings from frozen knowledge graph completion scorers"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [
+  { name = "Efstratios Skaperdas" },
+  { name = "Nick Bassiliades" }
+]
+keywords = [
+  "knowledge graph completion",
+  "semantic web",
+  "constrained ranking",
+  "inference-time control"
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+dependencies = []
+
+[project.optional-dependencies]
+analysis = [
+  "numpy>=1.26",
+  "pandas>=2.1",
+  "matplotlib>=3.8",
+  "scikit-learn>=1.4",
+  "lightgbm>=4.3"
+]
+preprocessing = [
+  "orjson>=3.10",
+  "rdflib>=7.0",
+  "tqdm>=4.66"
+]
+training = [
+  "numpy>=1.26",
+  "torch>=2.3",
+  "pykeen==1.11.1"
+]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6"
+]
+
+[project.scripts]
+stc-control = "stc.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[project.urls]
+Homepage = "https://github.com/sskaperdas/semantic-target-control"
+Repository = "https://github.com/sskaperdas/semantic-target-control"
+Documentation = "https://github.com/sskaperdas/semantic-target-control/tree/main/docs"
+Paper = "https://github.com/sskaperdas/semantic-target-control/blob/main/paper/STC_ISWC_2026.pdf"
+Issues = "https://github.com/sskaperdas/semantic-target-control/issues"

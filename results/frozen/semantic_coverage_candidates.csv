@@ -1,0 +1,27 @@
+dataset,key,value
+eurostatkg,counts.typed_entities,44704
+eurostatkg,counts.typing_coverage,0.994571504850049
+eurostatkg,schema_triples.rdf_type,67895
+eurostatkg,schema_triples.rdfs_subClassOf,1924
+eurostatkg,schema_triples.rdfs_domain,32
+eurostatkg,schema_triples.rdfs_range,36
+eurostatkg,schema_triples.owl_disjointWith,0
+dbpedia,counts.typed_entities,4628358
+dbpedia,counts.typing_coverage,0.8419808888032663
+dbpedia,counts.avg_types_per_typed_entity,3.8654481783820525
+dbpedia,schema.subclass_edges,769
+dbpedia,schema.classes_with_subclass_info,760
+dbpedia,schema.classes_in_closure,767
+dbpedia,schema.relations_with_domain_assertions,2421
+dbpedia,schema.relations_with_range_assertions,2588
+dbpedia,source_files.instance_types,"""data\\raw\\DBpedia\\instance_types_en.ttl.bz2"""
+drugbank,counts.typed_entities,22466
+drugbank,counts.typing_coverage,1.0
+drugbank,schema.schema_source,"""induced_from_xml_structure"""
+drugbank,schema.relation_signatures.drug_interacts_with,"[""Drug"", ""Drug""]"
+drugbank,schema.relation_signatures.drug_has_target,"[""Drug"", ""Protein""]"
+drugbank,schema.relation_signatures.drug_has_enzyme,"[""Drug"", ""Protein""]"
+drugbank,schema.relation_signatures.drug_has_carrier,"[""Drug"", ""Protein""]"
+drugbank,schema.relation_signatures.drug_has_transporter,"[""Drug"", ""Protein""]"
+drugbank,schema.relation_signatures.drug_in_pathway,"[""Drug"", ""Pathway""]"
+drugbank,schema.disjoint_pairs,"""<list length=3>"""
