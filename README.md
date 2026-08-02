@@ -161,25 +161,20 @@ semantic-target-control/
 `-- pyproject.toml
 ```
 
-## Research artifact
+## Release status
 
-<p align="center">
-  <img src="assets/stc-artifact-overview.png" alt="STC public research artifact" width="96%">
-</p>
+This repository accompanies the final ISWC 2026 camera-ready paper and its
+supplementary material. The v1.0.0 publication snapshot contains the validated
+implementation, configurations, command wrappers, curated results,
+reproducibility metadata, provenance records, and final publication PDFs.
 
-The camera-ready package passed:
+- [Main camera-ready paper](paper/STC_ISWC_2026.pdf)
+- [Supplementary material](paper/STC_ISWC_2026_supplementary.pdf)
+- [Public large-artifact bundle](https://drive.google.com/drive/folders/1B0Qf5g6AZw3njeDmzzVVrdP8jOjIh8v-)
 
-```text
-Body-end page: 16
-Large overfull boxes: 0
-Reviewer/scientific audit errors: 0
-Camera-ready provenance checks: 54/54
-Semantic-coverage inventory rows: 26
-```
-
-The repository contains a lightweight controller, preprocessing and training
-entry points, portable command wrappers, curated aggregate results, exact
-environment snapshots, source consistency checks, and the final paper PDFs.
+Detailed source-consistency, provenance, security, and release-readiness
+reports are available under
+[`results/provenance/release/`](results/provenance/release/).
 
 ## Data and distribution constraints
 
