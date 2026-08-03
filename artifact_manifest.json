@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "artifact": "STC ISWC 2026 public research artifact",
-  "generated_at": "2026-08-02T12:06:42.561509+00:00",
+  "generated_at": "2026-08-03T09:05:55.669281+00:00",
   "source_project": "local research workspace (path intentionally omitted)",
   "files": [
     {
@@ -321,8 +321,8 @@
     },
     {
       "path": "paper/STC_ISWC_2026.pdf",
-      "bytes": 457894,
-      "sha256": "6f09b5975289ba8eaab471275ccfd858f72caf899dc924961cfeed664f7a23b9"
+      "bytes": 409462,
+      "sha256": "0faebce860a7e5165a0ed016cbe596cfa533cba684c6f4ff66aa78117fa8767a"
     },
     {
       "path": "paper/STC_ISWC_2026_supplementary.pdf",
@@ -337,7 +337,7 @@
     {
       "path": "README.md",
       "bytes": 9009,
-      "sha256": "0ce23c9a642b76af7c8467e23508fae41579ca556da5441fd677421824a7aefb"
+      "sha256": "885751169269598609425ed6804f2474e4ad1b5ba455290929533f21e94ddc70"
     },
     {
       "path": "requirements.txt",

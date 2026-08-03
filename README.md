@@ -164,7 +164,7 @@ semantic-target-control/
 ## Release status
 
 This repository accompanies the final ISWC 2026 camera-ready paper and its
-supplementary material. The v1.0.0 publication snapshot contains the validated
+supplementary material. The v1.0.1 publication snapshot contains the validated
 implementation, configurations, command wrappers, curated results,
 reproducibility metadata, provenance records, and final publication PDFs.
 
