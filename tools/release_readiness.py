@@ -10,7 +10,7 @@ EXPECTED_TITLE = (
     "STC: Inference-Time Semantic Target Control for Knowledge Graph Completion Rankings"
 )
 EXPECTED_REPOSITORY = "https://github.com/sskaperdas/semantic-target-control"
-EXPECTED_TAG = "v1.0.0-iswc2026"
+EXPECTED_TAG = "v1.0.3-iswc2026"
 blockers: list[str] = []
 warnings: list[str] = []
 

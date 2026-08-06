@@ -22,4 +22,4 @@ Upload `assets/stc-social-preview.png`.
 
 ## Suggested release
 
-`v1.0.0-iswc2026`
+`v1.0.3-iswc2026`

@@ -21,7 +21,7 @@
 - [ ] Upload `assets/stc-social-preview.png` in GitHub Social preview settings.
 - [ ] Add the topics listed in `GITHUB_SETTINGS.md`.
 - [ ] Enable private vulnerability reporting.
-- [ ] Create release `v1.0.0-iswc2026` from the verified commit.
+- [ ] Create release `v1.0.3-iswc2026` from the verified commit.
 - [ ] Verify anonymous access to the repository, PDFs, and release archive.
 - [ ] Add the proceedings DOI to `CITATION.cff` when available.
 - [ ] Update the camera-ready artifact statement with the public repository and large-artifact URLs.

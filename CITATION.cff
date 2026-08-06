@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this software or artifact, please cite the ISWC 2026 paper."
 title: "STC: Inference-Time Semantic Target Control for Knowledge Graph Completion Rankings"
 type: software
-version: 1.0.0
-date-released: "2026-08-02"
+version: 1.0.3
+date-released: "2026-08-06"
 license: "Apache-2.0"
 authors:
   - family-names: Skaperdas

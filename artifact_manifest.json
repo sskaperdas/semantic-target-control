@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "artifact": "STC ISWC 2026 public research artifact",
-  "generated_at": "2026-08-04T17:57:21.499673+00:00",
+  "generated_at": "2026-08-06T00:09:25.656627+00:00",
   "source_project": "local research workspace (path intentionally omitted)",
   "files": [
     {
@@ -76,13 +76,13 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 324,
-      "sha256": "276b95fa47883b7ff82581e5ab740ad7dd33595e8f4beff028ac6f436982f964"
+      "bytes": 610,
+      "sha256": "fb97a627567143badf322af8c56a947b71f0952e5af592f1a12446555c0cecad"
     },
     {
       "path": "CITATION.cff",
       "bytes": 1093,
-      "sha256": "0137ca815afc0e283a1fbab26d419b1f43663f59e04747eebe1d303e6a3ad3c9"
+      "sha256": "a0bf49a43034868f77613d34118ed6a4a3fad66d85f266adf2b240d1e0f30881"
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -157,7 +157,7 @@
     {
       "path": "docs/GITHUB_RELEASE_CHECKLIST.md",
       "bytes": 1344,
-      "sha256": "b2ae524e3222b1b3f307c47955dcdced8e905ecf6f86764309ec477b036092b6"
+      "sha256": "dbff80dbf6b71a2562b7330ef20555c23819463b907c7bb48825ff2f95b24486"
     },
     {
       "path": "docs/HARDWARE.md",
@@ -232,7 +232,7 @@
     {
       "path": "GITHUB_SETTINGS.md",
       "bytes": 784,
-      "sha256": "740f8ac3026bc75da10624e5f38b9756f57f12a83aba5adf0bcec855bfe3a515"
+      "sha256": "bd3ce2c2f8c340299b8235493f57fd7160978a945e2eacce4b7d051de3537038"
     },
     {
       "path": "LICENSE",
@@ -321,8 +321,8 @@
     },
     {
       "path": "paper/STC_ISWC_2026.pdf",
-      "bytes": 410414,
-      "sha256": "cbc849037d964a477ca331d62454c680232924f29264ebc466be0006cff58cf1"
+      "bytes": 460837,
+      "sha256": "910857e6f8f9646277a72248fb8fb38e7bc8e88789b5652c917404954f8ddd90"
     },
     {
       "path": "paper/STC_ISWC_2026_supplementary.pdf",
@@ -332,12 +332,12 @@
     {
       "path": "pyproject.toml",
       "bytes": 2107,
-      "sha256": "ae3b0f5e170826611fe1b97265cd544e80fad51ff5b5d17cb61a8e918b063a94"
+      "sha256": "f58b8655675591b420ff4eea907444d31a31e89c9a1467b7a6a2db0650b639f8"
     },
     {
       "path": "README.md",
       "bytes": 9009,
-      "sha256": "81f05b90f5c03e47920ba660360560e73cb01277972bd5d30a54bea77cd4ee54"
+      "sha256": "4da9a953335fe1266e5b938a09e88a38706e52b42198ed0b771495efe7c4654a"
     },
     {
       "path": "requirements.txt",
@@ -702,7 +702,7 @@
     {
       "path": "tools/release_readiness.py",
       "bytes": 3234,
-      "sha256": "df47156d751d04431ebe44ce3e3d30c299d20315753c4db90284f351be6a056d"
+      "sha256": "0903e8f4ef5be8d8b5a5a442f3c6dee178d62c91da88954981ad60fd80342024"
     },
     {
       "path": "tools/repository_audit.py",
